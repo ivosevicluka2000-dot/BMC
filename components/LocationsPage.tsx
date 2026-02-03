@@ -106,41 +106,41 @@ const LocationsPage: React.FC = () => {
   };
 
   return (
-    <div className="pt-[100px] h-screen flex flex-col bg-[#050505] overflow-hidden">
+    <div className="pt-20 sm:pt-24 lg:pt-[100px] h-screen flex flex-col bg-[#050505] overflow-hidden">
       {/* Header / Controls */}
-      <div className="flex-none px-6 lg:px-12 py-8 border-b border-white/10 flex flex-col lg:flex-row items-center justify-between gap-6">
-        <div>
-          <h1 className="serif text-3xl lg:text-4xl">The Network</h1>
-          <p className="text-white/50 text-xs uppercase tracking-[0.3em] mt-2">Verified Chapters & Partners</p>
+      <div className="flex-none px-4 sm:px-6 lg:px-12 py-4 sm:py-6 lg:py-8 border-b border-white/10 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div className="text-center lg:text-left">
+          <h1 className="serif text-2xl sm:text-3xl lg:text-4xl">The Network</h1>
+          <p className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-1 sm:mt-2">Verified Chapters & Partners</p>
         </div>
 
-        <div className="flex items-center gap-4 w-full lg:w-auto">
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full lg:w-auto">
           {/* Toggle */}
-          <div className="bg-white/5 p-1 flex rounded-none border border-white/20 w-full lg:w-[300px]">
+          <div className="bg-white/5 p-1 flex rounded-none border border-white/20 w-full sm:w-auto sm:min-w-[240px] lg:w-[300px]">
             <button 
               onClick={() => setActiveType('shop')}
-              className={`flex-1 py-3 text-xs uppercase tracking-widest font-bold transition-all ${activeType === 'shop' ? 'bg-brand text-white' : 'text-white/60 hover:text-white'}`}
+              className={`flex-1 py-3.5 sm:py-3 text-[11px] sm:text-xs uppercase tracking-widest font-bold transition-all min-h-[44px] ${activeType === 'shop' ? 'bg-brand text-white' : 'text-white/60 hover:text-white'}`}
             >
               Shops
             </button>
             <button 
               onClick={() => setActiveType('service')}
-              className={`flex-1 py-3 text-xs uppercase tracking-widest font-bold transition-all ${activeType === 'service' ? 'bg-brand text-white' : 'text-white/60 hover:text-white'}`}
+              className={`flex-1 py-3.5 sm:py-3 text-[11px] sm:text-xs uppercase tracking-widest font-bold transition-all min-h-[44px] ${activeType === 'service' ? 'bg-brand text-white' : 'text-white/60 hover:text-white'}`}
             >
               Services
             </button>
           </div>
 
           {/* Search */}
-          <div className="relative w-full lg:w-[400px]">
+          <div className="relative w-full sm:flex-1 lg:w-[400px] lg:flex-none">
             <input 
               type="text" 
               placeholder="SEARCH BY CITY OR NAME..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/20 px-6 py-3.5 text-xs uppercase tracking-widest focus:outline-none focus:border-brand transition-colors placeholder:text-white/30"
+              className="w-full bg-white/5 border border-white/20 px-4 sm:px-6 py-3.5 text-[11px] sm:text-xs uppercase tracking-widest focus:outline-none focus:border-brand transition-colors placeholder:text-white/30 min-h-[48px]"
             />
-            <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 pointer-events-none">
               <svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
           </div>
@@ -152,7 +152,7 @@ const LocationsPage: React.FC = () => {
         
         {/* List View (Left) */}
         <div className={`
-          absolute lg:relative inset-0 lg:inset-auto z-[900] lg:z-auto bg-[#050505] lg:w-[450px] border-r border-white/10 flex flex-col transition-transform duration-500
+          absolute lg:relative inset-0 lg:inset-auto z-[900] lg:z-auto bg-[#050505] w-full sm:w-[85%] md:w-[60%] lg:w-[400px] xl:w-[450px] border-r border-white/10 flex flex-col transition-transform duration-500
           ${isMobileListOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}>
           <div className="p-6 bg-[#0a0a0a] border-b border-white/10 lg:hidden flex justify-between items-center">
@@ -173,18 +173,18 @@ const LocationsPage: React.FC = () => {
                 <button 
                   key={loc.id}
                   onClick={() => handleLocationSelect(loc)}
-                  className={`w-full text-left p-8 border-b border-white/10 group transition-all hover:bg-white/[0.04] ${selectedLocation?.id === loc.id ? 'bg-white/[0.06]' : ''}`}
+                  className={`w-full text-left p-5 sm:p-6 lg:p-8 border-b border-white/10 group transition-all hover:bg-white/[0.04] active:bg-white/[0.08] ${selectedLocation?.id === loc.id ? 'bg-white/[0.06]' : ''}`}
                 >
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="text-xs text-white/50 uppercase tracking-[0.2em] font-medium">{loc.category}</span>
-                    <span className="text-xs text-white/40 uppercase tracking-widest">{loc.city}</span>
+                  <div className="flex justify-between items-start mb-3 sm:mb-4">
+                    <span className="text-[10px] sm:text-xs text-white/50 uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium">{loc.category}</span>
+                    <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-widest">{loc.city}</span>
                   </div>
-                  <h3 className="serif text-xl mb-3 group-hover:translate-x-1 transition-transform">{loc.name}</h3>
-                  <p className="text-white/60 text-sm font-light leading-relaxed line-clamp-2">{loc.description}</p>
+                  <h3 className="serif text-lg sm:text-xl mb-2 sm:mb-3 group-hover:translate-x-1 transition-transform">{loc.name}</h3>
+                  <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed line-clamp-2">{loc.description}</p>
                   
-                  <div className="mt-6 flex items-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="mt-4 sm:mt-6 flex items-center space-x-4 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                     <div className="w-4 h-[1px] bg-white/50" />
-                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/80">View Location Details</span>
+                    <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold text-white/80">View Location Details</span>
                   </div>
                 </button>
               ))
@@ -199,15 +199,15 @@ const LocationsPage: React.FC = () => {
           {/* Mobile Overlay Toggle */}
           <button 
             onClick={() => setIsMobileListOpen(true)}
-            className="lg:hidden absolute bottom-8 left-1/2 -translate-x-1/2 z-[1000] bg-brand text-white px-8 py-4 text-xs font-bold uppercase tracking-widest shadow-2xl active:scale-95 transition-transform"
+            className="lg:hidden absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-[1000] bg-brand text-white px-6 sm:px-8 py-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest shadow-2xl active:scale-95 transition-transform min-h-[48px]"
           >
             Show List
           </button>
 
           {/* Selected Location Modal/Card */}
           {selectedLocation && (
-            <div className="absolute inset-0 lg:inset-auto lg:top-8 lg:right-8 z-[1001] pointer-events-none flex items-center justify-center lg:block">
-               <div className="pointer-events-auto w-[90%] lg:w-[400px] bg-black border border-white/20 shadow-2xl animate-in slide-in-from-right-4 duration-500">
+            <div className="absolute inset-0 lg:inset-auto lg:top-4 xl:top-8 lg:right-4 xl:right-8 z-[1001] pointer-events-none flex items-end sm:items-center justify-center lg:block p-4 sm:p-0">
+               <div className="pointer-events-auto w-full sm:w-[90%] md:w-[70%] lg:w-[360px] xl:w-[400px] max-h-[85vh] overflow-y-auto bg-black border border-white/20 shadow-2xl animate-in slide-in-from-bottom-4 sm:slide-in-from-right-4 duration-500">
                   <div className="relative h-32 bg-zinc-900 overflow-hidden">
                     <div className="absolute inset-0 bg-cover bg-center grayscale brightness-50 opacity-50" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1558981403-c5f9100d2b17?auto=format&fit=crop&q=80&w=600')` }} />
                     <button 
@@ -221,30 +221,30 @@ const LocationsPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="p-8">
-                    <h2 className="serif text-3xl mb-2">{selectedLocation.name}</h2>
-                    <p className="text-white/60 text-sm mb-8 italic">{selectedLocation.address}, {selectedLocation.city}</p>
+                  <div className="p-5 sm:p-6 lg:p-8">
+                    <h2 className="serif text-2xl sm:text-3xl mb-2">{selectedLocation.name}</h2>
+                    <p className="text-white/60 text-xs sm:text-sm mb-6 sm:mb-8 italic">{selectedLocation.address}, {selectedLocation.city}</p>
                     
-                    <div className="space-y-6 mb-8">
-                       <div className="flex items-start gap-4">
-                          <span className="text-white/40 text-xs uppercase tracking-widest w-16 pt-1">Hours:</span>
-                          <span className="text-white/80 text-sm tracking-wide">{selectedLocation.hours}</span>
+                    <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+                       <div className="flex items-start gap-3 sm:gap-4">
+                          <span className="text-white/40 text-[10px] sm:text-xs uppercase tracking-widest w-14 sm:w-16 pt-1 flex-shrink-0">Hours:</span>
+                          <span className="text-white/80 text-xs sm:text-sm tracking-wide">{selectedLocation.hours}</span>
                        </div>
-                       <div className="flex items-start gap-4">
-                          <span className="text-white/40 text-xs uppercase tracking-widest w-16 pt-1">Contact:</span>
-                          <span className="text-white/80 text-sm tracking-wide">{selectedLocation.phone}</span>
+                       <div className="flex items-start gap-3 sm:gap-4">
+                          <span className="text-white/40 text-[10px] sm:text-xs uppercase tracking-widest w-14 sm:w-16 pt-1 flex-shrink-0">Contact:</span>
+                          <span className="text-white/80 text-xs sm:text-sm tracking-wide">{selectedLocation.phone}</span>
                        </div>
-                       <p className="text-white/60 text-sm leading-relaxed font-light">
+                       <p className="text-white/60 text-xs sm:text-sm leading-relaxed font-light">
                          {selectedLocation.description}
                        </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                        <a 
                         href={`https://www.google.com/maps/dir/?api=1&destination=${selectedLocation.lat},${selectedLocation.lng}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="bg-brand text-white flex items-center justify-center py-4 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors"
+                        className="bg-brand text-white flex items-center justify-center py-3.5 sm:py-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors min-h-[44px]"
                        >
                          Directions
                        </a>
@@ -252,13 +252,13 @@ const LocationsPage: React.FC = () => {
                         href={selectedLocation.website}
                         target="_blank"
                         rel="noreferrer"
-                        className="border border-white/30 text-white/80 flex items-center justify-center py-4 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
+                        className="border border-white/30 text-white/80 flex items-center justify-center py-3.5 sm:py-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors min-h-[44px]"
                        >
                          Website
                        </a>
                     </div>
                     <button 
-                      className="w-full mt-4 border border-white/10 py-4 text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white hover:border-white/30 transition-colors"
+                      className="w-full mt-3 sm:mt-4 border border-white/10 py-3.5 sm:py-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white hover:border-white/30 transition-colors min-h-[44px]"
                       onClick={() => window.location.href = `tel:${selectedLocation.phone}`}
                     >
                       Call Shop

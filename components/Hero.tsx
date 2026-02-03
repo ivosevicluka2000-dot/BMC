@@ -47,7 +47,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <div className="h-px w-8 bg-brand/50" />
         </div>
         
-        <h1 className="serif text-brand text-5xl sm:text-6xl md:text-9xl lg:text-[10rem] mb-8 md:mb-12 leading-[0.85] font-extralight tracking-tight">
+        <h1 className="serif text-brand text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[10rem] mb-6 sm:mb-8 md:mb-12 leading-[0.85] font-extralight tracking-tight">
           Balkan <br />
           <span className="italic font-light text-white opacity-80">Moto Club</span>
         </h1>
