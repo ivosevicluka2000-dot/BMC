@@ -1,17 +1,20 @@
+'use client';
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { locations, Location, LocationType } from '../data/locations';
-import L from 'leaflet';
+import type L from 'leaflet';
 
 const LocationsPage: React.FC = () => {
   const [activeType, setActiveType] = useState<LocationType>('shop');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [isMobileListOpen, setIsMobileListOpen] = useState(false);
+  const [leafletLoaded, setLeafletLoaded] = useState(false);
   
   const mapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.LayerGroup | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const leafletRef = useRef<typeof L | null>(null);
 
   // Filtered data based on toggle and search
   const filteredLocations = useMemo(() => {
@@ -27,28 +30,36 @@ const LocationsPage: React.FC = () => {
     });
   }, [activeType, searchQuery]);
 
-  // Initialize Map
+  // Initialize Map - dynamically import Leaflet on client side only
   useEffect(() => {
-    if (mapContainerRef.current && !mapRef.current) {
-      mapRef.current = L.map(mapContainerRef.current, {
-        center: [44.7866, 20.4489],
-        zoom: 6,
-        zoomControl: false,
-        attributionControl: false
-      });
+    if (typeof window === 'undefined') return;
+    
+    // Dynamic import of Leaflet
+    import('leaflet').then((L) => {
+      leafletRef.current = L.default;
+      setLeafletLoaded(true);
+      
+      if (mapContainerRef.current && !mapRef.current) {
+        mapRef.current = L.default.map(mapContainerRef.current, {
+          center: [44.7866, 20.4489],
+          zoom: 6,
+          zoomControl: false,
+          attributionControl: false
+        });
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        maxZoom: 19,
-      }).addTo(mapRef.current);
+        L.default.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          maxZoom: 19,
+        }).addTo(mapRef.current);
 
-      L.control.zoom({ position: 'bottomright' }).addTo(mapRef.current);
-      markersRef.current = L.layerGroup().addTo(mapRef.current);
+        L.default.control.zoom({ position: 'bottomright' }).addTo(mapRef.current);
+        markersRef.current = L.default.layerGroup().addTo(mapRef.current);
 
-      // Fix for gray maps or broken tiles on initial load
-      setTimeout(() => {
-        if (mapRef.current) mapRef.current.invalidateSize();
-      }, 200);
-    }
+        // Fix for gray maps or broken tiles on initial load
+        setTimeout(() => {
+          if (mapRef.current) mapRef.current.invalidateSize();
+        }, 200);
+      }
+    });
 
     return () => {
       if (mapRef.current) {
@@ -60,8 +71,9 @@ const LocationsPage: React.FC = () => {
 
   // Update Markers when filteredLocations changes
   useEffect(() => {
-    if (!mapRef.current || !markersRef.current) return;
-
+    if (!mapRef.current || !markersRef.current || !leafletRef.current) return;
+    
+    const L = leafletRef.current;
     markersRef.current.clearLayers();
 
     filteredLocations.forEach(loc => {
@@ -93,7 +105,7 @@ const LocationsPage: React.FC = () => {
       const group = L.featureGroup(filteredLocations.map(l => L.marker([l.lat, l.lng])));
       mapRef.current.fitBounds(group.getBounds(), { padding: [50, 50], maxZoom: 12 });
     }
-  }, [filteredLocations]);
+  }, [filteredLocations, leafletLoaded]);
 
   const handleLocationSelect = (loc: Location) => {
     setSelectedLocation(loc);

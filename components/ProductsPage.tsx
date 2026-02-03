@@ -1,5 +1,6 @@
+'use client';
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { products, Product, ProductCategory } from '../data/products';
 import ProductModal from './ProductModal';
 
