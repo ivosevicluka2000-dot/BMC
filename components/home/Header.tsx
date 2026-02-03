@@ -51,10 +51,14 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-lg sm:text-xl font-bold text-[#F5F5F7] hover:text-[#E10600] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E10600] rounded-lg"
+            className="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E10600] rounded-lg"
           >
-            <span className="text-[#E10600]">BMC</span>
-            <span className="hidden sm:inline ml-2">Balkan Moto</span>
+            <img
+              src="/download-removebg-preview.png"
+              alt="BMC Logo"
+              className="h-20 sm:h-24 w-auto"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.7)) drop-shadow(0 0 20px rgba(255,255,255,0.5)) drop-shadow(0 0 40px rgba(255,255,255,0.3))' }}
+            />
           </Link>
 
           {/* Desktop Navigation */}
