@@ -26,11 +26,11 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=2670&auto=format&fit=crop"
+          src="/hero-image.jpg"
           alt="Motorcycle background"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-top"
           sizes="100vw"
         />
         {/* Dark overlay with gradient */}
