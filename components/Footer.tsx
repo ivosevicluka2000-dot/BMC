@@ -16,10 +16,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('home')}
               className="flex items-center space-x-3 mb-8 group"
             >
-              <div className="w-8 h-8 border border-white flex items-center justify-center rotate-45 group-hover:bg-white transition-all duration-500">
+              <div className="w-8 h-8 border border-white flex items-center justify-center rotate-45 group-hover:bg-brand transition-all duration-500">
                 <span className="text-white group-hover:text-black -rotate-45 font-bold text-[10px]">BM</span>
               </div>
-              <span className="uppercase tracking-[0.3em] font-light text-sm">Balkan Moto Club</span>
+              <span className="uppercase tracking-[0.3em] font-light text-sm group-hover:text-brand transition-colors">Balkan Moto Club</span>
             </button>
             <p className="text-white/30 text-xs leading-relaxed max-w-sm">
               Established 2012. Dedicated to the preservation of road culture and the advancement of the riding spirit across the Balkan Peninsula.
@@ -27,22 +27,22 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           <div>
-            <h5 className="uppercase tracking-widest text-[10px] font-bold mb-6 text-white/50">Follow The Pack</h5>
+            <h5 className="uppercase tracking-widest text-[10px] font-bold mb-6 text-brand">Social Media</h5>
             <ul className="space-y-4">
-              <li><a href="#" className="text-xs text-white/40 hover:text-white transition-colors">Instagram</a></li>
-              <li><a href="#" className="text-xs text-white/40 hover:text-white transition-colors">Vimeo</a></li>
-              <li><a href="#" className="text-xs text-white/40 hover:text-white transition-colors">The Journal</a></li>
+              <li><a href="#" className="text-xs text-brand/60 hover:text-brand transition-colors">Instagram</a></li>
+              <li><a href="#" className="text-xs text-brand/60 hover:text-brand transition-colors">Vimeo</a></li>
+              <li><a href="#" className="text-xs text-brand/60 hover:text-brand transition-colors">The Journal</a></li>
             </ul>
           </div>
 
           <div>
-            <h5 className="uppercase tracking-widest text-[10px] font-bold mb-6 text-white/50">Explorer</h5>
+            <h5 className="uppercase tracking-widest text-[10px] font-bold mb-6 text-white/50">Menu</h5>
             <ul className="space-y-4">
-              <li><button onClick={() => onNavigate('home')} className="text-xs text-white/40 hover:text-white transition-colors text-left">Home</button></li>
-              <li><button onClick={() => onNavigate('registry')} className="text-xs text-white/40 hover:text-white transition-colors text-left">The Registry</button></li>
-              <li><button onClick={() => onNavigate('locations')} className="text-xs text-white/40 hover:text-white transition-colors text-left">The Network</button></li>
-              <li><button onClick={() => onNavigate('contact')} className="text-xs text-white/40 hover:text-white transition-colors text-left">Contact Liaison</button></li>
-              <li><a href="#join" className="text-xs text-white/40 hover:text-white transition-colors">Join Us</a></li>
+              <li><button onClick={() => onNavigate('home')} className="text-xs text-white/40 hover:text-brand transition-colors text-left">Home</button></li>
+              <li><button onClick={() => onNavigate('registry')} className="text-xs text-white/40 hover:text-brand transition-colors text-left">Shop</button></li>
+              <li><button onClick={() => onNavigate('locations')} className="text-xs text-white/40 hover:text-brand transition-colors text-left">Locations</button></li>
+              <li><button onClick={() => onNavigate('contact')} className="text-xs text-white/40 hover:text-brand transition-colors text-left">Contact Us</button></li>
+              <li><a href="#join" className="text-xs text-white/40 hover:text-brand transition-colors">Join Us</a></li>
             </ul>
           </div>
 

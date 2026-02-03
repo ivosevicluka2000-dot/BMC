@@ -69,8 +69,8 @@ const LocationsPage: React.FC = () => {
         className: 'custom-marker',
         html: `
           <div class="relative group">
-            <div class="w-4 h-4 bg-white rounded-full border-2 border-black transition-transform duration-300 group-hover:scale-150 shadow-[0_0_15px_rgba(255,255,255,0.5)]"></div>
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black border border-white/20 px-2 py-1 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-[8px] uppercase tracking-widest z-50">
+            <div class="w-4 h-4 bg-brand rounded-full border-2 border-black transition-transform duration-300 group-hover:scale-150 shadow-[0_0_15px_rgba(207,10,10,0.8)]"></div>
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black border border-brand/30 text-brand px-2 py-1 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-[8px] uppercase tracking-widest z-50">
               ${loc.name}
             </div>
           </div>

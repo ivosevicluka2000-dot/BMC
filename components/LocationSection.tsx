@@ -12,18 +12,18 @@ const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
         <div className="flex flex-col lg:flex-row gap-12">
           
           <div className="lg:w-1/3">
-            <h2 className="serif text-4xl mb-6">Find The Pack</h2>
+            <h2 className="serif text-4xl mb-6">Our Locations</h2>
             <p className="text-white/50 text-sm mb-8 leading-relaxed">
-              We operate across several key nodes in the Balkan region. Our doors are open to those who approach with respect.
+              We have chapters active throughout the region. Come visit us or join a ride.
             </p>
             
             <div className="space-y-8 mb-12">
               <div>
-                <h4 className="uppercase tracking-widest text-[11px] font-bold mb-2">Central Chapter</h4>
+                <h4 className="uppercase tracking-widest text-[11px] font-bold mb-2">Belgrade HQ</h4>
                 <p className="text-white/70 text-sm font-light">12 Bulevar Kralja Petra, Belgrade, Serbia</p>
               </div>
               <div>
-                <h4 className="uppercase tracking-widest text-[11px] font-bold mb-2">Ride Days</h4>
+                <h4 className="uppercase tracking-widest text-[11px] font-bold mb-2">Weekly Schedule</h4>
                 <p className="text-white/70 text-sm font-light">Sundays @ 08:00 AM — Dawn Patrol</p>
                 <p className="text-white/70 text-sm font-light">Wednesdays @ 07:00 PM — Night Sessions</p>
               </div>
@@ -32,12 +32,12 @@ const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
             <div className="flex flex-col space-y-4">
               <button 
                 onClick={onNavigate}
-                className="bg-white text-center text-black px-8 py-4 text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors"
+                className="bg-white text-center text-black px-8 py-4 text-[10px] font-bold uppercase tracking-widest hover:bg-brand transition-colors"
               >
-                View Full Network Map
+                View All Locations
               </button>
-              <button className="border border-white/20 text-white px-8 py-4 text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 transition-colors">
-                Message HQ
+              <button className="border border-white/20 text-white px-8 py-4 text-[10px] font-bold uppercase tracking-widest hover:border-brand/50 hover:text-brand transition-colors">
+                Contact Us
               </button>
             </div>
           </div>
@@ -60,10 +60,10 @@ const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
 
               {/* Pulsing Pin */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full animate-ping absolute" />
-                <div className="w-4 h-4 bg-white rounded-full relative" />
-                <div className="ml-4 bg-black/80 border border-white/20 backdrop-blur-md px-4 py-2">
-                  <span className="text-[10px] uppercase tracking-widest">HQ — Belgrade</span>
+                <div className="w-4 h-4 bg-brand rounded-full animate-ping absolute" />
+                <div className="w-4 h-4 bg-brand rounded-full relative shadow-[0_0_15px_rgba(207,10,10,0.8)]" />
+                <div className="ml-4 bg-black/80 border border-brand/20 backdrop-blur-md px-4 py-2">
+                  <span className="text-[10px] uppercase tracking-widest text-brand">HQ — Belgrade</span>
                 </div>
               </div>
 

@@ -19,10 +19,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: 'var(--brand)',
+            }
+          }
+        }
+      }
+    </script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
       :root {
         --bg: #050505;
+        --brand: #CF0A0A; /* Heavy Red */
         --text: #F5F5F7;
       }
       body {
@@ -95,7 +107,7 @@
         background: #111 !important;
         color: #fff !important;
         border-radius: 0 !important;
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid var(--brand);
         padding: 0 !important;
       }
       .leaflet-popup-content {
@@ -104,6 +116,7 @@
       }
       .leaflet-popup-tip {
         background: #111 !important;
+        border-top: 1px solid var(--brand); /* Optional: match popup border */
       }
       .leaflet-bar a {
         background-color: #111 !important;

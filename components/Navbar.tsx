@@ -21,19 +21,19 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, currentView, onNavigate }) 
           onClick={() => onNavigate('home')}
           className="flex items-center space-x-4 group cursor-pointer"
         >
-          <div className="w-10 h-10 border border-white/20 flex items-center justify-center rotate-45 group-hover:border-white transition-all duration-500">
-            <span className="text-white -rotate-45 font-bold text-[10px] tracking-tighter">BMC</span>
+          <div className="w-10 h-10 border border-white/20 flex items-center justify-center rotate-45 group-hover:border-brand transition-all duration-500">
+            <span className="text-white -rotate-45 font-bold text-[10px] tracking-tighter group-hover:text-brand transition-colors">BMC</span>
           </div>
           <div className="flex flex-col text-left">
-            <span className="uppercase tracking-[0.4em] font-bold text-[11px]">Balkan Moto Club</span>
-            <span className="uppercase tracking-[0.5em] font-light text-[7px] text-white/30 group-hover:text-white/60 transition-colors">The Brotherhood</span>
+            <span className="uppercase tracking-[0.4em] font-bold text-[11px] group-hover:text-brand transition-colors">Balkan Moto Club</span>
+            <span className="uppercase tracking-[0.5em] font-light text-[7px] text-white/30 group-hover:text-white/60 transition-colors">Est. 2012</span>
           </div>
         </button>
         
         <div className="hidden lg:flex items-center space-x-12">
           <button 
             onClick={() => onNavigate('home')}
-            className={`group relative overflow-hidden text-[10px] uppercase tracking-[0.3em] font-medium transition-colors ${currentView === 'home' ? 'text-white' : 'text-white/40 hover:text-white'}`}
+            className={`group relative overflow-hidden text-[10px] uppercase tracking-[0.3em] font-medium transition-colors ${currentView === 'home' ? 'text-brand' : 'text-white/40 hover:text-brand'}`}
           >
             <span className="block transition-transform duration-500 group-hover:-translate-y-full">Home</span>
             <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-500 group-hover:translate-y-0 italic font-bold">Home</span>
@@ -41,31 +41,31 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled, currentView, onNavigate }) 
 
           <button 
             onClick={() => onNavigate('registry')}
-            className={`group relative overflow-hidden text-[10px] uppercase tracking-[0.3em] font-medium transition-colors ${currentView === 'registry' ? 'text-white' : 'text-white/40 hover:text-white'}`}
+            className={`group relative overflow-hidden text-[10px] uppercase tracking-[0.3em] font-medium transition-colors ${currentView === 'registry' ? 'text-brand' : 'text-white/40 hover:text-brand'}`}
           >
-            <span className="block transition-transform duration-500 group-hover:-translate-y-full">Registry</span>
+            <span className="block transition-transform duration-500 group-hover:-translate-y-full">Shop</span>
             <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-500 group-hover:translate-y-0 italic font-bold">Gear</span>
           </button>
 
           <button 
             onClick={() => onNavigate('locations')}
-            className={`group relative overflow-hidden text-[10px] uppercase tracking-[0.3em] font-medium transition-colors ${currentView === 'locations' ? 'text-white' : 'text-white/40 hover:text-white'}`}
+            className={`group relative overflow-hidden text-[10px] uppercase tracking-[0.3em] font-medium transition-colors ${currentView === 'locations' ? 'text-brand' : 'text-white/40 hover:text-brand'}`}
           >
-            <span className="block transition-transform duration-500 group-hover:-translate-y-full">Network</span>
+            <span className="block transition-transform duration-500 group-hover:-translate-y-full">Locations</span>
             <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-500 group-hover:translate-y-0 italic font-bold">Network</span>
           </button>
 
           <button 
             onClick={() => onNavigate('contact')}
-            className={`group relative overflow-hidden text-[10px] uppercase tracking-[0.3em] font-medium transition-colors ${currentView === 'contact' ? 'text-white' : 'text-white/40 hover:text-white'}`}
+            className={`group relative overflow-hidden text-[10px] uppercase tracking-[0.3em] font-medium transition-colors ${currentView === 'contact' ? 'text-brand' : 'text-white/40 hover:text-brand'}`}
           >
-            <span className="block transition-transform duration-500 group-hover:-translate-y-full">Liaison</span>
+            <span className="block transition-transform duration-500 group-hover:-translate-y-full">Contact</span>
             <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-500 group-hover:translate-y-0 italic font-bold">Contact</span>
           </button>
 
           <a 
             href="#join" 
-            className="px-8 py-3 border border-white/10 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-white hover:text-black transition-all duration-500"
+            className="px-8 py-3 border border-brand/50 text-brand text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-brand hover:text-white transition-all duration-500"
           >
             Join Us
           </a>

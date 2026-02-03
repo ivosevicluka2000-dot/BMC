@@ -41,19 +41,18 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
       <div className={`relative z-10 max-w-7xl mx-auto px-6 text-center transition-all duration-[2000ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="mb-10 inline-flex items-center space-x-4">
-          <div className="h-px w-8 bg-white/20" />
-          <span className="text-white/40 uppercase tracking-[0.6em] text-[9px] font-bold">The Brotherhood of the Road</span>
-          <div className="h-px w-8 bg-white/20" />
+          <div className="h-px w-8 bg-brand/50" />
+          <span className="text-brand/80 uppercase tracking-[0.6em] text-[9px] font-bold">Est. 2012</span>
+          <div className="h-px w-8 bg-brand/50" />
         </div>
         
-        <h1 className="serif text-6xl md:text-9xl lg:text-[11rem] mb-12 leading-[0.85] font-extralight tracking-tight">
-          Steel Soul. <br />
-          <span className="italic font-light opacity-80">Balkan Heart.</span>
+        <h1 className="serif text-brand text-6xl md:text-9xl lg:text-[10rem] mb-12 leading-[0.85] font-extralight tracking-tight">
+          Balkan <br />
+          <span className="italic font-light text-white opacity-80">Moto Club</span>
         </h1>
         
         <p className="max-w-2xl mx-auto text-white/50 text-sm md:text-lg font-light tracking-wide mb-16 leading-relaxed">
-          We are the silent guardians of the asphalt. A collective defined by discipline, 
-          cemented by loyalty, and driven by the raw mechanical pulse of the peninsula.
+          The premier motorcycle community in the Balkans. Join us for weekly rides, events, and the freedom of the open road.
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
@@ -61,30 +60,30 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             onClick={onNavigate}
             className="group relative px-12 py-5 overflow-hidden"
           >
-            <div className="absolute inset-0 bg-white transition-transform duration-500 group-hover:scale-105" />
-            <span className="relative z-10 text-black text-[11px] uppercase tracking-[0.4em] font-bold">Locate The Chapter</span>
+            <div className="absolute inset-0 bg-brand transition-transform duration-500 group-hover:scale-105" />
+            <span className="relative z-10 text-black text-[11px] uppercase tracking-[0.4em] font-bold">Find a Location</span>
           </button>
           <a 
             href="#join"
-            className="group relative px-12 py-5 overflow-hidden border border-white/20"
+            className="group relative px-12 py-5 overflow-hidden border border-white/20 hover:border-brand/50 transition-colors duration-500"
           >
             <div className="absolute inset-0 bg-white/0 group-hover:bg-white transition-all duration-500" />
-            <span className="relative z-10 text-white group-hover:text-black text-[11px] uppercase tracking-[0.4em] font-bold transition-colors duration-500">The Vetting Process</span>
+            <span className="relative z-10 text-white group-hover:text-black text-[11px] uppercase tracking-[0.4em] font-bold transition-colors duration-500">How to Join</span>
           </a>
         </div>
       </div>
 
       <div className="absolute bottom-12 left-12 flex flex-col items-start space-y-4">
         <div className="flex space-x-4">
-            <div className="w-1 h-1 rounded-full bg-white animate-pulse" />
-            <div className="w-1 h-1 rounded-full bg-white/20" />
-            <div className="w-1 h-1 rounded-full bg-white/20" />
+            <div className="w-1 h-1 rounded-full bg-brand animate-pulse" />
+            <div className="w-1 h-1 rounded-full bg-brand/20" />
+            <div className="w-1 h-1 rounded-full bg-brand/20" />
         </div>
         <span className="text-[8px] uppercase tracking-[0.4em] text-white/30">HQ: 44.7866° N, 20.4489° E</span>
       </div>
 
       <div className="absolute bottom-12 right-12 flex flex-col items-end">
-        <div className="w-px h-24 bg-gradient-to-t from-white/40 to-transparent" />
+        <div className="w-px h-24 bg-gradient-to-t from-brand to-transparent" />
       </div>
     </section>
   );
