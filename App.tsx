@@ -14,10 +14,14 @@ import ProductsPage from './components/ProductsPage';
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'locations' | 'contact' | 'registry'>('home');
+  const scrollTimeout = React.useRef<number | null>(null);
 
   const handleScroll = useCallback(() => {
-    // Use requestAnimationFrame for smoother scroll handling
-    requestAnimationFrame(() => {
+    // Debounce scroll handler for better performance
+    if (scrollTimeout.current) {
+      cancelAnimationFrame(scrollTimeout.current);
+    }
+    scrollTimeout.current = requestAnimationFrame(() => {
       setIsScrolled(window.scrollY > 50);
     });
   }, []);

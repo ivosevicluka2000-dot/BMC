@@ -1,16 +1,31 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const JoinUs: React.FC = () => {
+  const [bgImage, setBgImage] = useState('');
+  
+  useEffect(() => {
+    // Use smaller image on mobile for faster loading
+    const isMobile = window.innerWidth < 768;
+    setBgImage(isMobile 
+      ? 'https://images.unsplash.com/photo-1558981420-c532902e58b4?auto=format&fit=crop&q=60&w=800'
+      : 'https://images.unsplash.com/photo-1558981420-c532902e58b4?auto=format&fit=crop&q=80&w=1600'
+    );
+  }, []);
+
   return (
     <section id="join" className="relative py-20 md:py-32 lg:py-80 overflow-hidden bg-black">
       {/* Dynamic Background - Uses bg-scroll on mobile to fix iOS Safari issues */}
       <div 
         className="absolute inset-0 bg-cover bg-scroll lg:bg-fixed bg-center grayscale brightness-[0.25]"
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1558981420-c532902e58b4?auto=format&fit=crop&q=90&w=2400')` }}
+        style={{ 
+          backgroundImage: bgImage ? `url('${bgImage}')` : 'none',
+          transform: 'translateZ(0)'
+        }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]" />
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+      {/* Only use backdrop-blur on desktop for performance */}
+      <div className="absolute inset-0 bg-black/40 lg:backdrop-blur-[2px]" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <div className="mb-8 md:mb-12 flex justify-center items-center space-x-4 md:space-x-6">

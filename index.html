@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Preload critical hero image -->
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1558981359-219d6364c9c8?auto=format&fit=crop&q=80&w=1920" fetchpriority="high">
+    <!-- Preload critical hero image - mobile size for faster initial load -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1558981359-219d6364c9c8?auto=format&fit=crop&q=60&w=800" fetchpriority="high">
     
     <!-- Fonts with display swap for faster text rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -83,6 +83,38 @@
         
         button, a {
           touch-action: manipulation;
+        }
+        
+        /* Improve scroll performance on mobile */
+        body {
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-y: contain;
+        }
+        
+        /* Reduce paint on fixed elements */
+        .fixed {
+          transform: translateZ(0);
+          will-change: transform;
+          backface-visibility: hidden;
+        }
+        
+        /* Disable heavy filters on mobile for performance */
+        .grayscale {
+          filter: grayscale(1) brightness(0.3);
+        }
+      }
+      
+      /* Reduce motion for users who prefer it */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        
+        .reveal {
+          opacity: 1;
+          transform: none;
         }
       }
 

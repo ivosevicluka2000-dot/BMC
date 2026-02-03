@@ -96,7 +96,10 @@ const ContactPage: React.FC = () => {
       <section className="relative h-[50dvh] sm:h-[60dvh] flex items-center justify-center overflow-hidden border-b border-white/5">
         <div 
           className="absolute inset-0 bg-cover bg-center grayscale brightness-[0.25]"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1558981396-5fcf84bdf14d?auto=format&fit=crop&q=90&w=2400')` }}
+          style={{ 
+            backgroundImage: `url('https://images.unsplash.com/photo-1558981396-5fcf84bdf14d?auto=format&fit=crop&q=60&w=${window.innerWidth < 768 ? 800 : 1600}')`,
+            transform: 'translateZ(0)'
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent" />
         

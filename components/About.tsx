@@ -6,13 +6,21 @@ const About: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Use lower threshold on mobile for earlier reveal and better performance
+    const isMobile = window.innerWidth < 768;
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
+          if (entry.isIntersecting) {
+            // Use requestAnimationFrame for smoother class addition
+            requestAnimationFrame(() => {
+              entry.target.classList.add('visible');
+            });
+          }
         });
       },
-      { threshold: 0.2 }
+      { threshold: isMobile ? 0.1 : 0.2, rootMargin: '50px' }
     );
 
     const elements = sectionRef.current?.querySelectorAll('.reveal');

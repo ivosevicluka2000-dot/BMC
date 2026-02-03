@@ -48,15 +48,19 @@ const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
               className="relative h-[280px] sm:h-[350px] lg:h-[500px] w-full bg-zinc-900 overflow-hidden grayscale contrast-125 border border-white/10 group cursor-pointer" 
               onClick={onNavigate}
             >
-              {/* Mock Map View - Optimized */}
+              {/* Mock Map View - Optimized, disable heavy hover on mobile */}
               <div 
-                className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity group-hover:scale-110 transition-transform duration-[5000ms]"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=60&w=800')` }}
+                className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity lg:group-hover:scale-105 transition-transform duration-1000"
+                style={{ 
+                  backgroundImage: `url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=50&w=600')`,
+                  transform: 'translateZ(0)'
+                }}
               />
               <div className="absolute inset-0 bg-black/40" />
               
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 backdrop-blur-[2px]">
-                 <span className="text-xs uppercase tracking-[0.3em] font-bold px-8 py-4 border border-white/30 bg-black/80 text-white">Enter Interactive Map</span>
+              {/* Only show on hover for desktop, always visible on mobile */}
+              <div className="absolute inset-0 flex items-center justify-center lg:opacity-0 lg:group-hover:opacity-100 transition-opacity bg-black/50">
+                 <span className="text-xs uppercase tracking-[0.3em] font-bold px-6 md:px-8 py-4 border border-white/30 bg-black/80 text-white">Enter Interactive Map</span>
               </div>
 
               {/* Pulsing Pin */}

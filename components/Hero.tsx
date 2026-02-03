@@ -2,35 +2,38 @@
 import React, { useEffect, useState } from 'react';
 import { usePreloadImages } from './OptimizedImage';
 
-// Critical hero image URL
-const HERO_IMAGE = 'https://images.unsplash.com/photo-1558981359-219d6364c9c8?auto=format&fit=crop&q=80&w=1920';
+// Critical hero image URL - use smaller size on mobile
+const HERO_IMAGE_MOBILE = 'https://images.unsplash.com/photo-1558981359-219d6364c9c8?auto=format&fit=crop&q=60&w=800';
+const HERO_IMAGE_DESKTOP = 'https://images.unsplash.com/photo-1558981359-219d6364c9c8?auto=format&fit=crop&q=80&w=1920';
 
 interface HeroProps {
   onNavigate: () => void;
 }
 
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
-  const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [heroImage, setHeroImage] = useState(HERO_IMAGE_MOBILE);
 
-  // Preload hero image
-  usePreloadImages([HERO_IMAGE]);
-
+  // Determine image size based on screen
   useEffect(() => {
-    // Preload image before showing
+    const isMobile = window.innerWidth < 768;
+    const imageSrc = isMobile ? HERO_IMAGE_MOBILE : HERO_IMAGE_DESKTOP;
+    setHeroImage(imageSrc);
+    
+    // Preload the appropriate image
     const img = new Image();
-    img.src = HERO_IMAGE;
+    img.src = imageSrc;
     img.onload = () => setImageLoaded(true);
-    setIsVisible(true);
   }, []);
 
   return (
     <section className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
       {/* Immersive Backdrop - High-end Harley Davidson Visual */}
       <div 
-        className={`absolute inset-0 bg-cover bg-center grayscale brightness-[0.3] transition-opacity duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 bg-cover bg-center grayscale brightness-[0.3] transition-opacity duration-700 will-change-opacity ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
-          backgroundImage: `url('${HERO_IMAGE}')`
+          backgroundImage: `url('${heroImage}')`,
+          transform: 'translateZ(0)' // Force GPU acceleration
         }}
       />
       

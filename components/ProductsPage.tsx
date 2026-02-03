@@ -40,7 +40,10 @@ const ProductsPage: React.FC = () => {
       <section className="relative h-[30dvh] sm:h-[40dvh] flex items-center justify-center overflow-hidden border-b border-white/10">
         <div 
           className="absolute inset-0 bg-cover bg-center grayscale brightness-[0.2]"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=70&w=1600')` }}
+          style={{ 
+            backgroundImage: `url('https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=60&w=${window.innerWidth < 768 ? 800 : 1600}')`,
+            transform: 'translateZ(0)'
+          }}
         />
         <div className="relative z-10 text-center px-6">
           <span className="text-white/50 uppercase tracking-[0.3em] md:tracking-[0.5em] text-[10px] font-bold mb-3 md:mb-4 block">The Registry</span>
@@ -135,11 +138,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index, onClick }) =>
     >
       <div className="relative aspect-square mb-4 sm:mb-6 overflow-hidden bg-zinc-900">
         <img 
-          src={`${product.images[0].split('?')[0]}?auto=format&fit=crop&q=70&w=600`}
+          src={`${product.images[0].split('?')[0]}?auto=format&fit=crop&q=60&w=400`}
           alt={product.name} 
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 group-hover:brightness-100 group-hover:grayscale-0 transition-all duration-500"
+          className="w-full h-full object-cover grayscale brightness-75 lg:group-hover:scale-105 lg:group-hover:brightness-100 lg:group-hover:grayscale-0 transition-all duration-300"
+          style={{ transform: 'translateZ(0)' }}
         />
         <div className="absolute top-3 left-3 flex flex-col gap-2">
            {product.tags.map(tag => (
