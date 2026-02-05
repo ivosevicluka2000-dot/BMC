@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Shield, Wrench, Users } from 'lucide-react'
 
 const trustBadges = [
@@ -71,14 +72,14 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16"
           >
             {/* Primary CTA */}
-            <button
-              onClick={() => scrollToSection('footer')}
+            <Link
+              href="/locations"
               className="group relative w-full sm:w-auto px-8 py-4 bg-[#E10600] text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(225,6,0,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E10600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D]"
               aria-label="Show our location"
             >
               <span className="relative z-10">Show location</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#E10600] to-[#ff2a2a] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </button>
+            </Link>
 
             {/* Secondary CTA */}
             <button
