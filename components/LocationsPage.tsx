@@ -44,11 +44,13 @@ const LocationsPage: React.FC = () => {
           center: [44.7866, 20.4489],
           zoom: 6,
           zoomControl: false,
-          attributionControl: false
+          attributionControl: true
         });
 
-        L.default.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        // Yandex Maps - shows Kosovo as part of Serbia
+        L.default.tileLayer('https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}&scale=1&lang=sr_SR', {
           maxZoom: 19,
+          attribution: '© Yandex Maps',
         }).addTo(mapRef.current);
 
         L.default.control.zoom({ position: 'bottomright' }).addTo(mapRef.current);

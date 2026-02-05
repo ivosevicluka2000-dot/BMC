@@ -1,126 +1,91 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Activity, Settings, Zap } from 'lucide-react'
+import React, { useEffect, useRef } from 'react';
+import OptimizedImage from '../OptimizedImage';
 
-const highlights = [
-  {
-    icon: Activity,
-    title: 'Diagnostics',
-    description: 'State-of-the-art diagnostic equipment for precise troubleshooting',
-  },
-  {
-    icon: Settings,
-    title: 'Maintenance',
-    description: 'Regular service and maintenance to keep your ride running smooth',
-  },
-  {
-    icon: Zap,
-    title: 'Performance Upgrades',
-    description: 'Custom tuning and upgrades to maximize your bike\'s potential',
-  },
-]
+const About: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-}
+  useEffect(() => {
+    // Use lower threshold on mobile for earlier reveal and better performance
+    const isMobile = window.innerWidth < 768;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Use requestAnimationFrame for smoother class addition
+            requestAnimationFrame(() => {
+              entry.target.classList.add('visible');
+            });
+          }
+        });
+      },
+      { threshold: isMobile ? 0.1 : 0.2, rootMargin: '50px' }
+    );
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: 'easeOut',
-    },
-  },
-}
+    const elements = sectionRef.current?.querySelectorAll('.reveal');
+    elements?.forEach(el => observer.observe(el));
 
-export default function About() {
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section
-      id="about"
-      className="relative py-20 sm:py-28 lg:py-32 bg-[#0B0B0D]"
-      aria-labelledby="about-heading"
-    >
-      {/* Subtle top gradient */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2A2A33] to-transparent" />
+    <section id="about" ref={sectionRef} className="py-16 md:py-24 lg:py-40 bg-[#050505]">
+      <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 lg:gap-24 items-start">
+          
+          <div className="lg:col-span-5 relative reveal">
+            <div className="aspect-[3/4] overflow-hidden grayscale contrast-125 brightness-75 border border-white/5">
+              <OptimizedImage 
+                src="https://images.unsplash.com/photo-1542360561-19363d59649b" 
+                alt="The Machine" 
+                className="w-full h-full"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+            </div>
+            <div className="absolute top-12 -left-6 lg:-left-12 flex flex-col space-y-4 items-center">
+                <span className="[writing-mode:vertical-lr] uppercase tracking-[1em] text-[10px] text-white/20 font-light">ESTABLISHED MMXII</span>
+                <div className="w-px h-32 bg-white/10" />
+            </div>
+          </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={containerVariants}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
-        >
-          {/* Text Content */}
-          <motion.div variants={itemVariants}>
-            <h2
-              id="about-heading"
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 tracking-tight"
-            >
-              About{' '}
-              <span className="text-[#E10600]">Us</span>
+          <div className="lg:col-span-7 lg:pt-24 reveal delay-200">
+            <div className="mb-12 inline-flex items-center space-x-4">
+                <span className="text-white/50 uppercase tracking-[0.5em] text-[10px] font-bold">Our Philosophy</span>
+                <div className="h-px w-12 bg-white/20" />
+            </div>
+            
+            <h2 className="serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl mb-8 md:mb-12 leading-[1.1] font-extralight tracking-tight">
+              Built on <span className="italic">Trust</span>, <br />
+              Driven by <span className="italic">Steel.</span>
             </h2>
             
-            <div className="space-y-4 text-[#8A8A95] text-base sm:text-lg leading-relaxed">
+            <div className="max-w-xl space-y-6 md:space-y-10 text-white/70 text-base md:text-lg leading-relaxed font-light">
               <p>
-                At Balkan Moto Center, we live and breathe motorcycles. With over a decade of experience 
-                in the industry, our team of certified technicians brings unmatched expertise to every 
-                service we perform.
+                The Balkan Moto Club is not for everyone. We do not exist for the weekend hobbyist or the social media enthusiast. We exist for those who understand that the road is a teacher, and the machine is a mirror.
               </p>
               <p>
-                We're not just a service center—we're a community of riders who understand the passion 
-                that drives you. Whether you need routine maintenance, complex repairs, or performance 
-                upgrades, we treat every bike as if it were our own.
+                Our creed is simple: Respect the line. Protect the pack. Maintain the craft. Whether traversing the rugged peaks of the Dinaric Alps or the urban labyrinth of Belgrade, we move with a unified purpose that transcends borders.
               </p>
-              <p>
-                Quality parts, honest advice, and meticulous attention to detail are the foundations 
-                of everything we do.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Highlights Cards */}
-          <motion.div
-            variants={containerVariants}
-            className="grid gap-4"
-          >
-            {highlights.map((item, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#1A1A1F] to-[#0B0B0D] border border-[#2A2A33] hover:border-[#E10600]/30 transition-all duration-500"
-              >
-                {/* Glass effect overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
-                
-                <div className="relative flex items-start gap-4">
-                  <div className="flex-shrink-0 p-3 rounded-xl bg-[#E10600]/10 border border-[#E10600]/20 group-hover:bg-[#E10600]/20 transition-colors duration-300">
-                    <item.icon className="w-6 h-6 text-[#E10600]" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-[#F5F5F7] mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-[#8A8A95] text-sm leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
+              
+              <div className="pt-6 md:pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+                <div>
+                  <h4 className="text-white text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Discipline</h4>
+                  <p className="text-xs font-light text-white/50 leading-relaxed">Safety is not a checklist; it is an instinct honed through thousands of shared kilometers.</p>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+                <div>
+                  <h4 className="text-white text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Loyalty</h4>
+                  <p className="text-xs font-light text-white/50 leading-relaxed">No rider is left behind. We are bound by a commitment that remains silent but absolute.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default About;

@@ -1,153 +1,78 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { 
-  Droplets, 
-  Gauge, 
-  CircleDot, 
-  Zap, 
-  Sparkles, 
-  Package 
-} from 'lucide-react'
-import { ComponentType } from 'react'
+import { Wrench, Shield, Cog, Fuel, Gauge, Settings } from 'lucide-react'
 
-interface Service {
-  icon: ComponentType<{ className?: string }>
-  name: string
-  description: string
-}
-
-const services: Service[] = [
+const services = [
   {
-    icon: Droplets,
-    name: 'Maintenance & Oil Service',
-    description: 'Regular oil changes and comprehensive maintenance to keep your engine running at peak performance.',
+    icon: Wrench,
+    title: 'Full Service',
+    description: 'Complete maintenance packages for all motorcycle brands and models.'
+  },
+  {
+    icon: Shield,
+    title: 'Diagnostics',
+    description: 'Advanced electronic diagnostics and fault detection systems.'
+  },
+  {
+    icon: Cog,
+    title: 'Custom Parts',
+    description: 'OEM and aftermarket parts sourcing with guaranteed authenticity.'
+  },
+  {
+    icon: Fuel,
+    title: 'Performance',
+    description: 'Engine tuning, exhaust upgrades, and power optimization.'
   },
   {
     icon: Gauge,
-    name: 'Diagnostics',
-    description: 'Advanced computer diagnostics to identify and resolve any issues with precision and accuracy.',
+    title: 'Inspection',
+    description: 'Pre-purchase inspections and technical certification.'
   },
   {
-    icon: CircleDot,
-    name: 'Tire & Brake Service',
-    description: 'Professional tire mounting, balancing, and brake system service for maximum safety on the road.',
-  },
-  {
-    icon: Zap,
-    name: 'Performance Upgrades',
-    description: 'Custom tuning, exhaust systems, and performance parts to unlock your bike\'s full potential.',
-  },
-  {
-    icon: Sparkles,
-    name: 'Detailing',
-    description: 'Premium detailing services to keep your motorcycle looking showroom fresh.',
-  },
-  {
-    icon: Package,
-    name: 'Parts & Accessories',
-    description: 'Wide selection of OEM and aftermarket parts, gear, and accessories for every rider.',
-  },
+    icon: Settings,
+    title: 'Restoration',
+    description: 'Classic motorcycle restoration and custom builds.'
+  }
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-}
-
-export default function Services() {
+const Services: React.FC = () => {
   return (
-    <section
-      id="services"
-      className="relative py-20 sm:py-28 lg:py-32 bg-[#0B0B0D]"
-      aria-labelledby="services-heading"
-    >
-      {/* Background gradient accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#E10600]/5 rounded-full blur-[120px] pointer-events-none" />
-      
-      {/* Subtle top border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2A2A33] to-transparent" />
-
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
-        >
-          <h2
-            id="services-heading"
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
-          >
-            Our{' '}
-            <span className="text-[#E10600]">Services</span>
-          </h2>
-          <p className="text-[#8A8A95] text-base sm:text-lg max-w-2xl mx-auto">
-            From routine maintenance to performance upgrades, we've got everything 
-            your motorcycle needs under one roof.
+    <section id="services" className="py-16 md:py-24 lg:py-32 bg-[#0a0a0a]">
+      <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
+        <div className="text-center mb-12 md:mb-16">
+          <span className="text-white/50 uppercase tracking-[0.3em] md:tracking-[0.5em] text-[10px] font-bold mb-3 md:mb-4 block">
+            What We Offer
+          </span>
+          <h2 className="serif text-3xl sm:text-4xl lg:text-5xl mb-4 md:mb-6">Our Services</h2>
+          <p className="text-white/60 text-sm max-w-xl mx-auto leading-relaxed">
+            Professional motorcycle services backed by years of expertise and a passion for precision.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Services Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          variants={containerVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => (
-            <motion.article
-              key={index}
-              variants={cardVariants}
-              className="group relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#1A1A1F] to-[#0B0B0D] border border-[#2A2A33] hover:border-[#E10600] transition-all duration-500 hover:shadow-[0_0_40px_rgba(225,6,0,0.1)] hover:-translate-y-1"
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group p-6 md:p-8 border border-white/10 bg-white/[0.02] hover:border-brand/30 hover:bg-white/[0.04] transition-all duration-300"
             >
-              {/* Glass overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
-              
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#E10600]/5 to-transparent pointer-events-none" />
-
-              <div className="relative">
-                {/* Icon */}
-                <div className="mb-5 inline-flex p-3 rounded-xl bg-[#2A2A33]/50 border border-[#2A2A33] group-hover:border-[#E10600]/30 group-hover:bg-[#E10600]/10 transition-all duration-300">
-                  <service.icon 
-                    className="w-6 h-6 text-[#8A8A95] group-hover:text-[#E10600] transition-colors duration-300" 
-                    aria-hidden="true" 
-                  />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-lg sm:text-xl font-semibold text-[#F5F5F7] mb-2 group-hover:text-white transition-colors duration-300">
-                  {service.name}
-                </h3>
-                <p className="text-[#8A8A95] text-sm leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            </motion.article>
+              <service.icon className="w-8 h-8 text-brand mb-4 group-hover:scale-110 transition-transform duration-300" />
+              <h3 className="text-white text-lg font-bold uppercase tracking-wider mb-3">
+                {service.title}
+              </h3>
+              <p className="text-white/50 text-sm leading-relaxed">
+                {service.description}
+              </p>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
 }
+
+export default Services
