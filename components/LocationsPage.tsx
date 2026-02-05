@@ -1,20 +1,125 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { APIProvider, Map, AdvancedMarker, useMap } from '@vis.gl/react-google-maps';
 import { locations, Location, LocationType } from '../data/locations';
-import type L from 'leaflet';
+import Header from './home/Header';
+import LocationModal from './LocationModal';
+
+// Dark map style for the Balkans theme
+const darkMapStyle = [
+  { elementType: 'geometry', stylers: [{ color: '#1a1a1a' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#1a1a1a' }] },
+  { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
+  { featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers: [{ color: '#d59563' }] },
+  { featureType: 'administrative.country', elementType: 'geometry.stroke', stylers: [{ color: '#4a4a4a' }] },
+  { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#2c2c2c' }] },
+  { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#1a1a1a' }] },
+  { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#3c3c3c' }] },
+  { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0e0e0e' }] },
+  { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#4a4a4a' }] },
+  { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+  { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+];
+
+// Balkans center coordinates
+const BALKANS_CENTER = { lat: 43.5, lng: 20.5 };
+const DEFAULT_ZOOM = 6;
+
+// Custom marker component
+interface LocationMarkerProps {
+  location: Location;
+  isHovered: boolean;
+  isSelected: boolean;
+  onClick: () => void;
+}
+
+const LocationMarker: React.FC<LocationMarkerProps> = ({ location, isHovered, isSelected, onClick }) => {
+  const isHighlighted = isHovered || isSelected;
+  
+  return (
+    <AdvancedMarker
+      position={{ lat: location.lat, lng: location.lng }}
+      onClick={onClick}
+    >
+      <div className="relative group cursor-pointer">
+        {/* Pin shape */}
+        <div 
+          className={`
+            w-8 h-8 rounded-full border-2 flex items-center justify-center
+            transition-all duration-300 ease-out
+            ${isHighlighted 
+              ? 'bg-brand border-white scale-125 shadow-[0_0_20px_rgba(207,10,10,0.8)]' 
+              : 'bg-brand/80 border-black/50 hover:scale-110 shadow-[0_0_10px_rgba(207,10,10,0.5)]'
+            }
+          `}
+        >
+          <div className="w-2 h-2 bg-white rounded-full" />
+        </div>
+        
+        {/* Label tooltip */}
+        <div 
+          className={`
+            absolute -top-10 left-1/2 -translate-x-1/2 
+            bg-black/95 border border-brand/40 text-white 
+            px-3 py-1.5 whitespace-nowrap 
+            text-[10px] uppercase tracking-widest font-medium
+            transition-all duration-200 pointer-events-none z-50
+            ${isHighlighted ? 'opacity-100 -translate-y-1' : 'opacity-0 translate-y-0'}
+          `}
+        >
+          {location.name}
+          <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-brand/40" />
+        </div>
+      </div>
+    </AdvancedMarker>
+  );
+};
+
+// Map controller component for programmatic control
+interface MapControllerProps {
+  selectedLocation: Location | null;
+  filteredLocations: Location[];
+}
+
+const MapController: React.FC<MapControllerProps> = ({ selectedLocation, filteredLocations }) => {
+  const map = useMap();
+  const hasInitialFit = useRef(false);
+
+  // Fit bounds when filtered locations change  
+  useEffect(() => {
+    if (!map || filteredLocations.length === 0) return;
+    
+    // Only auto-fit on initial load or when no location is selected
+    if (!selectedLocation && !hasInitialFit.current) {
+      const bounds = new google.maps.LatLngBounds();
+      filteredLocations.forEach(loc => {
+        bounds.extend({ lat: loc.lat, lng: loc.lng });
+      });
+      map.fitBounds(bounds, { top: 50, right: 50, bottom: 50, left: 50 });
+      hasInitialFit.current = true;
+    }
+  }, [map, filteredLocations, selectedLocation]);
+
+  // Pan to selected location
+  useEffect(() => {
+    if (!map || !selectedLocation) return;
+    
+    map.panTo({ lat: selectedLocation.lat, lng: selectedLocation.lng });
+    map.setZoom(14);
+  }, [map, selectedLocation]);
+
+  return null;
+};
 
 const LocationsPage: React.FC = () => {
   const [activeType, setActiveType] = useState<LocationType>('shop');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [hoveredLocationId, setHoveredLocationId] = useState<string | null>(null);
   const [isMobileListOpen, setIsMobileListOpen] = useState(false);
-  const [leafletLoaded, setLeafletLoaded] = useState(false);
-  
-  const mapRef = useRef<L.Map | null>(null);
-  const markersRef = useRef<L.LayerGroup | null>(null);
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const leafletRef = useRef<typeof L | null>(null);
+
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
 
   // Filtered data based on toggle and search
   const filteredLocations = useMemo(() => {
@@ -30,97 +135,17 @@ const LocationsPage: React.FC = () => {
     });
   }, [activeType, searchQuery]);
 
-  // Initialize Map - dynamically import Leaflet on client side only
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    // Dynamic import of Leaflet
-    import('leaflet').then((L) => {
-      leafletRef.current = L.default;
-      setLeafletLoaded(true);
-      
-      if (mapContainerRef.current && !mapRef.current) {
-        mapRef.current = L.default.map(mapContainerRef.current, {
-          center: [44.7866, 20.4489],
-          zoom: 6,
-          zoomControl: false,
-          attributionControl: true
-        });
-
-        // Yandex Maps - shows Kosovo as part of Serbia
-        L.default.tileLayer('https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}&scale=1&lang=sr_SR', {
-          maxZoom: 19,
-          attribution: '© Yandex Maps',
-        }).addTo(mapRef.current);
-
-        L.default.control.zoom({ position: 'bottomright' }).addTo(mapRef.current);
-        markersRef.current = L.default.layerGroup().addTo(mapRef.current);
-
-        // Fix for gray maps or broken tiles on initial load
-        setTimeout(() => {
-          if (mapRef.current) mapRef.current.invalidateSize();
-        }, 200);
-      }
-    });
-
-    return () => {
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
-    };
-  }, []);
-
-  // Update Markers when filteredLocations changes
-  useEffect(() => {
-    if (!mapRef.current || !markersRef.current || !leafletRef.current) return;
-    
-    const L = leafletRef.current;
-    markersRef.current.clearLayers();
-
-    filteredLocations.forEach(loc => {
-      const customIcon = L.divIcon({
-        className: 'custom-marker',
-        html: `
-          <div class="relative group">
-            <div class="w-4 h-4 bg-brand rounded-full border-2 border-black transition-transform duration-300 group-hover:scale-150 shadow-[0_0_15px_rgba(207,10,10,0.8)]"></div>
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black border border-brand/30 text-brand px-2 py-1 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none text-[10px] uppercase tracking-widest z-50">
-              ${loc.name}
-            </div>
-          </div>
-        `,
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
-      });
-
-      const marker = L.marker([loc.lat, loc.lng], { icon: customIcon });
-      
-      marker.on('click', () => {
-        handleLocationSelect(loc);
-      });
-
-      markersRef.current?.addLayer(marker);
-    });
-
-    // Auto-fit bounds if we have locations
-    if (filteredLocations.length > 0 && mapRef.current) {
-      const group = L.featureGroup(filteredLocations.map(l => L.marker([l.lat, l.lng])));
-      mapRef.current.fitBounds(group.getBounds(), { padding: [50, 50], maxZoom: 12 });
-    }
-  }, [filteredLocations, leafletLoaded]);
-
-  const handleLocationSelect = (loc: Location) => {
+  const handleLocationSelect = useCallback((loc: Location) => {
     setSelectedLocation(loc);
-    if (mapRef.current) {
-      mapRef.current.setView([loc.lat, loc.lng], 14, { animate: true, duration: 1 });
-    }
     if (window.innerWidth < 1024) {
       setIsMobileListOpen(false);
     }
-  };
+  }, []);
 
   return (
-    <div className="pt-20 sm:pt-24 lg:pt-[100px] h-screen flex flex-col bg-[#050505] overflow-hidden">
+    <>
+      <Header />
+      <div className="pt-20 sm:pt-24 lg:pt-[100px] h-screen flex flex-col bg-[#050505] overflow-hidden">
       {/* Header / Controls */}
       <div className="flex-none px-4 sm:px-6 lg:px-12 py-4 sm:py-6 lg:py-8 border-b border-white/10 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6">
         <div className="text-center lg:text-left">
@@ -187,6 +212,8 @@ const LocationsPage: React.FC = () => {
                 <button 
                   key={loc.id}
                   onClick={() => handleLocationSelect(loc)}
+                  onMouseEnter={() => setHoveredLocationId(loc.id)}
+                  onMouseLeave={() => setHoveredLocationId(null)}
                   className={`w-full text-left p-5 sm:p-6 lg:p-8 border-b border-white/10 group transition-all hover:bg-white/[0.04] active:bg-white/[0.08] ${selectedLocation?.id === loc.id ? 'bg-white/[0.06]' : ''}`}
                 >
                   <div className="flex justify-between items-start mb-3 sm:mb-4">
@@ -208,7 +235,46 @@ const LocationsPage: React.FC = () => {
 
         {/* Map View (Right) */}
         <div className="flex-1 relative bg-black">
-          <div ref={mapContainerRef} className="h-full w-full" />
+          {apiKey && apiKey !== 'YOUR_API_KEY_HERE' ? (
+            <APIProvider apiKey={apiKey}>
+              <Map
+                defaultCenter={BALKANS_CENTER}
+                defaultZoom={DEFAULT_ZOOM}
+                mapId="balkans-dark-map"
+                styles={darkMapStyle}
+                disableDefaultUI={true}
+                zoomControl={true}
+                className="h-full w-full"
+                gestureHandling="greedy"
+              >
+                <MapController selectedLocation={selectedLocation} filteredLocations={filteredLocations} />
+                {filteredLocations.map(loc => (
+                  <LocationMarker
+                    key={loc.id}
+                    location={loc}
+                    isHovered={hoveredLocationId === loc.id}
+                    isSelected={selectedLocation?.id === loc.id}
+                    onClick={() => handleLocationSelect(loc)}
+                  />
+                ))}
+              </Map>
+            </APIProvider>
+          ) : (
+            <div className="h-full w-full flex items-center justify-center bg-zinc-900">
+              <div className="text-center p-8 max-w-md">
+                <div className="w-16 h-16 mx-auto mb-6 border border-brand/30 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-brand/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  </svg>
+                </div>
+                <h3 className="serif text-xl mb-3">Map Configuration Required</h3>
+                <p className="text-white/50 text-sm mb-4">Add your Google Maps API key to .env.local:</p>
+                <code className="block bg-black/50 border border-white/10 p-3 text-xs text-brand font-mono">
+                  NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_key
+                </code>
+              </div>
+            </div>
+          )}
           
           {/* Mobile Overlay Toggle */}
           <button 
@@ -220,70 +286,15 @@ const LocationsPage: React.FC = () => {
 
           {/* Selected Location Modal/Card */}
           {selectedLocation && (
-            <div className="absolute inset-0 lg:inset-auto lg:top-4 xl:top-8 lg:right-4 xl:right-8 z-[1001] pointer-events-none flex items-end sm:items-center justify-center lg:block p-4 sm:p-0">
-               <div className="pointer-events-auto w-full sm:w-[90%] md:w-[70%] lg:w-[360px] xl:w-[400px] max-h-[85vh] overflow-y-auto bg-black border border-white/20 shadow-2xl animate-in slide-in-from-bottom-4 sm:slide-in-from-right-4 duration-500">
-                  <div className="relative h-32 bg-zinc-900 overflow-hidden">
-                    <div className="absolute inset-0 bg-cover bg-center grayscale brightness-50 opacity-50" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1558981403-c5f9100d2b17?auto=format&fit=crop&q=80&w=600')` }} />
-                    <button 
-                      onClick={() => setSelectedLocation(null)}
-                      className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-black/50 hover:bg-black transition-colors"
-                    >
-                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                    <div className="absolute bottom-4 left-6">
-                       <span className="bg-white text-black px-2 py-1 text-[8px] font-bold uppercase tracking-widest">{selectedLocation.category}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-5 sm:p-6 lg:p-8">
-                    <h2 className="serif text-2xl sm:text-3xl mb-2">{selectedLocation.name}</h2>
-                    <p className="text-white/60 text-xs sm:text-sm mb-6 sm:mb-8 italic">{selectedLocation.address}, {selectedLocation.city}</p>
-                    
-                    <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-                       <div className="flex items-start gap-3 sm:gap-4">
-                          <span className="text-white/40 text-[10px] sm:text-xs uppercase tracking-widest w-14 sm:w-16 pt-1 flex-shrink-0">Hours:</span>
-                          <span className="text-white/80 text-xs sm:text-sm tracking-wide">{selectedLocation.hours}</span>
-                       </div>
-                       <div className="flex items-start gap-3 sm:gap-4">
-                          <span className="text-white/40 text-[10px] sm:text-xs uppercase tracking-widest w-14 sm:w-16 pt-1 flex-shrink-0">Contact:</span>
-                          <span className="text-white/80 text-xs sm:text-sm tracking-wide">{selectedLocation.phone}</span>
-                       </div>
-                       <p className="text-white/60 text-xs sm:text-sm leading-relaxed font-light">
-                         {selectedLocation.description}
-                       </p>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                       <a 
-                        href={`https://www.google.com/maps/dir/?api=1&destination=${selectedLocation.lat},${selectedLocation.lng}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="bg-brand text-white flex items-center justify-center py-3.5 sm:py-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors min-h-[44px]"
-                       >
-                         Directions
-                       </a>
-                       <a 
-                        href={selectedLocation.website}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="border border-white/30 text-white/80 flex items-center justify-center py-3.5 sm:py-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors min-h-[44px]"
-                       >
-                         Website
-                       </a>
-                    </div>
-                    <button 
-                      className="w-full mt-3 sm:mt-4 border border-white/10 py-3.5 sm:py-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white hover:border-white/30 transition-colors min-h-[44px]"
-                      onClick={() => window.location.href = `tel:${selectedLocation.phone}`}
-                    >
-                      Call Shop
-                    </button>
-                  </div>
-               </div>
-            </div>
+            <LocationModal 
+              location={selectedLocation} 
+              onClose={() => setSelectedLocation(null)} 
+            />
           )}
         </div>
       </div>
     </div>
+    </>
   );
 };
 

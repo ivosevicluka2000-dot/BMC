@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { products, Product, ProductCategory } from '../data/products';
 import ProductModal from './ProductModal';
+import Header from './home/Header';
 
 const ProductsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -45,7 +46,9 @@ const ProductsPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#050505] min-h-screen pt-20 sm:pt-24 lg:pt-[100px]">
+    <>
+      <Header />
+      <div className="bg-[#050505] min-h-screen pt-20 sm:pt-24 lg:pt-[100px]">
       {/* Hero Section */}
       <section className="relative h-[30dvh] sm:h-[40dvh] flex items-center justify-center overflow-hidden border-b border-white/10">
         <div 
@@ -131,6 +134,7 @@ const ProductsPage: React.FC = () => {
         <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
       )}
     </div>
+    </>
   );
 };
 

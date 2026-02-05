@@ -204,24 +204,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             )}
 
             {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-white/10">
-              <button 
-                className={`flex-1 py-4 text-xs font-bold uppercase tracking-widest transition-all ${
-                  product.availability === 'Sold Out'
-                    ? 'bg-white/10 text-white/40 cursor-not-allowed'
-                    : 'bg-brand text-white hover:bg-white hover:text-black active:scale-[0.98]'
-                }`}
-                disabled={product.availability === 'Sold Out'}
-              >
-                {product.availability === 'Sold Out' ? 'Sold Out' : 
-                 product.availability === 'Pre-Order' ? 'Pre-Order Now' : 
-                 'Add to Cart'}
-              </button>
-              <button className="px-6 py-4 border border-white/30 text-white/80 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">
-                <svg className="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </button>
+            <div className="flex flex-col gap-3 pt-6 border-t border-white/10">
+              <div className="bg-white/5 border border-white/10 p-4 text-center">
+                <p className="text-white/70 text-sm italic">
+                  Ove artikle možete pronaći u našim prodavnicama
+                </p>
+                <p className="text-white/40 text-xs mt-2 uppercase tracking-widest">
+                  Posetite nas ili nas kontaktirajte za više informacija
+                </p>
+              </div>
             </div>
           </div>
         </div>
