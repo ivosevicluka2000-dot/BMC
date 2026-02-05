@@ -3,8 +3,8 @@
 import { useState, FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Header from '@/components/home/Header'
+import Footer from '@/components/home/Footer'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-[#050505]">
-      <Navbar />
+      <Header />
       
       <section className="pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
