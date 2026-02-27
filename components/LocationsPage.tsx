@@ -5,6 +5,7 @@ import { APIProvider, Map, AdvancedMarker, useMap } from '@vis.gl/react-google-m
 import { locations, Location, LocationType } from '../data/locations';
 import Header from './home/Header';
 import LocationModal from './LocationModal';
+import { useLanguage, translateLocationCategory, translateLocationDescription } from '@/lib/i18n';
 
 // Dark map style for the Balkans theme
 const darkMapStyle = [
@@ -118,6 +119,7 @@ const LocationsPage: React.FC = () => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [hoveredLocationId, setHoveredLocationId] = useState<string | null>(null);
   const [isMobileListOpen, setIsMobileListOpen] = useState(false);
+  const { t } = useLanguage();
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
 
@@ -149,8 +151,8 @@ const LocationsPage: React.FC = () => {
       {/* Header / Controls */}
       <div className="flex-none px-4 sm:px-6 lg:px-12 py-4 sm:py-6 lg:py-8 border-b border-white/10 flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6">
         <div className="text-center lg:text-left">
-          <h1 className="serif text-2xl sm:text-3xl lg:text-4xl">The Network</h1>
-          <p className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-1 sm:mt-2">Verified Chapters & Partners</p>
+          <h1 className="serif text-2xl sm:text-3xl lg:text-4xl">{t('locations.heading')}</h1>
+          <p className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-1 sm:mt-2">{t('locations.subtitle')}</p>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full lg:w-auto">
@@ -160,13 +162,13 @@ const LocationsPage: React.FC = () => {
               onClick={() => setActiveType('shop')}
               className={`flex-1 py-3.5 sm:py-3 text-[11px] sm:text-xs uppercase tracking-widest font-bold transition-all min-h-[44px] ${activeType === 'shop' ? 'bg-brand text-white' : 'text-white/60 hover:text-white'}`}
             >
-              Shops
+              {t('locations.shops')}
             </button>
             <button 
               onClick={() => setActiveType('service')}
               className={`flex-1 py-3.5 sm:py-3 text-[11px] sm:text-xs uppercase tracking-widest font-bold transition-all min-h-[44px] ${activeType === 'service' ? 'bg-brand text-white' : 'text-white/60 hover:text-white'}`}
             >
-              Services
+              {t('locations.services')}
             </button>
           </div>
 
@@ -174,7 +176,7 @@ const LocationsPage: React.FC = () => {
           <div className="relative w-full sm:flex-1 lg:w-[400px] lg:flex-none">
             <input 
               type="text" 
-              placeholder="SEARCH BY CITY OR NAME..."
+              placeholder={t('locations.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-white/5 border border-white/20 px-4 sm:px-6 py-3.5 text-[11px] sm:text-xs uppercase tracking-widest focus:outline-none focus:border-brand transition-colors placeholder:text-white/30 min-h-[48px]"
@@ -195,8 +197,8 @@ const LocationsPage: React.FC = () => {
           ${isMobileListOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}>
           <div className="p-6 bg-[#0a0a0a] border-b border-white/10 lg:hidden flex justify-between items-center">
-             <span className="text-xs uppercase tracking-widest font-bold">Results ({filteredLocations.length})</span>
-             <button onClick={() => setIsMobileListOpen(false)} className="text-white/70 text-xs uppercase tracking-widest">Close</button>
+             <span className="text-xs uppercase tracking-widest font-bold">{t('locations.results')} ({filteredLocations.length})</span>
+             <button onClick={() => setIsMobileListOpen(false)} className="text-white/70 text-xs uppercase tracking-widest">{t('locations.close')}</button>
           </div>
           
           <div className="flex-1 overflow-y-auto custom-scrollbar">
@@ -205,7 +207,7 @@ const LocationsPage: React.FC = () => {
                 <div className="w-12 h-12 border border-white/20 flex items-center justify-center mb-6 rotate-45">
                    <span className="text-white/40 -rotate-45 font-bold">!</span>
                 </div>
-                <p className="text-white/40 text-xs uppercase tracking-widest">No connections found in this sector.</p>
+                <p className="text-white/40 text-xs uppercase tracking-widest">{t('locations.noResults')}</p>
               </div>
             ) : (
               filteredLocations.map(loc => (
@@ -217,15 +219,15 @@ const LocationsPage: React.FC = () => {
                   className={`w-full text-left p-5 sm:p-6 lg:p-8 border-b border-white/10 group transition-all hover:bg-white/[0.04] active:bg-white/[0.08] ${selectedLocation?.id === loc.id ? 'bg-white/[0.06]' : ''}`}
                 >
                   <div className="flex justify-between items-start mb-3 sm:mb-4">
-                    <span className="text-[10px] sm:text-xs text-white/50 uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium">{loc.category}</span>
+                    <span className="text-[10px] sm:text-xs text-white/50 uppercase tracking-[0.15em] sm:tracking-[0.2em] font-medium">{translateLocationCategory(loc.category, t)}</span>
                     <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-widest">{loc.city}</span>
                   </div>
                   <h3 className="serif text-lg sm:text-xl mb-2 sm:mb-3 group-hover:translate-x-1 transition-transform">{loc.name}</h3>
-                  <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed line-clamp-2">{loc.description}</p>
+                  <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed line-clamp-2">{translateLocationDescription(loc.id, t) || loc.description}</p>
                   
                   <div className="mt-4 sm:mt-6 flex items-center space-x-4 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                     <div className="w-4 h-[1px] bg-white/50" />
-                    <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold text-white/80">View Location Details</span>
+                    <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold text-white/80">{t('locations.viewDetails')}</span>
                   </div>
                 </button>
               ))
@@ -267,8 +269,8 @@ const LocationsPage: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                   </svg>
                 </div>
-                <h3 className="serif text-xl mb-3">Map Configuration Required</h3>
-                <p className="text-white/50 text-sm mb-4">Add your Google Maps API key to .env.local:</p>
+                <h3 className="serif text-xl mb-3">{t('locations.mapRequired')}</h3>
+                <p className="text-white/50 text-sm mb-4">{t('locations.mapRequiredDesc')}</p>
                 <code className="block bg-black/50 border border-white/10 p-3 text-xs text-brand font-mono">
                   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_key
                 </code>
@@ -281,7 +283,7 @@ const LocationsPage: React.FC = () => {
             onClick={() => setIsMobileListOpen(true)}
             className="lg:hidden absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-[1000] bg-brand text-white px-6 sm:px-8 py-4 text-[11px] sm:text-xs font-bold uppercase tracking-widest shadow-2xl active:scale-95 transition-transform min-h-[48px]"
           >
-            Show List
+            {t('locations.showList')}
           </button>
 
           {/* Selected Location Modal/Card */}

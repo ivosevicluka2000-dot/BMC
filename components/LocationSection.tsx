@@ -1,32 +1,35 @@
 
 import React from 'react';
+import { useLanguage } from '@/lib/i18n';
 
 interface LocationSectionProps {
   onNavigate: () => void;
 }
 
 const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
+  const { t } = useLanguage();
+
   return (
     <section id="location" className="py-16 md:py-24 lg:py-32 bg-[#0a0a0a] border-y border-white/10">
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-10 md:gap-12 lg:gap-16">
           
           <div className="lg:w-1/3">
-            <span className="text-white/50 uppercase tracking-[0.3em] md:tracking-[0.5em] text-[10px] font-bold mb-3 md:mb-4 block">The Network</span>
-            <h2 className="serif text-3xl sm:text-4xl lg:text-5xl mb-4 md:mb-6">Our Locations</h2>
+            <span className="text-white/50 uppercase tracking-[0.3em] md:tracking-[0.5em] text-[10px] font-bold mb-3 md:mb-4 block">{t('locationSection.sectionLabel')}</span>
+            <h2 className="serif text-3xl sm:text-4xl lg:text-5xl mb-4 md:mb-6">{t('locationSection.heading')}</h2>
             <p className="text-white/60 text-sm mb-6 md:mb-8 leading-relaxed">
-              We have chapters active throughout the region. Come visit us or join a ride.
+              {t('locationSection.description')}
             </p>
             
             <div className="space-y-4 md:space-y-6 mb-8 md:mb-10">
               <div>
-                <h4 className="uppercase tracking-widest text-xs font-bold mb-2 text-white/80">Belgrade HQ</h4>
+                <h4 className="uppercase tracking-widest text-xs font-bold mb-2 text-white/80">{t('locationSection.belgradeHQ')}</h4>
                 <p className="text-white/60 text-sm font-light">12 Bulevar Kralja Petra, Belgrade, Serbia</p>
               </div>
               <div>
-                <h4 className="uppercase tracking-widest text-xs font-bold mb-2 text-white/80">Weekly Schedule</h4>
-                <p className="text-white/60 text-sm font-light">Sundays @ 08:00 AM — Dawn Patrol</p>
-                <p className="text-white/60 text-sm font-light">Wednesdays @ 07:00 PM — Night Sessions</p>
+                <h4 className="uppercase tracking-widest text-xs font-bold mb-2 text-white/80">{t('locationSection.weeklySchedule')}</h4>
+                <p className="text-white/60 text-sm font-light">{t('locationSection.dawnPatrol')}</p>
+                <p className="text-white/60 text-sm font-light">{t('locationSection.nightSessions')}</p>
               </div>
             </div>
 
@@ -35,10 +38,10 @@ const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
                 onClick={onNavigate}
                 className="bg-brand text-center text-white px-6 md:px-8 py-4 text-sm sm:text-xs font-bold uppercase tracking-[0.15em] md:tracking-widest hover:bg-white hover:text-black transition-colors duration-300 active:scale-95"
               >
-                View All Locations
+                {t('locationSection.viewAll')}
               </button>
               <button className="border border-white/30 text-white/80 px-6 md:px-8 py-4 text-sm sm:text-xs font-bold uppercase tracking-[0.15em] md:tracking-widest hover:border-white hover:text-white transition-colors duration-300 active:scale-95">
-                Contact Us
+                {t('locationSection.contactUs')}
               </button>
             </div>
           </div>
@@ -60,7 +63,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
               
               {/* Only show on hover for desktop, always visible on mobile */}
               <div className="absolute inset-0 flex items-center justify-center lg:opacity-0 lg:group-hover:opacity-100 transition-opacity bg-black/50">
-                 <span className="text-xs uppercase tracking-[0.3em] font-bold px-6 md:px-8 py-4 border border-white/30 bg-black/80 text-white">Enter Interactive Map</span>
+                 <span className="text-xs uppercase tracking-[0.3em] font-bold px-6 md:px-8 py-4 border border-white/30 bg-black/80 text-white">{t('locationSection.enterMap')}</span>
               </div>
 
               {/* Pulsing Pin */}
@@ -68,7 +71,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
                 <div className="w-4 h-4 bg-brand rounded-full animate-ping absolute" />
                 <div className="w-4 h-4 bg-brand rounded-full relative shadow-[0_0_15px_rgba(207,10,10,0.8)]" />
                 <div className="ml-4 bg-black/90 border border-brand/30 backdrop-blur-md px-4 py-2">
-                  <span className="text-xs uppercase tracking-widest text-brand font-bold">HQ — Belgrade</span>
+                  <span className="text-xs uppercase tracking-widest text-brand font-bold">{t('locationSection.hqBelgrade')}</span>
                 </div>
               </div>
 

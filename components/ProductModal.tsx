@@ -2,6 +2,7 @@
 
 import React, { useEffect, useCallback } from 'react';
 import { Product, ProductVariant, getCategoryGroup } from '../data/products';
+import { useLanguage, translateAvailability, getLocalizedProductText } from '@/lib/i18n';
 
 interface ProductModalProps {
   product: Product;
@@ -9,6 +10,8 @@ interface ProductModalProps {
 }
 
 const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
+  const { locale, t } = useLanguage();
+  const localizedText = getLocalizedProductText(product, locale);
   const [selectedImage, setSelectedImage] = React.useState(0);
   const [selectedSize, setSelectedSize] = React.useState<string | null>(null);
   const [selectedColor, setSelectedColor] = React.useState<string | null>(null);
@@ -126,11 +129,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                   {product.name}
                 </h2>
 
-                {/* Price & availability */}
+                {/* Availability */}
                 <div className="flex items-center gap-4 mb-6">
-                  {product.priceEur > 0 && (
-                    <span className="text-brand text-xl sm:text-2xl font-bold">€{product.priceEur}</span>
-                  )}
                   <span
                     className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider border ${
                       product.availability === 'In Stock'
@@ -142,14 +142,14 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                         : 'border-white/30 text-white/60'
                     }`}
                   >
-                    {product.availability}
+                    {translateAvailability(product.availability, t)}
                   </span>
                 </div>
 
                 {/* Tagline */}
-                {product.tagline && (
+                {localizedText.tagline && (
                   <p className="text-white/90 text-lg sm:text-xl font-semibold uppercase tracking-wide mb-4">
-                    {product.tagline}
+                    {localizedText.tagline}
                   </p>
                 )}
 
@@ -157,7 +157,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                 {product.variants && product.variants.length > 0 && (
                   <div className="mb-6">
                     <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-3">
-                      Select Model: <span className="text-white">{product.variants[selectedVariant].name}</span>
+                      {t('productModal.selectModel')} <span className="text-white">{product.variants[selectedVariant].name}</span>
                     </label>
                     <div className="flex flex-wrap gap-2">
                       {product.variants.map((v, idx) => (
@@ -196,7 +196,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                 {product.colors && product.colors.length > 0 && (
                   <div className="mb-6">
                     <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-3">
-                      Select Color: <span className="text-white">{selectedColor}</span>
+                      {t('productModal.selectColor')} <span className="text-white">{selectedColor}</span>
                     </label>
                     <div className="flex flex-wrap gap-2">
                       {product.colors.map(color => (
@@ -220,7 +220,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                 {product.sizes && product.sizes.length > 0 && (
                   <div className="mb-6">
                     <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-3">
-                      Size: <span className="text-white">{selectedSize}</span>
+                      {t('productModal.size')} <span className="text-white">{selectedSize}</span>
                     </label>
                     <div className="flex flex-wrap gap-2">
                       {product.sizes.map(size => (
@@ -243,21 +243,21 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             </div>
 
             {/* ── Description ── */}
-            {(product.fullDesc || product.shortDesc) && (
+            {(localizedText.fullDesc || localizedText.shortDesc) && (
               <div className="mt-12 sm:mt-16 max-w-4xl">
                 <div className="w-12 h-[2px] bg-brand mb-6" />
                 <p className="text-white/80 text-base sm:text-lg leading-relaxed whitespace-pre-line">
-                  {product.fullDesc || product.shortDesc}
+                  {localizedText.fullDesc || localizedText.shortDesc}
                 </p>
               </div>
             )}
 
             {/* ── Key Features ── */}
-            {product.keyFeatures && product.keyFeatures.length > 0 && (
+            {localizedText.keyFeatures && localizedText.keyFeatures.length > 0 && (
               <div className="mt-12 sm:mt-16">
-                <h3 className="serif text-2xl sm:text-3xl text-white mb-8">Key Features</h3>
+                <h3 className="serif text-2xl sm:text-3xl text-white mb-8">{t('productModal.keyFeatures')}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {product.keyFeatures.map((feat, i) => (
+                  {localizedText.keyFeatures.map((feat, i) => (
                     <div key={i} className="border border-white/10 bg-white/[0.02] p-6 sm:p-8">
                       <div className="flex items-start gap-4">
                         <span className="text-brand text-xs font-bold mt-1">{String(i + 1).padStart(2, '0')}</span>
@@ -275,7 +275,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             {/* ── Specifications ── */}
             {product.specs && product.specs.length > 0 && (
               <div className="mt-12 sm:mt-16">
-                <h3 className="serif text-2xl sm:text-3xl text-white mb-8">Specifications</h3>
+                <h3 className="serif text-2xl sm:text-3xl text-white mb-8">{t('productModal.specifications')}</h3>
 
                 {/* Variant tabs inside specs */}
                 {product.variants && product.variants.length > 0 && (
@@ -316,10 +316,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             <div className="mt-12 sm:mt-16 max-w-2xl mx-auto">
               <div className="bg-white/5 border border-white/10 p-6 sm:p-8 text-center">
                 <p className="text-white/70 text-sm sm:text-base italic">
-                  Ove artikle možete pronaći u našim prodavnicama
+                  {t('productModal.ctaText')}
                 </p>
                 <p className="text-white/40 text-xs mt-3 uppercase tracking-widest">
-                  Posetite nas ili nas kontaktirajte za više informacija
+                  {t('productModal.ctaSubtext')}
                 </p>
               </div>
             </div>
@@ -393,9 +393,6 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             <h2 className="serif text-2xl sm:text-3xl lg:text-4xl text-white mb-2">{product.name}</h2>
 
             <div className="flex items-center gap-4 mb-6">
-              {product.priceEur > 0 && (
-                <span className="text-brand text-xl sm:text-2xl font-bold">€{product.priceEur}</span>
-              )}
               <span
                 className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider border ${
                   product.availability === 'In Stock'
@@ -407,19 +404,19 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                     : 'border-white/30 text-white/60'
                 }`}
               >
-                {product.availability}
+                {translateAvailability(product.availability, t)}
               </span>
             </div>
 
-            {(product.fullDesc || product.shortDesc) && (
+            {(localizedText.fullDesc || localizedText.shortDesc) && (
               <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-6">
-                {product.fullDesc || product.shortDesc}
+                {localizedText.fullDesc || localizedText.shortDesc}
               </p>
             )}
 
             {product.sizes && product.sizes.length > 0 && (
               <div className="mb-6">
-                <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-3">Size</label>
+                <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-3">{t('productModal.size')}</label>
                 <div className="flex flex-wrap gap-2">
                   {product.sizes.map(size => (
                     <button
@@ -441,7 +438,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             {product.colors && product.colors.length > 0 && (
               <div className="mb-6">
                 <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-3">
-                  Color: <span className="text-white">{selectedColor}</span>
+                  {t('productModal.color')} <span className="text-white">{selectedColor}</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {product.colors.map(color => (
@@ -463,7 +460,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
 
             {product.specs && product.specs.length > 0 && (
               <div className="mb-6 pt-6 border-t border-white/10">
-                <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-4">Specifications</label>
+                <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-4">{t('productModal.specifications')}</label>
                 <div className="space-y-3">
                   {product.specs.map(spec => (
                     <div key={spec.label} className="flex justify-between text-sm">
@@ -477,9 +474,9 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
 
             <div className="flex flex-col gap-3 pt-6 border-t border-white/10">
               <div className="bg-white/5 border border-white/10 p-4 text-center">
-                <p className="text-white/70 text-sm italic">Ove artikle možete pronaći u našim prodavnicama</p>
+                <p className="text-white/70 text-sm italic">{t('productModal.ctaText')}</p>
                 <p className="text-white/40 text-xs mt-2 uppercase tracking-widest">
-                  Posetite nas ili nas kontaktirajte za više informacija
+                  {t('productModal.ctaSubtext')}
                 </p>
               </div>
             </div>

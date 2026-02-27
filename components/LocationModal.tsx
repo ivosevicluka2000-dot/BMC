@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Location } from '../data/locations';
+import { useLanguage, translateLocationCategory, translateLocationDescription } from '@/lib/i18n';
 
 interface LocationModalProps {
   location: Location;
@@ -10,6 +11,7 @@ interface LocationModalProps {
 
 const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
   const [selectedImage, setSelectedImage] = useState(0);
+  const { t } = useLanguage();
 
   // Close modal on escape key and lock body scroll
   useEffect(() => {
@@ -122,7 +124,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
                 ? 'bg-brand/20 border-brand/40 text-brand' 
                 : 'bg-white/10 border-white/20 text-white/80'
             }`}>
-              {location.type === 'shop' ? 'Prodavnica' : 'Servis'}
+              {location.type === 'shop' ? t('locationModal.shop') : t('locationModal.service')}
             </span>
           </div>
 
@@ -141,7 +143,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
                 </svg>
               </div>
               <div>
-                <span className="text-white/40 text-[10px] uppercase tracking-widest block mb-1">Adresa</span>
+                <span className="text-white/40 text-[10px] uppercase tracking-widest block mb-1">{t('locationModal.address')}</span>
                 <span className="text-white text-sm sm:text-base">{location.address}, {location.city}</span>
               </div>
             </div>
@@ -154,7 +156,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
                 </svg>
               </div>
               <div>
-                <span className="text-white/40 text-[10px] uppercase tracking-widest block mb-1">Radno Vreme</span>
+                <span className="text-white/40 text-[10px] uppercase tracking-widest block mb-1">{t('locationModal.hours')}</span>
                 <span className="text-white text-sm sm:text-base">{location.hours}</span>
               </div>
             </div>
@@ -167,7 +169,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
                 </svg>
               </div>
               <div>
-                <span className="text-white/40 text-[10px] uppercase tracking-widest block mb-1">Telefon</span>
+                <span className="text-white/40 text-[10px] uppercase tracking-widest block mb-1">{t('locationModal.phone')}</span>
                 <a 
                   href={`tel:${location.phone}`}
                   className="text-white text-sm sm:text-base hover:text-brand transition-colors"
@@ -187,7 +189,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              Pozovite Nas
+              {t('locationModal.callUs')}
             </a>
             <a 
               href={`https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`}
@@ -198,7 +200,7 @@ const LocationModal: React.FC<LocationModalProps> = ({ location, onClose }) => {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
-              Uputstva za Dolazak
+              {t('locationModal.directions')}
             </a>
           </div>
         </div>

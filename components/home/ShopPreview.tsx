@@ -5,6 +5,8 @@ import { products } from '@/data/products'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useLanguage, translateAvailability } from '@/lib/i18n'
+import { TranslationKey } from '@/lib/i18n/translations/sr'
 
 // Select 3 featured products - prioritize bestsellers
 const getFeaturedProducts = () => {
@@ -27,14 +29,21 @@ const getFeaturedProducts = () => {
   return [...bestsellers, ...others].slice(0, 3)
 }
 
-const badges = [
-  { label: 'Best Seller', className: 'bg-amber-500 text-black' },
-  { label: 'New Arrival', className: 'bg-brand text-white' },
-  { label: 'Popular', className: 'bg-white text-black' }
+const badgeKeys: TranslationKey[] = [
+  'shopPreview.bestSeller',
+  'shopPreview.newArrival',
+  'shopPreview.popular',
+]
+
+const badgeClasses = [
+  'bg-amber-500 text-black',
+  'bg-brand text-white',
+  'bg-white text-black',
 ]
 
 const ShopPreview: React.FC = () => {
   const featuredProducts = getFeaturedProducts()
+  const { t } = useLanguage()
 
   return (
     <section id="shop-preview" className="py-16 md:py-24 lg:py-32 bg-[#0a0a0a]">
@@ -42,11 +51,11 @@ const ShopPreview: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <span className="text-white/50 uppercase tracking-[0.3em] md:tracking-[0.5em] text-[10px] font-bold mb-3 md:mb-4 block">
-            Products & Accessories
+            {t('shopPreview.sectionLabel')}
           </span>
-          <h2 className="serif text-3xl sm:text-4xl lg:text-5xl mb-4 md:mb-6">Club Shop</h2>
+          <h2 className="serif text-3xl sm:text-4xl lg:text-5xl mb-4 md:mb-6">{t('shopPreview.heading')}</h2>
           <p className="text-white/60 text-sm max-w-xl mx-auto leading-relaxed">
-            Explore our range of UTVs, ATVs, engine kits, and accessories. Quality equipment for every rider and every terrain.
+            {t('shopPreview.description')}
           </p>
         </div>
 
@@ -63,8 +72,8 @@ const ShopPreview: React.FC = () => {
             >
               {/* Badge */}
               <div className="absolute top-4 left-4 z-10">
-                <span className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider ${badges[index].className}`}>
-                  {badges[index].label}
+                <span className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider ${badgeClasses[index]}`}>
+                  {t(badgeKeys[index])}
                 </span>
               </div>
 
@@ -91,11 +100,8 @@ const ShopPreview: React.FC = () => {
                   {product.shortDesc}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-brand font-bold text-xl">
-                    €{product.priceEur}
-                  </span>
                   <span className="text-white/30 text-xs uppercase tracking-wider">
-                    {product.availability}
+                    {translateAvailability(product.availability, t)}
                   </span>
                 </div>
               </div>
@@ -115,7 +121,7 @@ const ShopPreview: React.FC = () => {
             href="/shop"
             className="inline-flex items-center gap-3 bg-brand text-white px-8 md:px-10 py-4 text-sm font-bold uppercase tracking-[0.15em] md:tracking-widest hover:bg-white hover:text-black transition-colors duration-300 active:scale-95"
           >
-            Shop All Products
+            {t('shopPreview.shopAll')}
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>

@@ -3,11 +3,13 @@
 import { useState, useEffect, useRef, FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check, Star, Percent, Calendar } from 'lucide-react'
+import { useLanguage } from '@/lib/i18n'
+import { TranslationKey } from '@/lib/i18n/translations/sr'
 
-const benefits = [
-  { icon: Percent, text: 'Exclusive discounts on parts and services' },
-  { icon: Calendar, text: 'Priority booking for maintenance slots' },
-  { icon: Star, text: 'Access to members-only events and rides' },
+const benefitKeys: { icon: typeof Percent; key: TranslationKey }[] = [
+  { icon: Percent, key: 'member.benefit1' },
+  { icon: Calendar, key: 'member.benefit2' },
+  { icon: Star, key: 'member.benefit3' },
 ]
 
 interface FormData {
@@ -26,6 +28,7 @@ export default function MemberCTA() {
   })
   const modalRef = useRef<HTMLDivElement>(null)
   const firstInputRef = useRef<HTMLInputElement>(null)
+  const { t } = useLanguage()
 
   // Focus trap and escape key handling
   useEffect(() => {
@@ -93,17 +96,16 @@ export default function MemberCTA() {
                 id="membership-heading"
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
               >
-                Become a{' '}
-                <span className="text-[#E10600]">Member</span>
+                {t('member.heading')}{' '}
+                <span className="text-[#E10600]">{t('member.headingHighlight')}</span>
               </h2>
               <p className="text-[#8A8A95] text-base sm:text-lg mb-8 max-w-lg">
-                Join the Balkan Moto Center community and unlock exclusive benefits designed 
-                for passionate riders like you.
+                {t('member.description')}
               </p>
 
               {/* Benefits */}
               <ul className="space-y-4 mb-8">
-                {benefits.map((benefit, index) => (
+                {benefitKeys.map((benefit, index) => (
                   <motion.li
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -116,7 +118,7 @@ export default function MemberCTA() {
                       <benefit.icon className="w-4 h-4 text-[#E10600]" aria-hidden="true" />
                     </div>
                     <span className="text-[#F5F5F7] text-sm sm:text-base">
-                      {benefit.text}
+                      {t(benefit.key)}
                     </span>
                   </motion.li>
                 ))}
@@ -126,9 +128,9 @@ export default function MemberCTA() {
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="group relative w-full sm:w-auto px-8 py-4 bg-[#E10600] text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(225,6,0,0.4)] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E10600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D] min-h-[48px]"
-                aria-label="Join the club"
+                aria-label={t('member.joinClubAria')}
               >
-                <span className="relative z-10">Join the club</span>
+                <span className="relative z-10">{t('member.joinClub')}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#E10600] to-[#ff2a2a] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
             </div>
@@ -189,10 +191,10 @@ export default function MemberCTA() {
                 id="modal-title"
                 className="text-2xl font-bold text-[#F5F5F7] mb-2"
               >
-                Join the Club
+                {t('member.modalTitle')}
               </h3>
               <p className="text-[#8A8A95] text-sm mb-6">
-                Fill out the form below to become a member.
+                {t('member.modalDesc')}
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -201,7 +203,7 @@ export default function MemberCTA() {
                     htmlFor="name"
                     className="block text-sm font-medium text-[#F5F5F7] mb-2"
                   >
-                    Name
+                    {t('member.name')}
                   </label>
                   <input
                     ref={firstInputRef}
@@ -213,7 +215,7 @@ export default function MemberCTA() {
                       setFormData({ ...formData, name: e.target.value })
                     }
                     className="w-full px-4 py-3.5 bg-[#0B0B0D] border border-[#2A2A33] rounded-xl text-[#F5F5F7] placeholder-[#8A8A95] focus:outline-none focus:border-[#E10600] focus:ring-1 focus:ring-[#E10600] transition-colors min-h-[48px] text-base"
-                    placeholder="Your name"
+                    placeholder={t('member.namePlaceholder')}
                   />
                 </div>
 
@@ -222,7 +224,7 @@ export default function MemberCTA() {
                     htmlFor="email"
                     className="block text-sm font-medium text-[#F5F5F7] mb-2"
                   >
-                    Email
+                    {t('member.email')}
                   </label>
                   <input
                     type="email"
@@ -233,7 +235,7 @@ export default function MemberCTA() {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     className="w-full px-4 py-3.5 bg-[#0B0B0D] border border-[#2A2A33] rounded-xl text-[#F5F5F7] placeholder-[#8A8A95] focus:outline-none focus:border-[#E10600] focus:ring-1 focus:ring-[#E10600] transition-colors min-h-[48px] text-base"
-                    placeholder="your@email.com"
+                    placeholder={t('member.emailPlaceholder')}
                   />
                 </div>
 
@@ -242,7 +244,7 @@ export default function MemberCTA() {
                     htmlFor="bikeModel"
                     className="block text-sm font-medium text-[#F5F5F7] mb-2"
                   >
-                    Bike Model
+                    {t('member.bikeModel')}
                   </label>
                   <input
                     type="text"
@@ -253,7 +255,7 @@ export default function MemberCTA() {
                       setFormData({ ...formData, bikeModel: e.target.value })
                     }
                     className="w-full px-4 py-3.5 bg-[#0B0B0D] border border-[#2A2A33] rounded-xl text-[#F5F5F7] placeholder-[#8A8A95] focus:outline-none focus:border-[#E10600] focus:ring-1 focus:ring-[#E10600] transition-colors min-h-[48px] text-base"
-                    placeholder="e.g. Yamaha MT-09"
+                    placeholder={t('member.bikeModelPlaceholder')}
                   />
                 </div>
 
@@ -261,7 +263,7 @@ export default function MemberCTA() {
                   type="submit"
                   className="w-full mt-2 px-6 py-4 bg-[#E10600] text-white font-semibold rounded-xl hover:bg-[#ff2a2a] active:bg-[#c00500] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E10600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A1A1F] min-h-[52px] text-base"
                 >
-                  Submit Application
+                  {t('member.submit')}
                 </button>
               </form>
             </motion.div>
@@ -285,7 +287,7 @@ export default function MemberCTA() {
               <Check className="w-4 h-4" />
             </div>
             <span className="font-medium">
-              Welcome to the club! We'll be in touch soon.
+              {t('member.toast')}
             </span>
           </motion.div>
         )}

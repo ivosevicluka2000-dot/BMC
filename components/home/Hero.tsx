@@ -4,14 +4,18 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Shield, Wrench, Users } from 'lucide-react'
+import { useLanguage } from '@/lib/i18n'
+import { TranslationKey } from '@/lib/i18n/translations/sr'
 
-const trustBadges = [
-  { icon: Shield, label: 'Certified Service' },
-  { icon: Wrench, label: 'OEM Parts' },
-  { icon: Users, label: 'Rider Community' },
+const trustBadgeKeys: { icon: typeof Shield; key: TranslationKey }[] = [
+  { icon: Shield, key: 'hero.certifiedService' },
+  { icon: Wrench, key: 'hero.oemParts' },
+  { icon: Users, key: 'hero.riderCommunity' },
 ]
 
 export default function Hero() {
+  const { t } = useLanguage()
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -50,7 +54,7 @@ export default function Hero() {
           {/* Main Title */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 sm:mb-6">
             <span className="bg-gradient-to-r from-white via-[#F5F5F7] to-[#8A8A95] bg-clip-text text-transparent">
-              Balkan Moto Center
+              {t('hero.title')}
             </span>
           </h1>
 
@@ -61,7 +65,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
             className="text-lg sm:text-xl md:text-2xl text-[#8A8A95] font-light mb-8 sm:mb-10 max-w-2xl mx-auto"
           >
-            Premium service. Trusted parts. Rider community.
+            {t('hero.subtitle')}
           </motion.p>
 
           {/* CTAs */}
@@ -75,9 +79,9 @@ export default function Hero() {
             <Link
               href="/locations"
               className="group relative w-full sm:w-auto px-8 py-4 bg-[#E10600] text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(225,6,0,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E10600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D]"
-              aria-label="Show our location"
+              aria-label={t('hero.showLocationAria')}
             >
-              <span className="relative z-10">Show location</span>
+              <span className="relative z-10">{t('hero.showLocation')}</span>
               <div className="absolute inset-0 bg-gradient-to-r from-[#E10600] to-[#ff2a2a] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
 
@@ -85,9 +89,9 @@ export default function Hero() {
             <button
               onClick={() => scrollToSection('footer')}
               className="group w-full sm:w-auto px-8 py-4 bg-transparent text-[#F5F5F7] font-semibold rounded-xl border border-[#2A2A33] hover:border-[#8A8A95] transition-all duration-300 hover:bg-[#1A1A1F]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8A8A95] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D]"
-              aria-label="Contact us"
+              aria-label={t('hero.contactUsAria')}
             >
-              Contact us
+              {t('hero.contactUs')}
             </button>
           </motion.div>
 
@@ -98,7 +102,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10"
           >
-            {trustBadges.map((badge, index) => (
+            {trustBadgeKeys.map((badge, index) => (
               <div
                 key={index}
                 className="flex items-center gap-3 text-[#8A8A95]"
@@ -106,7 +110,7 @@ export default function Hero() {
                 <div className="p-2 rounded-lg bg-[#1A1A1F]/80 border border-[#2A2A33]">
                   <badge.icon className="w-5 h-5 text-[#E10600]" aria-hidden="true" />
                 </div>
-                <span className="text-sm font-medium">{badge.label}</span>
+                <span className="text-sm font-medium">{t(badge.key)}</span>
               </div>
             ))}
           </motion.div>

@@ -4,10 +4,12 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { products, Product, ProductCategory, ProductGroup, CATEGORY_GROUPS } from '../data/products';
 import ProductModal from './ProductModal';
 import Header from './home/Header';
+import { useLanguage, translateAvailability, translateGroup, getLocalizedProductText } from '@/lib/i18n';
 
 const ALL_GROUPS: (ProductGroup | 'All')[] = ['All', 'Products', 'Accessories'];
 
 const ProductsPage: React.FC = () => {
+  const { locale, t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGroup, setSelectedGroup] = useState<ProductGroup | 'All'>('All');
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory | 'All'>('All');
@@ -81,8 +83,8 @@ const ProductsPage: React.FC = () => {
           }}
         />
         <div className="relative z-10 text-center px-4 sm:px-6">
-          <span className="text-white/50 uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.5em] text-[9px] sm:text-[10px] font-bold mb-2 sm:mb-3 md:mb-4 block">Balkan Moto Club</span>
-          <h1 className="serif text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight text-white">Our <span className="italic">Shop.</span></h1>
+          <span className="text-white/50 uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.5em] text-[9px] sm:text-[10px] font-bold mb-2 sm:mb-3 md:mb-4 block">{t('products.brandLabel')}</span>
+          <h1 className="serif text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight text-white">{t('products.heading')} <span className="italic">{t('products.headingItalic')}</span></h1>
         </div>
       </section>
 
@@ -104,7 +106,7 @@ const ProductsPage: React.FC = () => {
                       : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white active:bg-white/10'
                   }`}
                 >
-                  {group}
+                  {translateGroup(group, t)}
                 </button>
               ))}
             </div>
@@ -114,26 +116,18 @@ const ProductsPage: React.FC = () => {
               <div className="relative flex-1 lg:w-[280px]">
                 <input 
                   type="text" 
-                  placeholder="Search products..."
+                  placeholder={t('products.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-white/5 border border-white/20 px-3 sm:px-4 py-3 text-sm focus:outline-none focus:border-brand text-white placeholder:text-white/30 min-h-[44px]"
                 />
               </div>
               
-              <select 
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-white/5 border border-white/20 px-2 sm:px-3 md:px-4 py-3 text-xs sm:text-sm text-white/70 focus:outline-none focus:border-brand cursor-pointer min-w-0 min-h-[44px]"
-              >
-                <option value="none" className="bg-black">Sort</option>
-                <option value="low-high" className="bg-black">Low → High</option>
-                <option value="high-low" className="bg-black">High → Low</option>
-              </select>
+
 
               {hasActiveFilters && (
                 <button onClick={clearFilters} className="text-[10px] sm:text-xs uppercase tracking-widest text-white/50 hover:text-white active:text-brand transition-colors underline underline-offset-4 py-2 min-h-[44px] px-2">
-                  Reset
+                  {t('products.reset')}
                 </button>
               )}
             </div>
@@ -174,7 +168,7 @@ const ProductsPage: React.FC = () => {
         <div className="max-w-screen-2xl mx-auto">
           {filteredProducts.length === 0 ? (
             <div className="py-40 text-center">
-              <span className="text-white/40 uppercase tracking-[0.3em] text-sm">No items found in this category.</span>
+              <span className="text-white/40 uppercase tracking-[0.3em] text-sm">{t('products.noItems')}</span>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 border-t border-l border-white/10">
@@ -202,18 +196,20 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, index, onClick }) => {
+  const { locale, t } = useLanguage();
+  const localizedText = getLocalizedProductText(product, locale);
   return (
     <div 
       onClick={onClick}
       className="bg-[#0a0a0a] group cursor-pointer overflow-hidden p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col hover:bg-white/[0.04] active:bg-white/[0.08] transition-colors duration-200 border-r border-b border-white/10"
     >
-      <div className="relative aspect-square mb-3 sm:mb-4 md:mb-6 overflow-hidden bg-zinc-900">
+      <div className="relative aspect-[4/3] mb-3 sm:mb-4 md:mb-6 overflow-hidden bg-zinc-900">
         <img 
           src={`${product.images[0].split('?')[0]}?auto=format&fit=crop&q=60&w=400`}
           alt={product.name} 
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover grayscale brightness-75 lg:group-hover:scale-105 lg:group-hover:brightness-100 lg:group-hover:grayscale-0 transition-all duration-300"
+          className="w-full h-full object-cover lg:group-hover:scale-105 transition-all duration-300"
           style={{ transform: 'translateZ(0)' }}
         />
         <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex flex-col gap-1 sm:gap-2">
@@ -224,7 +220,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index, onClick }) =>
         {product.availability !== 'In Stock' && (
            <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3">
               <span className={`px-1.5 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] font-bold uppercase tracking-wider border ${product.availability === 'Sold Out' ? 'border-red-500 bg-red-500/20 text-red-400' : 'border-white/40 bg-black/50 text-white/70'}`}>
-                {product.availability}
+                {translateAvailability(product.availability, t)}
               </span>
            </div>
         )}
@@ -233,14 +229,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index, onClick }) =>
       <div className="flex-grow flex flex-col">
         <div className="flex justify-between items-start mb-1.5 sm:mb-2 gap-2">
            <span className="text-white/50 text-[9px] sm:text-[10px] uppercase tracking-widest">{product.category}</span>
-           {product.priceEur > 0 && <span className="text-brand text-xs sm:text-sm font-bold">{product.priceEur}€</span>}
+
         </div>
         <h3 className="serif text-base sm:text-lg md:text-xl text-white group-hover:text-brand transition-colors mb-2 sm:mb-3">{product.name}</h3>
-        {product.shortDesc && <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed line-clamp-2">{product.shortDesc}</p>}
+        {localizedText.shortDesc && <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed line-clamp-2">{localizedText.shortDesc}</p>}
         
         <div className="mt-4 sm:mt-6 flex items-center space-x-3 text-white/50 group-hover:text-brand transition-colors">
            <div className="w-3 sm:w-4 h-[2px] bg-current" />
-           <span className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold">View Details</span>
+           <span className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold">{t('products.viewDetails')}</span>
         </div>
       </div>
     </div>

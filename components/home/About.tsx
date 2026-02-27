@@ -2,9 +2,11 @@
 
 import React, { useEffect, useRef } from 'react';
 import OptimizedImage from '../OptimizedImage';
+import { useLanguage } from '@/lib/i18n';
 
 const About: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Use lower threshold on mobile for earlier reveal and better performance
@@ -45,38 +47,38 @@ const About: React.FC = () => {
               />
             </div>
             <div className="absolute top-12 -left-6 lg:-left-12 flex flex-col space-y-4 items-center">
-                <span className="[writing-mode:vertical-lr] uppercase tracking-[1em] text-[10px] text-white/20 font-light">ESTABLISHED MMXII</span>
+                <span className="[writing-mode:vertical-lr] uppercase tracking-[1em] text-[10px] text-white/20 font-light">{t('about.established')}</span>
                 <div className="w-px h-32 bg-white/10" />
             </div>
           </div>
 
           <div className="lg:col-span-7 lg:pt-24 reveal delay-200">
             <div className="mb-12 inline-flex items-center space-x-4">
-                <span className="text-white/50 uppercase tracking-[0.5em] text-[10px] font-bold">Our Philosophy</span>
+                <span className="text-white/50 uppercase tracking-[0.5em] text-[10px] font-bold">{t('about.sectionLabel')}</span>
                 <div className="h-px w-12 bg-white/20" />
             </div>
             
             <h2 className="serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl mb-8 md:mb-12 leading-[1.1] font-extralight tracking-tight">
-              Built on <span className="italic">Trust</span>, <br />
-              Driven by <span className="italic">Steel.</span>
+              {t('about.heading1')} <span className="italic">{t('about.headingTrust')}</span>, <br />
+              {t('about.heading2')} <span className="italic">{t('about.headingSteel')}</span>
             </h2>
             
             <div className="max-w-xl space-y-6 md:space-y-10 text-white/70 text-base md:text-lg leading-relaxed font-light">
               <p>
-                The Balkan Moto Club is not for everyone. We do not exist for the weekend hobbyist or the social media enthusiast. We exist for those who understand that the road is a teacher, and the machine is a mirror.
+                {t('about.paragraph1')}
               </p>
               <p>
-                Our creed is simple: Respect the line. Protect the pack. Maintain the craft. Whether traversing the rugged peaks of the Dinaric Alps or the urban labyrinth of Belgrade, we move with a unified purpose that transcends borders.
+                {t('about.paragraph2')}
               </p>
               
               <div className="pt-6 md:pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                 <div>
-                  <h4 className="text-white text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Discipline</h4>
-                  <p className="text-xs font-light text-white/50 leading-relaxed">Safety is not a checklist; it is an instinct honed through thousands of shared kilometers.</p>
+                  <h4 className="text-white text-[10px] uppercase tracking-[0.3em] font-bold mb-3">{t('about.discipline')}</h4>
+                  <p className="text-xs font-light text-white/50 leading-relaxed">{t('about.disciplineDesc')}</p>
                 </div>
                 <div>
-                  <h4 className="text-white text-[10px] uppercase tracking-[0.3em] font-bold mb-3">Loyalty</h4>
-                  <p className="text-xs font-light text-white/50 leading-relaxed">No rider is left behind. We are bound by a commitment that remains silent but absolute.</p>
+                  <h4 className="text-white text-[10px] uppercase tracking-[0.3em] font-bold mb-3">{t('about.loyalty')}</h4>
+                  <p className="text-xs font-light text-white/50 leading-relaxed">{t('about.loyaltyDesc')}</p>
                 </div>
               </div>
             </div>

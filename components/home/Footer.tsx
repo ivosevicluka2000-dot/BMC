@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter } from 'lucide-react'
+import { useLanguage } from '@/lib/i18n'
 
 const socialLinks = [
   { icon: Facebook, label: 'Facebook', href: '#' },
@@ -10,22 +11,24 @@ const socialLinks = [
   { icon: Twitter, label: 'Twitter', href: '#' },
 ]
 
-const footerLinks = {
-  services: [
-    { name: 'Maintenance', href: '#services' },
-    { name: 'Diagnostics', href: '#services' },
-    { name: 'Tire & Brake', href: '#services' },
-    { name: 'Performance', href: '#services' },
-  ],
-  company: [
-    { name: 'About Us', href: '#about' },
-    { name: 'Membership', href: '#membership' },
-    { name: 'Careers', href: '#' },
-    { name: 'Partners', href: '#' },
-  ],
-}
-
 export default function Footer() {
+  const { t } = useLanguage()
+
+  const footerLinks = {
+    services: [
+      { name: t('footer.maintenance'), href: '#services' },
+      { name: t('footer.diagnostics'), href: '#services' },
+      { name: t('footer.tireBrake'), href: '#services' },
+      { name: t('footer.performance'), href: '#services' },
+    ],
+    company: [
+      { name: t('footer.aboutUs'), href: '#about' },
+      { name: t('footer.membership'), href: '#membership' },
+      { name: t('footer.careers'), href: '#' },
+      { name: t('footer.partners'), href: '#' },
+    ],
+  }
+
   return (
     <footer
       id="footer"
@@ -46,11 +49,10 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="text-xl font-bold text-[#F5F5F7] mb-3">
-              Balkan Moto Center
+              {t('footer.brand')}
             </h3>
             <p className="text-[#8A8A95] text-sm leading-relaxed mb-6 max-w-xs">
-              Your trusted partner for premium motorcycle service, quality parts, 
-              and a passionate rider community.
+              {t('footer.brandDesc')}
             </p>
             
             {/* Social Links */}
@@ -71,7 +73,7 @@ export default function Footer() {
           {/* Services Links */}
           <div>
             <h4 className="text-sm font-semibold text-[#F5F5F7] uppercase tracking-wider mb-4">
-              Services
+              {t('footer.services')}
             </h4>
             <ul className="space-y-1 sm:space-y-3 -ml-3 sm:ml-0">
               {footerLinks.services.map((link, index) => (
@@ -90,7 +92,7 @@ export default function Footer() {
           {/* Company Links */}
           <div>
             <h4 className="text-sm font-semibold text-[#F5F5F7] uppercase tracking-wider mb-4">
-              Company
+              {t('footer.company')}
             </h4>
             <ul className="space-y-1 sm:space-y-3 -ml-3 sm:ml-0">
               {footerLinks.company.map((link, index) => (
@@ -109,7 +111,7 @@ export default function Footer() {
           {/* Contact Info */}
           <div>
             <h4 className="text-sm font-semibold text-[#F5F5F7] uppercase tracking-wider mb-4">
-              Contact
+              {t('footer.contact')}
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
@@ -143,19 +145,19 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-[#1A1A1F]">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[#8A8A95] text-xs">
-            <p>© {new Date().getFullYear()} Balkan Moto Center. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} {t('footer.brand')}. {t('footer.copyright')}</p>
             <div className="flex items-center gap-1 sm:gap-6 -mx-3 sm:mx-0">
               <a
                 href="#"
                 className="px-3 py-2 sm:p-0 hover:text-[#F5F5F7] active:text-[#F5F5F7] transition-colors focus:outline-none focus-visible:text-[#F5F5F7] min-h-[44px] sm:min-h-0 flex items-center"
               >
-                Privacy Policy
+                {t('footer.privacy')}
               </a>
               <a
                 href="#"
                 className="px-3 py-2 sm:p-0 hover:text-[#F5F5F7] active:text-[#F5F5F7] transition-colors focus:outline-none focus-visible:text-[#F5F5F7] min-h-[44px] sm:min-h-0 flex items-center"
               >
-                Terms of Service
+                {t('footer.terms')}
               </a>
             </div>
           </div>
