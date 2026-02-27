@@ -38,12 +38,12 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 lg:gap-24 items-start">
           
           <div className="lg:col-span-5 relative reveal">
-            <div className="aspect-[3/4] overflow-hidden grayscale contrast-125 brightness-75 border border-white/5">
-              <OptimizedImage 
-                src="https://images.unsplash.com/photo-1542360561-19363d59649b" 
+            <div className="aspect-[3/4] overflow-hidden border border-white/5">
+              <img 
+                src="/about-moto.png" 
                 alt="The Machine" 
-                className="w-full h-full"
-                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             <div className="absolute top-12 -left-6 lg:-left-12 flex flex-col space-y-4 items-center">
