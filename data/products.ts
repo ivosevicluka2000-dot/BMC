@@ -38,6 +38,12 @@ export interface KeyFeature {
   description: string;
 }
 
+export interface ProductVariant {
+  name: string;
+  /** Per-variant overrides — keys that match a spec label will show this value */
+  specOverrides?: Record<string, string>;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -57,6 +63,8 @@ export interface Product {
   keyFeatures?: KeyFeature[];
   /** Short tagline shown above description */
   tagline?: string;
+  /** Model variants (e.g. BASE / SE / PRO) */
+  variants?: ProductVariant[];
 }
 
 // ── Product catalogue ───────────────────────────────────────
@@ -66,65 +74,234 @@ export const products: Product[] = [
   // ── UTV ───────────────────────────────────────────────────
   {
     id: 'utv-1',
-    name: 'LandMax 1000 BASE',
+    name: 'LandMax 1000',
     category: 'UTV',
     priceEur: 15900,
     images: [
       'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
       'https://images.unsplash.com/photo-1605289355680-75fb41239154?auto=format&fit=crop&q=80&w=800',
     ],
-    shortDesc: 'TGB LandMax 1000 base model side-by-side UTV.',
+    shortDesc: 'TGB LandMax 1000 side-by-side UTV — BASE / SE / PRO. 83 HP V-Twin, 4WD, CVT, 14" ground clearance.',
     fullDesc:
-      'The TGB LandMax 1000 BASE is a rugged side-by-side powered by a 1000 cc V-Twin EFI engine. Features selectable 4WD with differential lock, CVT transmission, independent suspension on all four corners, and a tilting cargo bed. Built for work and trail riding alike.',
-    tags: ['Bestseller'],
-    availability: 'In Stock',
-    specs: [
-      { label: 'Engine', value: '1000 cc, V-Twin EFI' },
-      { label: 'Power', value: '83 HP' },
-      { label: 'Drive', value: '4WD with diff lock' },
-      { label: 'Transmission', value: 'CVT (H-L-N-R-P)' },
-    ],
-  },
-  {
-    id: 'utv-2',
-    name: 'LandMax 1000 SE',
-    category: 'UTV',
-    priceEur: 17900,
-    images: [
-      'https://images.unsplash.com/photo-1605289355680-75fb41239154?auto=format&fit=crop&q=80&w=800',
-      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
-    ],
-    shortDesc: 'Special Edition LandMax with EPS and alloy wheels.',
-    fullDesc:
-      'The LandMax 1000 SE builds on the BASE with electronic power steering (EPS), aluminium alloy wheels, upgraded seats, and a premium winch. Same proven 1000 cc V-Twin power plant with added comfort for longer rides.',
-    tags: ['New'],
-    availability: 'In Stock',
-    specs: [
-      { label: 'Engine', value: '1000 cc, V-Twin EFI' },
-      { label: 'Power', value: '83 HP' },
-      { label: 'EPS', value: 'Yes' },
-      { label: 'Wheels', value: 'Aluminium alloy' },
-    ],
-  },
-  {
-    id: 'utv-3',
-    name: 'LandMax 1000 PRO',
-    category: 'UTV',
-    priceEur: 19900,
-    images: [
-      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
-      'https://images.unsplash.com/photo-1605289355680-75fb41239154?auto=format&fit=crop&q=80&w=800',
-    ],
-    shortDesc: 'Fully loaded LandMax — EPS, roof, winch, premium cabin.',
-    fullDesc:
-      'The flagship LandMax 1000 PRO comes fully equipped: electronic power steering, full hard roof, powerful 4,500 lb winch, LED light bar, premium cloth seats, and a reinforced front bumper. The ultimate workhorse and trail machine.',
+      'Top features and design with most advanced equipment. Heavy-duty robust body works with TGB quality innovation workmanship standard. With a 997cc V-Twin engine, the Landmax 1000 is capable of holding its own no matter what off-road challenges you throw at it. The 4-stroke, liquid cooled engine delivers huge performance, top acceleration and powerful low end torque. Paired with an electronic fuel injection system alongside a TGB designed and built CVT transmission, you\'re guaranteed smooth and instant power.\n\nThe Landmax 1000 is the ultimate all terrain vehicle. Whether you require superior road handling or are tackling the toughest trails, with TGB\'s patented rear differential locking system you have access to a 4 configuration powertrain to fit your needs making it the ultimate machine for any user.',
     tags: ['Premium', 'Bestseller'],
     availability: 'In Stock',
+    colors: ['Matt Blue'],
+    tagline: 'HIGH QUALITY CRAFTSMANSHIP',
+    highlightStats: [
+      { label: 'Power', value: '83', unit: 'HP' },
+      { label: 'Cargo Box Capacity', value: '1,000', unit: 'Lbs.' },
+      { label: 'Winch Pulling', value: '4,500', unit: 'Lbs.' },
+      { label: 'Towing Capacity', value: '2,500', unit: 'Lbs.' },
+      { label: 'Engine', value: '997', unit: 'cc' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 83 HP — Top Speed 95 kph',
+        description:
+          'With a 997cc V-Twin engine the Landmax 1000 delivers huge performance, top acceleration and powerful low end torque. Paired with EFI and TGB\'s CVT transmission, you\'re guaranteed smooth and instant power.',
+      },
+      {
+        title: 'LED Headlight / Tail Lamp',
+        description:
+          'Modern LED lighting system with 26W LED low beam / 64W LED high beam and LED tail lights offer superior visibility, safety and an attractive design.',
+      },
+      {
+        title: 'More Legroom & Interior Cab Space',
+        description:
+          'More legroom and interior cab space than competitors with fast & easy installation door set. Flip-up passenger seat, sound and heat insulation for comfort.',
+      },
+      {
+        title: 'Industry-Leading 4WD Turf Mode & E-Parking',
+        description:
+          'Selectable 2WD / RWD / 4WD / 4WD Lock / Turf Mode with industry-leading electronic parking brake for maximum versatility and safety.',
+      },
+      {
+        title: 'Towing Capacity: Up to 2,500 lbs',
+        description:
+          'Massive towing capacity of 2,500 lbs (1,134 kg) combined with a cargo box carrying up to 1,000 lbs and a factory-standard front winch handling up to 4,500 lbs.',
+      },
+      {
+        title: '4WD / 2WD Switchable with Front & Rear Differentials',
+        description:
+          'TGB\'s patented lockable front and rear differential system provides 4 configuration powertrain access for superior handling on any terrain.',
+      },
+      {
+        title: 'Optional Electric Lifting Rear Tilt Bed',
+        description:
+          'Cargo box with 47° dump angle, quick-lock accessory mechanism, tailgate ruler, beverage holders, D-rings and 5-gallon bucket holders.',
+      },
+      {
+        title: 'CVT System with 2WD/4WD/Diff Lock/Turf Mode',
+        description:
+          'Advanced CVT & Gear Box transmission with L-H-N-R-P gear range ensures smooth power delivery across all driving conditions.',
+      },
+      {
+        title: 'Tri-Mode Dynamic EPS',
+        description:
+          'Tri-Mode Dynamic Electric Power Steering (Off/Min/Max) with tilt steering wheel for effortless control and customizable comfort on any terrain.',
+      },
+    ],
+    variants: [
+      {
+        name: 'BASE',
+        specOverrides: {
+          'Integrated Alternator': '650W',
+          'Front Tyre': '26 × 9-14 6P Radial',
+          'Rear Tyre': '26 × 11-14 6P Radial',
+          'Wheel Rim': '14" Steel',
+          'L × W × H': '3,122 × 1,625 × 2,065 mm',
+          'Front Bumper': 'N/A',
+          'Front Winch': 'N/A',
+          'Head Light': 'Round Halogen Lamp',
+          'Tail Light': 'Round LED Tail Light',
+          'Door': 'Net Door',
+          'Roof': 'N/A',
+          'Camera': 'N/A',
+          'Hand Brake': 'N/A',
+          'Hill-Start Assist': 'N/A',
+          'Turn Signal': 'N/A',
+          'Hazard Warning Signal': 'N/A',
+          'Dome Light': 'N/A',
+          'Horn': 'N/A',
+          'Rear View Mirror': 'N/A',
+          'Side Mirror': 'N/A',
+          'Front Windshield (Glass)': 'N/A',
+          'Rear Windshield (Glass)': 'N/A',
+          'Wiper / Washer': 'N/A',
+          'Heating & Ventilation': 'N/A',
+          'Window': 'N/A',
+          'Instrumentation': '4.3" TFT',
+          'Driven Belt Slip Warning': 'N/A',
+        },
+      },
+      {
+        name: 'SE',
+        specOverrides: {
+          'Integrated Alternator': '650W',
+          'Front Tyre': '27 × 9-14 8P Radial',
+          'Rear Tyre': '27 × 11-14 8P Radial',
+          'Wheel Rim': '14" Alloy',
+          'L × W × H': '3,122 × 1,625 × 2,065 mm',
+          'Front Bumper': 'Equipped',
+          'Front Winch': '4,500 lbs (Synthetic Rope)',
+          'Head Light': '26W LED Low Beam / 64W LED High Beam',
+          'Tail Light': 'LED Tail Light',
+          'Door': 'Net Door',
+          'Roof': 'Equipped',
+          'Camera': 'N/A',
+          'Hand Brake': 'N/A',
+          'Hill-Start Assist': 'N/A',
+          'Turn Signal': 'N/A',
+          'Hazard Warning Signal': 'N/A',
+          'Dome Light': 'N/A',
+          'Horn': 'N/A',
+          'Rear View Mirror': 'N/A',
+          'Side Mirror': 'N/A',
+          'Front Windshield (Glass)': 'N/A',
+          'Rear Windshield (Glass)': 'N/A',
+          'Wiper / Washer': 'N/A',
+          'Heating & Ventilation': 'N/A',
+          'Window': 'N/A',
+          'Instrumentation': '4.3" TFT',
+          'Driven Belt Slip Warning': 'Belt Slip Warning on Instrumentation',
+        },
+      },
+      {
+        name: 'PRO (Full Cab)',
+        specOverrides: {
+          'Integrated Alternator': '850W',
+          'Front Tyre': '29 × 9-14 8P Radial',
+          'Rear Tyre': '29 × 11-14 8P Radial',
+          'Wheel Rim': '14" Alloy',
+          'L × W × H': '3,122 × 1,872 × 2,065 mm',
+          'Front Bumper': 'Equipped',
+          'Front Winch': '4,500 lbs (Synthetic Rope)',
+          'Head Light': '26W LED Low Beam / 64W LED High Beam',
+          'Tail Light': 'LED Tail Light',
+          'Door': 'Full Door',
+          'Roof': 'Equipped',
+          'Camera': 'Equipped',
+          'Hand Brake': 'E-Brake',
+          'Hill-Start Assist': 'Equipped',
+          'Turn Signal': 'Equipped',
+          'Hazard Warning Signal': 'Equipped',
+          'Dome Light': 'Equipped',
+          'Horn': 'Equipped',
+          'Rear View Mirror': 'Equipped',
+          'Side Mirror': 'Equipped',
+          'Front Windshield (Glass)': 'Equipped',
+          'Rear Windshield (Glass)': 'Equipped',
+          'Wiper / Washer': 'Equipped',
+          'Heating & Ventilation': 'Equipped',
+          'Window': 'Equipped',
+          'Instrumentation': '4.3" TFT + 10.2" TFT (Center Console)',
+          'Driven Belt Slip Warning': 'Belt Slip Warning on Instrumentation',
+        },
+      },
+    ],
     specs: [
-      { label: 'Engine', value: '1000 cc, V-Twin EFI' },
-      { label: 'Power', value: '83 HP' },
-      { label: 'EPS', value: 'Yes' },
-      { label: 'Winch', value: '4,500 lb' },
+      // ENGINE
+      { label: 'Engine Type', value: '997cc 4-Stroke V-Twin Cylinder SOHC' },
+      { label: 'Bore × Stroke', value: 'Ø92 mm × 75 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Horsepower', value: '83 HP (84 PS)' },
+      { label: 'Torque', value: '89.9 Nm (66.3 lb·ft)' },
+      { label: 'Power Mode', value: 'Standard Mode' },
+      { label: 'Fuel System', value: 'Electronic Fuel Injection' },
+      { label: 'Cooling System', value: 'Liquid Cooling' },
+      { label: 'Lubrication System', value: 'Wet Sump' },
+      { label: 'Integrated Alternator', value: '650W / 650W / 850W' },
+      { label: 'Spark Arrester', value: 'USFS / USDA-FS 5100-1' },
+      // DRIVETRAIN
+      { label: 'Transmission', value: 'CVT & Gear Box' },
+      { label: 'Gear Range', value: 'L-H-N-R-P' },
+      { label: 'Final Drive', value: 'Lockable Front and Rear Differential' },
+      { label: 'Drive Mode', value: '2WD / RWD / 4WD / 4WD Lock / Turf Mode' },
+      { label: 'Driven Belt Slip Warning', value: 'Per variant' },
+      // SUSPENSION
+      { label: 'Front Suspension', value: 'Dual A-Arm IRS — 27.9 cm (10.9 in) Travel' },
+      { label: 'Rear Suspension', value: 'Dual A-Arm IRS — 27.9 cm (10.9 in) Travel with Anti-Roll Bar' },
+      { label: 'Shock Absorber', value: 'Preload Adjustable / Preload Ring' },
+      { label: 'Front Tyre', value: '26×9-14 / 27×9-14 / 29×9-14' },
+      { label: 'Rear Tyre', value: '26×11-14 / 27×11-14 / 29×11-14' },
+      { label: 'Wheel Rim', value: '14" Steel / 14" Alloy / 14" Alloy' },
+      // STEERING
+      { label: 'Power Steering', value: 'Tri-Mode Dynamic EPS (Off/Min/Max)' },
+      { label: 'Steering Wheel', value: 'Tilt Steering' },
+      // DIMENSIONS
+      { label: 'L × W × H', value: '3,122 × 1,625 × 2,065 mm' },
+      { label: 'Wheelbase', value: '2,120 mm (83.4 in)' },
+      { label: 'Ground Clearance', value: 'Front: 360 mm / Rear: 360 mm (14.1 in)' },
+      { label: 'Min. Turning Radius', value: '3,785 mm (149 in)' },
+      { label: 'Approach / Departure Angle', value: '77.2° / 70.4°' },
+      { label: 'Fuel Capacity', value: '42 L (11 US gal)' },
+      { label: 'Towing Capacity', value: '2,500 lb (1,134 kg)' },
+      { label: 'Max. Vehicle Speed', value: '100 km/h (62 mph)' },
+      { label: 'Speed Key', value: 'Short: Free / Long: 40 kph restricted' },
+      // CARGO BOX
+      { label: 'Cargo Box (Inside)', value: '1,080 × 1,600 × 320 mm' },
+      { label: 'Cargo Box Capacity', value: '1,000 lb (454 kg)' },
+      { label: 'Tailgate Hold Weight', value: '120 kg (264.5 lb)' },
+      { label: 'Dump Angle', value: '47°' },
+      { label: 'Electric Lifting Box', value: 'Option' },
+      // CAB
+      { label: 'Seat', value: 'Adjustable Driver + 2 Passenger Seats' },
+      { label: 'Beverage Holders', value: '6' },
+      { label: 'Electrical Power', value: 'DC 12V 20A × 1, USB × 1, Battery Trickle Outlet × 1' },
+      { label: 'Safety Warning', value: 'Seat belt warning — speed restricted to 24 kph' },
+      // BRAKE
+      { label: 'Main Brake', value: '4-Wheel Hydraulic Disc Brake' },
+      { label: 'Hand Brake', value: 'N/A / N/A / E-Brake' },
+      { label: 'Hill-Start Assist', value: 'N/A / N/A / Equipped' },
+      // LIGHTING
+      { label: 'Head Light', value: 'Halogen / LED / LED' },
+      { label: 'Tail Light', value: 'Round LED / LED / LED' },
+      // INSTRUMENTATION
+      { label: 'Instrumentation', value: '4.3" TFT / 4.3" TFT / 4.3" + 10.2" TFT' },
+      // CERTIFICATE
+      { label: 'Emission', value: 'EPA (49)' },
+      { label: 'Type Approval', value: 'ROHVA' },
     ],
   },
 

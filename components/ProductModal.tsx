@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useCallback } from 'react';
-import { Product, getCategoryGroup } from '../data/products';
+import { Product, ProductVariant, getCategoryGroup } from '../data/products';
 
 interface ProductModalProps {
   product: Product;
@@ -12,6 +12,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
   const [selectedImage, setSelectedImage] = React.useState(0);
   const [selectedSize, setSelectedSize] = React.useState<string | null>(null);
   const [selectedColor, setSelectedColor] = React.useState<string | null>(null);
+  const [selectedVariant, setSelectedVariant] = React.useState<number>(0);
 
   const isRich = getCategoryGroup(product.category) === 'Products';
 
@@ -35,7 +36,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
     if (product.sizes?.length) setSelectedSize(product.sizes[0]);
     if (product.colors?.length) setSelectedColor(product.colors[0]);
     setSelectedImage(0);
+    setSelectedVariant(0);
   }, [product]);
+
+  // Helper: resolve a spec value based on selected variant overrides
+  const getSpecValue = (label: string, baseValue: string): string => {
+    if (!product.variants?.length) return baseValue;
+    const variant = product.variants[selectedVariant];
+    return variant?.specOverrides?.[label] ?? baseValue;
+  };
 
   /* ─── Rich / Product Modal ─── */
   if (isRich) {
@@ -144,6 +153,30 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                   </p>
                 )}
 
+                {/* Variant / Model selector */}
+                {product.variants && product.variants.length > 0 && (
+                  <div className="mb-6">
+                    <label className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-3">
+                      Select Model: <span className="text-white">{product.variants[selectedVariant].name}</span>
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {product.variants.map((v, idx) => (
+                        <button
+                          key={v.name}
+                          onClick={() => setSelectedVariant(idx)}
+                          className={`px-5 py-3 text-xs font-bold uppercase tracking-wider border transition-all ${
+                            selectedVariant === idx
+                              ? 'bg-brand/20 border-brand text-white'
+                              : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                          }`}
+                        >
+                          {v.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Highlight stats row */}
                 {product.highlightStats && product.highlightStats.length > 0 && (
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
@@ -243,6 +276,26 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             {product.specs && product.specs.length > 0 && (
               <div className="mt-12 sm:mt-16">
                 <h3 className="serif text-2xl sm:text-3xl text-white mb-8">Specifications</h3>
+
+                {/* Variant tabs inside specs */}
+                {product.variants && product.variants.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {product.variants.map((v, idx) => (
+                      <button
+                        key={v.name}
+                        onClick={() => setSelectedVariant(idx)}
+                        className={`px-4 py-2 text-[11px] font-bold uppercase tracking-wider border transition-all ${
+                          selectedVariant === idx
+                            ? 'bg-brand/20 border-brand text-white'
+                            : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                        }`}
+                      >
+                        {v.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
                 <div className="border border-white/10 overflow-hidden">
                   {product.specs.map((spec, i) => (
                     <div
@@ -252,7 +305,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                       } ${i < product.specs!.length - 1 ? 'border-b border-white/5' : ''}`}
                     >
                       <span className="text-white/50 min-w-[40%]">{spec.label}</span>
-                      <span className="text-white/90 text-right">{spec.value}</span>
+                      <span className="text-white/90 text-right">{getSpecValue(spec.label, spec.value)}</span>
                     </div>
                   ))}
                 </div>
