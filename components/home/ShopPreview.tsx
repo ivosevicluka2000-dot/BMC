@@ -28,9 +28,9 @@ const getFeaturedProducts = () => {
 }
 
 const badges = [
-  { label: 'Top Seller', className: 'bg-amber-500 text-black' },
-  { label: 'Fan Favorite', className: 'bg-brand text-white' },
-  { label: 'Club Pick', className: 'bg-white text-black' }
+  { label: 'Best Seller', className: 'bg-amber-500 text-black' },
+  { label: 'New Arrival', className: 'bg-brand text-white' },
+  { label: 'Popular', className: 'bg-white text-black' }
 ]
 
 const ShopPreview: React.FC = () => {
@@ -42,11 +42,11 @@ const ShopPreview: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <span className="text-white/50 uppercase tracking-[0.3em] md:tracking-[0.5em] text-[10px] font-bold mb-3 md:mb-4 block">
-            Official Merch
+            Products & Accessories
           </span>
           <h2 className="serif text-3xl sm:text-4xl lg:text-5xl mb-4 md:mb-6">Club Shop</h2>
           <p className="text-white/60 text-sm max-w-xl mx-auto leading-relaxed">
-            Gear up with official Balkan Moto Club merchandise. Premium quality apparel and accessories for true riders.
+            Explore our range of UTVs, ATVs, engine kits, and accessories. Quality equipment for every rider and every terrain.
           </p>
         </div>
 

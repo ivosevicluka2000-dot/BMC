@@ -1,6 +1,42 @@
-export type ProductCategory = 'Apparel' | 'Accessories' | 'Gear' | 'Stickers' | 'Essentials';
+// ── Sub-categories ──────────────────────────────────────────
+export type ProductCategory =
+  | 'UTV'
+  | 'ATV'
+  | 'Engine Kit'
+  | 'ATV Blade'
+  | 'ATV Target'
+  | 'Agriculture'
+  | 'Apparel'
+  | 'TGB Shop';
 
+// ── Top-level groups ────────────────────────────────────────
+export type ProductGroup = 'Products' | 'Accessories';
+
+export const CATEGORY_GROUPS: Record<ProductGroup, ProductCategory[]> = {
+  Products: ['UTV', 'ATV', 'Engine Kit'],
+  Accessories: ['ATV Blade', 'ATV Target', 'Agriculture', 'Apparel', 'TGB Shop'],
+};
+
+// Helper – get the group a category belongs to
+export const getCategoryGroup = (cat: ProductCategory): ProductGroup =>
+  (Object.keys(CATEGORY_GROUPS) as ProductGroup[]).find(g =>
+    CATEGORY_GROUPS[g].includes(cat),
+  )!;
+
+// ── Availability ────────────────────────────────────────────
 export type ProductAvailability = 'In Stock' | 'Low Stock' | 'Pre-Order' | 'Sold Out';
+
+// ── Product interface ───────────────────────────────────────
+export interface HighlightStat {
+  label: string;
+  value: string;
+  unit: string;
+}
+
+export interface KeyFeature {
+  title: string;
+  description: string;
+}
 
 export interface Product {
   id: string;
@@ -15,242 +51,2566 @@ export interface Product {
   sizes?: string[];
   colors?: string[];
   specs?: { label: string; value: string }[];
+  /** Hero stats shown as large numbers (cc, HP, Nm, etc.) */
+  highlightStats?: HighlightStat[];
+  /** Rich key-feature sections with title + description */
+  keyFeatures?: KeyFeature[];
+  /** Short tagline shown above description */
+  tagline?: string;
 }
 
+// ── Product catalogue ───────────────────────────────────────
 export const products: Product[] = [
-  // Apparel
+  // ═══════════════════════  PRODUCTS  ═══════════════════════
+
+  // ── UTV ───────────────────────────────────────────────────
+  {
+    id: 'utv-1',
+    name: 'LandMax 1000 BASE',
+    category: 'UTV',
+    priceEur: 15900,
+    images: [
+      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1605289355680-75fb41239154?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'TGB LandMax 1000 base model side-by-side UTV.',
+    fullDesc:
+      'The TGB LandMax 1000 BASE is a rugged side-by-side powered by a 1000 cc V-Twin EFI engine. Features selectable 4WD with differential lock, CVT transmission, independent suspension on all four corners, and a tilting cargo bed. Built for work and trail riding alike.',
+    tags: ['Bestseller'],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Engine', value: '1000 cc, V-Twin EFI' },
+      { label: 'Power', value: '83 HP' },
+      { label: 'Drive', value: '4WD with diff lock' },
+      { label: 'Transmission', value: 'CVT (H-L-N-R-P)' },
+    ],
+  },
+  {
+    id: 'utv-2',
+    name: 'LandMax 1000 SE',
+    category: 'UTV',
+    priceEur: 17900,
+    images: [
+      'https://images.unsplash.com/photo-1605289355680-75fb41239154?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Special Edition LandMax with EPS and alloy wheels.',
+    fullDesc:
+      'The LandMax 1000 SE builds on the BASE with electronic power steering (EPS), aluminium alloy wheels, upgraded seats, and a premium winch. Same proven 1000 cc V-Twin power plant with added comfort for longer rides.',
+    tags: ['New'],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Engine', value: '1000 cc, V-Twin EFI' },
+      { label: 'Power', value: '83 HP' },
+      { label: 'EPS', value: 'Yes' },
+      { label: 'Wheels', value: 'Aluminium alloy' },
+    ],
+  },
+  {
+    id: 'utv-3',
+    name: 'LandMax 1000 PRO',
+    category: 'UTV',
+    priceEur: 19900,
+    images: [
+      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+      'https://images.unsplash.com/photo-1605289355680-75fb41239154?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Fully loaded LandMax — EPS, roof, winch, premium cabin.',
+    fullDesc:
+      'The flagship LandMax 1000 PRO comes fully equipped: electronic power steering, full hard roof, powerful 4,500 lb winch, LED light bar, premium cloth seats, and a reinforced front bumper. The ultimate workhorse and trail machine.',
+    tags: ['Premium', 'Bestseller'],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Engine', value: '1000 cc, V-Twin EFI' },
+      { label: 'Power', value: '83 HP' },
+      { label: 'EPS', value: 'Yes' },
+      { label: 'Winch', value: '4,500 lb' },
+    ],
+  },
+
+  // ── ATV ───────────────────────────────────────────────────
+  {
+    id: 'atv-1',
+    name: 'BLADE 1000 LTX EPS ABS',
+    category: 'ATV',
+    priceEur: 13500,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Powerful V-Twin EFI engine with high-quality chassis, ABS and on-command electric 4WD/2WD.',
+    fullDesc:
+      'Powerful V-Twin Electric Fuel Injection engine fitted with high-quality chassis delivers unyielding durability. It comes with 5 gated shifters with most advanced CVT drive system, lockable front and rear differential, on-command electric 4WD/2WD system, 14-inch aluminum rim, EVO Shock absorber and remarkable anti-lock braking system. BLADE 1000 LTX EPS ABS will bring you a different riding pleasure toward your every adventure you can imagine.\n\nTop features and design with most advanced equipment. Heavy-duty robust body works with TGB quality innovation workmanship standard. This durable and reliable BLADE 1000 LTX EPS ABS is your best companion in works, farm ranch, and outdoor adventure.',
+    tags: ['Premium', 'Bestseller'],
+    availability: 'In Stock',
+    tagline: 'OPTIMIZED FEATURES!',
+    highlightStats: [
+      { label: 'Engine Type', value: '997', unit: 'cc' },
+      { label: 'Max Power', value: '83', unit: 'HP' },
+      { label: 'Max Torque', value: '89.9', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful V-Twin 1000 EFI Engine',
+        description:
+          'The two-cylinder V-Twin is one of the largest engines in the ATV world. With its enormous power and high torque, it gives the ATV top-notch dynamics and powerful tractive power. Electronic injection guarantees reliable starts, clean combustion and low consumption.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          "Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone and the possibility to enter a speed warning, the coloured TFT display is one of TGB's top features.",
+      },
+      {
+        title: 'Dynamic LED Taillight',
+        description:
+          'The modern LED rear lights offer higher visibility, more safety and are also equipped with an attractive dynamic flasher function.',
+      },
+      {
+        title: 'Strong Traction',
+        description:
+          'The new aluminium rims give TGB models a particularly sporty look with their colour inserts in orange or yellow. In combination with the high-traction tread tyres and the colour-coordinated impact protection, the new aluminium wheels are another high-quality feature of the TGB vehicles.',
+      },
+      {
+        title: 'Bumper Kit',
+        description:
+          'The malachite in combination with the bumper kit not only enhances the look of the BLADE 1000, but also improves the protection and durability of the headlights.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '997 cc, V-Twin, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore × Stroke', value: 'Ø 92 × 75.0 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '83 HP / 7000 rpm' },
+      { label: 'Max Torque', value: '89.9 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 × 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 26 × 9 - 14, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 26 × 11 - 14, 6 PLY' },
+      { label: 'Wheelbase', value: '1460 mm' },
+      { label: 'L / W / H', value: '2340 × 1255 × 1340 mm' },
+      { label: 'Fuel Capacity', value: '23 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-2',
+    name: 'BLADE 1000 LTX EPS Premium',
+    category: 'ATV',
+    priceEur: 12900,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'The Most Spectacular-Looking Quad Bike with advanced LED headlights and state-of-the-art grill design.',
+    fullDesc:
+      'Equipped with the most advanced LED headlights and state of the art grill design, Blade 1000 LTX EPS PREMIUM will be the spotlight among all. This series also comes with plastic rack providing maximum durability and excellent loading capability.\n\nBlade 1000 LTX EPS Premium is built with a 62kW (83 HP) powerful V-Twin Engine, 14-inch aluminum rim, EVO Shock absorber and class-leading engine management system. It features high ground clearance and adjustable suspensions. With electric on-command 4WD/2WD, electric power steering system and most durable CVT drive system, it will bring you excellent rider comfort on the toughest trail.',
+    tags: ['Premium'],
+    availability: 'In Stock',
+    colors: ['Camo'],
+    tagline: 'THE MOST SPECTACULAR-LOOKING QUAD BIKE',
+    highlightStats: [
+      { label: 'Engine Type', value: '997', unit: 'cc' },
+      { label: 'Max Power', value: '83', unit: 'HP' },
+      { label: 'Max Torque', value: '89.9', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful V-Twin 1000 EFI Engine',
+        description:
+          'The two-cylinder V-Twin is one of the largest engines in the ATV world. With its enormous power and high torque, it gives the ATV top-notch dynamics and powerful tractive power. Electronic injection guarantees reliable starts, clean combustion and low consumption.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'Extended Chassis',
+        description:
+          'The extended wheelbase provides the driver and front passenger with plenty of space on separate seats, ensuring better stability when driving on hills. Independent suspension on all wheels, high ground clearance and chassis with large departure angles ensure excellent off-road capability.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          'Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone, the coloured TFT display is one of TGB\'s top features.',
+      },
+      {
+        title: 'Dynamic LED Taillight',
+        description:
+          'The modern LED rear lights offer higher visibility, more safety and are also equipped with an attractive dynamic flasher function.',
+      },
+      {
+        title: 'Strong Traction',
+        description:
+          'The new aluminium rims give TGB models a particularly sporty look with their colour inserts in orange or yellow. In combination with high-traction tread tyres and colour-coordinated impact protection, the new aluminium wheels are another high-quality feature.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '997 cc, V-Twin, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore × Stroke', value: 'Ø 92 × 75.0 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '83 HP / 7000 rpm' },
+      { label: 'Max Torque', value: '89.9 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 × 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 26 × 9 - 14, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 26 × 11 - 14, 6 PLY' },
+      { label: 'Wheelbase', value: '1460 mm' },
+      { label: 'L / W / H', value: '2340 × 1255 × 1340 mm' },
+      { label: 'Fuel Capacity', value: '23 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-3',
+    name: 'BLADE 1000 LTX EPS 14"',
+    category: 'ATV',
+    priceEur: 12500,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Go Beyond Your Expectation — the tough endurance to push the limits of any trip.',
+    fullDesc:
+      'Go Beyond Your Expectation. Blade 1000 LTX EPS 14" line has the tough endurance to push the limits of trips you have in mind. Perfect for any joyful riding with friends and family.\n\nEnjoy ultimate freedom and Fear Not! With the strength of steel reinforced racks and the fully integration of a 62kW (83 HP) powerful V-Twin Engine, electric power steering system, EVO Shock absorber and electric on-command 4WD/2WD, nothing can stop you to challenge every difficult terrain.',
+    tags: [],
+    availability: 'In Stock',
+    colors: ['Red'],
+    tagline: 'POWER UP YOUR LIMITS, YOUR TRUSTY PARTNER',
+    highlightStats: [
+      { label: 'Engine', value: '997', unit: 'cc' },
+      { label: 'Max Power', value: '83', unit: 'HP' },
+      { label: 'Max Torque', value: '89.9', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful V-Twin 1000 EFI Engine',
+        description:
+          'The two-cylinder V-Twin is one of the largest engines in the ATV world. With its enormous power and high torque, it gives the ATV top-notch dynamics and powerful tractive power. Electronic injection guarantees reliable starts, clean combustion and low consumption.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'Extended Chassis',
+        description:
+          'The extended wheelbase provides the driver and front passenger with plenty of space on separate seats, ensuring better stability when driving on hills. Independent suspension on all wheels, high ground clearance and chassis with large departure angles ensure excellent off-road capability.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          'Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone, the coloured TFT display is one of TGB\'s top features.',
+      },
+      {
+        title: 'Dynamic LED Taillight',
+        description:
+          'The modern LED rear lights offer higher visibility, more safety and are also equipped with an attractive dynamic flasher function.',
+      },
+      {
+        title: 'Strong Traction',
+        description:
+          'The new aluminium rims give TGB models a particularly sporty look with their colour inserts in orange or yellow. In combination with high-traction tread tyres and colour-coordinated impact protection, the new aluminium wheels are another high-quality feature.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '997 cc, V-Twin, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore × Stroke', value: 'Ø 92 × 75.0 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '83 HP / 7000 rpm' },
+      { label: 'Max Torque', value: '89.9 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 × 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 26 × 9 - 14, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 26 × 11 - 14, 6 PLY' },
+      { label: 'Wheelbase', value: '1460 mm' },
+      { label: 'L / W / H', value: '2340 × 1255 × 1340 mm' },
+      { label: 'Fuel Capacity', value: '23 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-4',
+    name: 'BLADE 1000 LTX EPS 12"',
+    category: 'ATV',
+    priceEur: 12200,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Next level of equipment combines with powerful innovation technology and maximum comfort.',
+    fullDesc:
+      'Always stay in Ultimate Power with trusted confidence no matter for work, play, fun or anything you need it. Regardless Latest Model or classic design, whether equipped with electric power steering, TFT Speedometer, EVO Shock absorber or 12-inch aluminum rim.\n\nWith the most powerful V-twin engine, Blade 1000 LTX EPS can bring you the most exceptional performance and unrivaled experience on Earth. The two-cylinder V-Twin is one of the largest engines in the ATV world. With its enormous power and high torque, it gives the ATV top-notch dynamics and powerful tractive power. Electronic injection guarantees reliable starts, clean combustion and low consumption.',
+    tags: [],
+    availability: 'In Stock',
+    colors: ['Red'],
+    tagline: 'V-TWIN POWER CONQUERS EVERY ARDUOUS TERRAIN',
+    highlightStats: [
+      { label: 'Engine Type', value: '997', unit: 'cc' },
+      { label: 'Max Power', value: '83', unit: 'HP' },
+      { label: 'Max Torque', value: '89.9', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '997 cc, V-Twin, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore × Stroke', value: 'Ø 92 × 75.0 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '83 HP / 7000 rpm' },
+      { label: 'Max Torque', value: '89.9 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 × 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 × 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 × 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1460 mm' },
+      { label: 'L / W / H', value: '2340 × 1255 × 1340 mm' },
+      { label: 'Fuel Capacity', value: '23 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-5',
+    name: 'BLADE 600 LTX EPS ABS',
+    category: 'ATV',
+    priceEur: 9800,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Best suitable for any task and terrain with modern full LED Matrix headlights and superior ABS.',
+    fullDesc:
+      'Blade 600 LTX EPS ABS is best suitable for any task and terrain. With modern full LED Matrix headlights, upgraded CVT, high-quality and durable chassis, electric on-command lockable front differential, outstanding power steering control, superior anti-lock braking system and the powerful engine package, Blade 600 LTX EPS ABS will be your everyday companion on the road, hill, and even the toughest rough terrain.\n\nThe biggest spotlight of Blade 600 LTX EPS ABS is its powerful engine with multi-diversified functions. The ATV is built for the speed, tight cornering and nimble handling. With its powerful engine and do-it-all functionality, the loading and hauling on everyday job or every adventure trip can be very easy and enjoyable. Blade 600 LTX EPS ABS is well known for its configuration. The double arched A-arms and 4WD functions will bring you confidence on every terrain.',
+    tags: ['New'],
+    availability: 'In Stock',
+    tagline: 'TOURING AND EXPLORING',
+    highlightStats: [
+      { label: 'Engine Type', value: '561', unit: 'cc' },
+      { label: 'Max Power', value: '44.8', unit: 'HP' },
+      { label: 'Max Torque', value: '46.5', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 600 cc Engine',
+        description:
+          'The reliable 600 cc four-stroke engine with modern four-valve technology is cooled by liquid and oil with two separate radiators. Modern electronic fuel injection guarantees high performance, high tractive force, high torque, low emissions and reliable starting in summer and winter.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'Extended Chassis',
+        description:
+          'The extended wheelbase provides the driver and front passenger with plenty of space on separate seats, ensuring better stability when driving on hills. Independent suspension on all wheels, high ground clearance and chassis with large departure angles ensure excellent off-road capability.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          "Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone, the coloured TFT display is one of TGB's top features.",
+      },
+      {
+        title: 'Dynamic LED Taillight',
+        description:
+          'The modern LED rear lights offer higher visibility, more safety and are also equipped with an attractive dynamic flasher function.',
+      },
+      {
+        title: 'Strong Traction',
+        description:
+          'The new aluminium rims give TGB models a particularly sporty look with their colour inserts in orange or yellow. In combination with high-traction tread tyres and colour-coordinated impact protection, the new aluminium wheels are another high-quality feature.',
+      },
+      {
+        title: 'Bumper Kit',
+        description:
+          'The malachite in combination with the bumper kit not only enhances the look of the BLADE, but also improves the protection and durability of the headlights.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '561 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 95 \u00d7 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '44.8 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.5 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Over Ride Button', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 26 \u00d7 9 - 14, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 26 \u00d7 11 - 14, 6 PLY' },
+      { label: 'Wheelbase', value: '1450 mm' },
+      { label: 'L / W / H', value: '2360 \u00d7 1235 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-6',
+    name: 'BLADE 600 LTX EPS Premium',
+    category: 'ATV',
+    priceEur: 9400,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'With new engineering inside out, powerful 32kW (43HP) EFI engine and excellent power steering.',
+    fullDesc:
+      'With new engineering inside out, Blade 600 LTX EPS Premium equipped with powerful 32kW (43HP) electronic fuel injection engine, electric on-command lockable front differential, excellent power steering control you can count on.\n\nBlade 600 LTX EPS Premium has been the most versatile ATV in the industry. With its latest engineering design of full LED headlights, it will increase the visibility by lighting up work area or down on the trail. The new innovative layout of front grill makes the cleaning more accessible and easy-to-handle. Over thousands of people trusted, The Blade 600 LTX EPS Premium is a chance for you to play more and do more.',
+    tags: ['Premium'],
+    availability: 'In Stock',
+    colors: ['Camo'],
+    tagline: 'THE TOUGHEST & POWERFUL ATV BUILT FOR YOU',
+    highlightStats: [
+      { label: 'Engine Type', value: '561', unit: 'cc' },
+      { label: 'Max Power', value: '44.8', unit: 'HP' },
+      { label: 'Max Torque', value: '46.5', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 600 cc Engine',
+        description:
+          'The reliable 600 cc four-stroke engine with modern four-valve technology is cooled by liquid and oil with two separate radiators. Modern electronic fuel injection guarantees high performance, high tractive force, high torque, low emissions and reliable starting in summer and winter.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'Extended Chassis',
+        description:
+          'The extended wheelbase provides the driver and front passenger with plenty of space on separate seats, ensuring better stability when driving on hills. Independent suspension on all wheels, high ground clearance and chassis with large departure angles ensure excellent off-road capability.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          "Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone, the coloured TFT display is one of TGB's top features.",
+      },
+      {
+        title: 'Dynamic LED Taillight',
+        description:
+          'The modern LED rear lights offer higher visibility, more safety and are also equipped with an attractive dynamic flasher function.',
+      },
+      {
+        title: 'Strong Traction',
+        description:
+          'The new aluminium rims give TGB models a particularly sporty look with their colour inserts in orange or yellow. In combination with high-traction tread tyres and colour-coordinated impact protection, the new aluminium wheels are another high-quality feature.',
+      },
+      {
+        title: 'Bumper Kit',
+        description:
+          'The malachite in combination with the bumper kit not only enhances the look of the BLADE, but also improves the protection and durability of the headlights.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '561 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 95 \u00d7 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '44.8 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.5 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Over Ride Button', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 26 \u00d7 9 - 14, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 26 \u00d7 11 - 14, 6 PLY' },
+      { label: 'Wheelbase', value: '1450 mm' },
+      { label: 'L / W / H', value: '2360 \u00d7 1235 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-7',
+    name: 'BLADE 600 LTX EPS',
+    category: 'ATV',
+    priceEur: 8900,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Extended chassis for 2 passengers with premium engine performance and on-command 4WD/2WD.',
+    fullDesc:
+      'No matter working in the farm or having trail adventures with your family & friends. TGB Blade 600 LTX EPS built with extended chassis is to provide a bigger space for 2 passengers riding. It also equips with premium engine performance and on-command 4WD/2WD system. The all-purpose Blade 600 LTX EPS will be your ideal partner for your next unforgettable adventure.\n\nLatest design of full LED headlights, ergonomic seat, durable plastic rack, 12" aluminum rims, sportive exhaust, lockable storage box with 12V charger and much more. Blade 600 LTX is an impeccable choice you do not want to miss.',
+    tags: [],
+    availability: 'In Stock',
+    colors: ['Yellow'],
+    tagline: 'WORK FUN & PLAY HARD',
+    highlightStats: [
+      { label: 'Engine Type', value: '561', unit: 'cc' },
+      { label: 'Max Power', value: '44.8', unit: 'HP' },
+      { label: 'Max Torque', value: '46.5', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 600 cc Engine',
+        description:
+          'The reliable 600 cc four-stroke engine with modern four-valve technology is cooled by liquid and oil with two separate radiators. Modern electronic fuel injection guarantees high performance, high tractive force, high torque, low emissions and reliable starting in summer and winter.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'Extended Chassis',
+        description:
+          'The extended wheelbase provides the driver and front passenger with plenty of space on separate seats, ensuring better stability when driving on hills. Independent suspension on all wheels, high ground clearance and chassis with large departure angles ensure excellent off-road capability.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          "Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone, the coloured TFT display is one of TGB's top features.",
+      },
+      {
+        title: 'Dynamic LED Taillight',
+        description:
+          'The modern LED rear lights offer higher visibility, more safety and are also equipped with an attractive dynamic flasher function.',
+      },
+      {
+        title: 'Strong Traction',
+        description:
+          'The new aluminium rims give TGB models a particularly sporty look with their colour inserts in orange or yellow. In combination with high-traction tread tyres and colour-coordinated impact protection, the new aluminium wheels are another high-quality feature.',
+      },
+      {
+        title: 'Bumper Kit',
+        description:
+          'The malachite in combination with the bumper kit not only enhances the look of the BLADE, but also improves the protection and durability of the headlights.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '561 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 95 \u00d7 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '44.8 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.5 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Over Ride Button', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1450 mm' },
+      { label: 'L / W / H', value: '2360 \u00d7 1235 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-8',
+    name: 'BLADE 600 SE.X EPS Premium',
+    category: 'ATV',
+    priceEur: 9200,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Super performance, easy to ride and handling for the most exacting jobs.',
+    fullDesc:
+      'Blade 600 SE.X Premium line has the super performance, easy to ride and handling to challenge the most exacting jobs you are looking for. Take advantage of the class-leading 44.8 HP 600 series engine that delivers strength and confidence as it is needed for hard work and outdoor pleasure.',
+    tags: ['New'],
+    availability: 'In Stock',
+    tagline: 'BUILT TO WORK HARD AND PLAY SMART',
+    highlightStats: [
+      { label: 'Engine Type', value: '561', unit: 'cc' },
+      { label: 'Max Power', value: '44.8', unit: 'HP' },
+      { label: 'Max Torque', value: '46.5', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 600 cc Engine',
+        description:
+          'The reliable 600 cc four-stroke engine with modern four-valve technology is cooled by liquid and oil with two separate radiators. Modern electronic fuel injection guarantees high performance, high tractive force, high torque, low emissions and reliable starting in summer and winter.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          "Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone, the coloured TFT display is one of TGB's top features.",
+      },
+      {
+        title: 'Dynamic LED Taillight',
+        description:
+          'The modern LED rear lights offer higher visibility, more safety and are also equipped with an attractive dynamic flasher function.',
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '561 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 95 \u00d7 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '44.8 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.5 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 26 \u00d7 9 - 14, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 26 \u00d7 11 - 14, 6 PLY' },
+      { label: 'Wheelbase', value: '1290 mm' },
+      { label: 'L / W / H', value: '2155 \u00d7 1240 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-9',
+    name: 'BLADE 600 SE.X EPS ABS',
+    category: 'ATV',
+    priceEur: 9500,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'High-performance engine and high-quality features designed for aggressive riding experience.',
+    fullDesc:
+      'The ideal partner for every adventure. The on-command 4WD/2WD system can be activated by a push of the button. The electric power steering is specifically tuned for Blade 600 SE.X EPS ABS. It also provides a smart anti-lock braking system to perform the excellent driving control on the road and trail. It can be the best machine for your every energetic adventure.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'IS BUILT TO LAST AND FUN RIDES',
+    highlightStats: [
+      { label: 'Engine Type', value: '561', unit: 'cc' },
+      { label: 'Max Power', value: '44.8', unit: 'HP' },
+      { label: 'Max Torque', value: '46.5', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 600 cc Engine',
+        description:
+          'The reliable 600 cc four-stroke engine with modern four-valve technology is cooled by liquid and oil with two separate radiators. Modern electronic fuel injection guarantees high performance, high tractive force, high torque, low emissions and reliable starting in summer and winter.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          "Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone, the coloured TFT display is one of TGB's top features.",
+      },
+      {
+        title: 'Dynamic LED Taillight',
+        description:
+          'The modern LED rear lights offer higher visibility, more safety and are also equipped with an attractive dynamic flasher function.',
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+      {
+        title: 'ABS Braking System',
+        description:
+          'Anti-lock braking systems (ABS) help you steer in emergencies by restoring traction to your tires and help prevent wheels from locking up for driver to steer to safety.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '561 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 95 \u00d7 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '44.8 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.5 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 26 \u00d7 9 - 14, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 26 \u00d7 11 - 14, 6 PLY' },
+      { label: 'Wheelbase', value: '1290 mm' },
+      { label: 'L / W / H', value: '2155 \u00d7 1240 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-10',
+    name: 'BLADE 600 SE.X EPS',
+    category: 'ATV',
+    priceEur: 8700,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Find more value for your hard-working money with performance, comfort and durability.',
+    fullDesc:
+      'Find more value for your hard-working money with the performance, comfort and durability of Blade 600 SE.X EPS.\n\nCarry distinguished TFT Speedometer. Break through the toughest terrain from True On-command 4WD/2WD. Front Differential available. 12-inch aluminum rim.',
+    tags: [],
+    availability: 'In Stock',
+    colors: ['Blue'],
+    tagline: 'THE PERFECT PACKAGE FOR VALUE & PERFORMANCE',
+    highlightStats: [
+      { label: 'Engine Type', value: '561', unit: 'cc' },
+      { label: 'Max Power', value: '44.8', unit: 'HP' },
+      { label: 'Max Torque', value: '46.5', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 600 cc Engine',
+        description:
+          'The reliable 600 cc four-stroke engine with modern four-valve technology is cooled by liquid and oil with two separate radiators. Modern electronic fuel injection guarantees high performance, high tractive force, high torque, low emissions and reliable starting in summer and winter.',
+      },
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'New TFT Color Display',
+        description:
+          "Automatic day/night mode and digital display of RPM, speed, tank level, 2WD/4WD drive, ABS, gear indicator, coolant temperature and Tripmaster ensure maximum visibility. With the Bluetooth connection to the mobile phone, the coloured TFT display is one of TGB's top features.",
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '561 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 95 \u00d7 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '44.8 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.5 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1290 mm' },
+      { label: 'L / W / H', value: '2155 \u00d7 1240 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-11',
+    name: 'TARGET 600 EPS',
+    category: 'ATV',
+    priceEur: 8200,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Pure riding pleasure with top performing fuel-efficient engine and strong power.',
+    fullDesc:
+      'Pure riding pleasure. With top performing fuel-efficient engine and strong power characteristic to get maximum horsepower to the ground. Target 600 EPS will blow your mind on every different adventure. The advanced geometric chassis design with unique vehicle behavior will make Target 600 EPS become your most recognized Quad ever.\n\nTGB Target series coming with 4WD and EPS will soon become your favorite sportive ATV. Design with black and yellow elements inspire its sporty DNA. The specialized redesign chassis is much more robust and stronger. With TGB powerful engine, it provides top level of stability and ultimate performance when you need it.\n\nThe most stylish sporty ATV in the industry. With the characters of easy to ride, state of arts double arch A-Arm, optimized drive control and reducing the kickback, Target 600 EPS will be the best choice for your sports ATV to attack any terrain.',
+    tags: ['Bestseller'],
+    availability: 'In Stock',
+    tagline: 'A POWERFUL MACHINE WITH UNLIMITED DRIVING FUN',
+    highlightStats: [
+      { label: 'Engine Type', value: '561', unit: 'cc' },
+      { label: 'Max Power', value: '44.8', unit: 'HP' },
+      { label: 'Max Torque', value: '46.5', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 600 cc Engine',
+        description:
+          'The reliable 600 cc four-stroke engine with modern four-valve technology is cooled by liquid and oil with two separate radiators. Modern electronic fuel injection guarantees high performance, high tractive force, high torque, low emissions and reliable starting in summer and winter.',
+      },
+      {
+        title: 'Multifunctional LCD Display',
+        description:
+          'Accurate information whenever you need it: the modern multi-function LCD display is not only easy to read, but also beautiful, and offers many functions such as digital tachometer, digital speedometer, maximum engine speed, maximum speed, average speed, 2 daily distance counters, total distance counter, fuel gauge, on-board clock and all necessary indicator lights.',
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '561 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 95 \u00d7 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '44.8 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.5 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Double A-Arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1290 mm' },
+      { label: 'L / W / H', value: '1950 \u00d7 1240 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3, L7e (2 seaters)' },
+    ],
+  },
+  {
+    id: 'atv-12',
+    name: 'BLADE 550 LTX EPS',
+    category: 'ATV',
+    priceEur: 7800,
+    images: [
+      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Designed for 2 passengers with completely redesigned and reinforced chassis.',
+    fullDesc:
+      'Designed for 2 passengers, Blade 550 LTX EPS completely redesigned and reinforced chassis bring more comfortable riding experiences. It is an ATV dedicated for fun and incredible riding experience.\n\nBlade 550 LTX EPS equips with robust front bumper, TFT instrument panel, comfortable passenger backrest and 12" aluminum rims. Blade 550 LTX EPS ensures passenger comfort and stability better than ever.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'TOURING AND SHARING',
+    highlightStats: [
+      { label: 'Engine Type', value: '503', unit: 'cc' },
+      { label: 'Max Power', value: '38.7', unit: 'HP' },
+      { label: 'Max Torque', value: '46.1', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'Multifunctional LCD Display',
+        description:
+          'Accurate information whenever you need it: the modern multi-function LCD display is not only easy to read, but also beautiful, and offers many functions such as digital tachometer, digital speedometer, maximum engine speed, maximum speed, average speed, 2 daily distance counters, total distance counter, fuel gauge, on-board clock and all necessary indicator lights.',
+      },
+      {
+        title: 'Extended Chassis',
+        description:
+          'The extended wheelbase provides the driver and front passenger with plenty of space on separate seats, ensuring better stability when driving on hills. Independent suspension on all wheels, high ground clearance and chassis with large departure angles ensure excellent off-road capability.',
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '503 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 92 \u00d7 75.6 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '38.7 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.1 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Park In Transmission / Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1450 mm' },
+      { label: 'L / W / H', value: '2360 \u00d7 1235 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3' },
+    ],
+  },
+  {
+    id: 'atv-13',
+    name: 'BLADE 550X EPS ABS',
+    category: 'ATV',
+    priceEur: 7500,
+    images: [
+      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'One of the best-selling models — specially designed for adventure fun and hard work.',
+    fullDesc:
+      'Blade 550X EPS ABS is one of the best-selling models in the market. A machine specially designed for adventure fun and hard work. With ease usability and versatile riding functions, Blade 550X EPS ABS is standby anytime for your next riding adventure.\n\nBlade 550X EPS offers a wide variety of features: Along with top performing EFI engine, durable CVT drive system, on-command 4WD/2WD and lock, LED brake lights, dual A-arms and superior anti-lock braking system, Blade 550X EPS ABS has a confident ability to prevail on all types of tough terrains.',
+    tags: [],
+    availability: 'In Stock',
+    colors: ['Metallic Gray'],
+    tagline: 'RELIABLE AND TRUSTWORTHY',
+    highlightStats: [
+      { label: 'Engine Type', value: '503', unit: 'cc' },
+      { label: 'Max Power', value: '38.7', unit: 'HP' },
+      { label: 'Max Torque', value: '46.1', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'Multifunctional LCD Display',
+        description:
+          'Accurate information whenever you need it: the modern multi-function LCD display is not only easy to read, but also beautiful, and offers many functions such as digital tachometer, digital speedometer, maximum engine speed, maximum speed, average speed, 2 daily distance counters, total distance counter, fuel gauge, on-board clock and all necessary indicator lights.',
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+      {
+        title: 'ABS Braking System',
+        description:
+          'Anti-lock braking systems (ABS) help you steer in emergencies by restoring traction to your tires and help prevent wheels from locking up for driver to steer to safety.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '503 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 92 \u00d7 75.6 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '38.7 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.1 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1290 mm' },
+      { label: 'L / W / H', value: '2155 \u00d7 1240 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3' },
+    ],
+  },
+  {
+    id: 'atv-14',
+    name: 'BLADE 550X EPS',
+    category: 'ATV',
+    priceEur: 7200,
+    images: [
+      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Best-in-class selling model — a machine with both fun and hard work.',
+    fullDesc:
+      'The best-in-class selling models in the market. Blade 550X EPS is a machine with both fun and hard work. Easy to operate and plenty fun to ride.\n\nTough but easy-to-use with high-quality craftsmanship. The basic concept of BLADE 550X EPS provides the best features for almost all challenges. Whether it is used for work or adventure, whether on forest roads or in steep terrain, it can ensure reliability and the riding pleasure.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'AGILE AND NIMBLE',
+    highlightStats: [
+      { label: 'Engine Type', value: '503', unit: 'cc' },
+      { label: 'Max Power', value: '38.7', unit: 'HP' },
+      { label: 'Max Torque', value: '46.1', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Modern Full-LED Lighting',
+        description:
+          'The attractive LED Matrix headlights have excellent light output and increase the safety level of the ATV. The headlights have built-in front LED flashers and daytime running lights. LED technologies offer high reliability and high light output at low power consumption.',
+      },
+      {
+        title: 'Multifunctional LCD Display',
+        description:
+          'Accurate information whenever you need it: the modern multi-function LCD display is not only easy to read, but also beautiful, and offers many functions such as digital tachometer, digital speedometer, maximum engine speed, maximum speed, average speed, 2 daily distance counters, total distance counter, fuel gauge, on-board clock and all necessary indicator lights.',
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '503 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 92 \u00d7 75.6 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '38.7 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.1 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1290 mm' },
+      { label: 'L / W / H', value: '2155 \u00d7 1240 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3' },
+    ],
+  },
+  {
+    id: 'atv-15',
+    name: 'BLADE 550',
+    category: 'ATV',
+    priceEur: 6500,
+    images: [
+      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Innovation technology, solid quality, maximum comfort — the most recognized ATV.',
+    fullDesc:
+      'No matter going alone or taking friends with the ride, Blade 550 series will be one of your ATVs known in performance and its value. With optimized features for off-road uses, Blade 550 series is suitable for those who are looking for ideal combination of functionality and riding pleasure.\n\nBlade 550 is the best choice for those who want to enter the world of power sports, equipped with a powerful 503cc engine that combines power and agility.\n\nUnmatched all-terrain performance with the outstanding 503cc engine. The digital management system brings you with smooth power characteristic. With a simple push of a button, you can easily drive all your adventures.',
+    tags: [],
+    availability: 'In Stock',
+    colors: ['Orange'],
+    tagline: 'BUILT STRONG FOR EVERYDAY TASKS',
+    highlightStats: [
+      { label: 'Engine Type', value: '503', unit: 'cc' },
+      { label: 'Max Power', value: '38.7', unit: 'HP' },
+      { label: 'Max Torque', value: '46.1', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '503 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 92 \u00d7 75.6 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '38.7 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.1 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1290 mm' },
+      { label: 'L / W / H', value: '2155 \u00d7 1240 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3' },
+    ],
+  },
+  {
+    id: 'atv-16',
+    name: 'BLADE 520 EPS 4x4 Rigid',
+    category: 'ATV',
+    priceEur: 6200,
+    images: [
+      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Voted for most reliable machine in the agriculture market — built for hard-working people.',
+    fullDesc:
+      'Blade 520 EPS Rigid has been voted for most reliable machine in the agriculture market. It is an all-terrain vehicle that is built for the hard-working people. With its easy operation and maintenance, it will bring the efficiency of your daily works. Equipped with powerful 503cc engine, Blade 520 EPS 4x4 Rigid delivers the smoothest power you ever had.\n\nHigh-performance and high-quality craftsmanship guarantee the unlimited riding pleasure to every terrain you conquered. Blade 520 is not only a perfect model for you to enter with but also proven in working and recreational application.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'THE LIFE OF TGB RIDER',
+    highlightStats: [
+      { label: 'Engine Type', value: '503', unit: 'cc' },
+      { label: 'Max Power', value: '38.7', unit: 'HP' },
+      { label: 'Max Torque', value: '46.1', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Multifunctional LCD Display',
+        description:
+          'Accurate information whenever you need it: the modern multi-function LCD display is not only easy to read, but also beautiful, and offers many functions such as digital tachometer, digital speedometer, maximum engine speed, maximum speed, average speed, 2 daily distance counters, total distance counter, fuel gauge, on-board clock and all necessary indicator lights.',
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '503 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 92 \u00d7 75.6 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Max Power', value: '38.7 HP / 6500 rpm' },
+      { label: 'Max Torque', value: '46.1 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Engine Braking', value: 'Standard' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Rigid with Dual Shock Absorbers' },
+      { label: 'Front / Rear Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Parking Brake', value: 'Lockable Hand Lever' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12, 6 PLY' },
+      { label: 'Wheelbase', value: '1290 mm' },
+      { label: 'L / W / H', value: '2155 \u00d7 1240 \u00d7 1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+      { label: 'Homologation', value: 'T3' },
+    ],
+  },
+  {
+    id: 'atv-17',
+    name: 'BLADE 600AR EPS 4x4',
+    category: 'ATV',
+    priceEur: 8500,
+    images: [
+      'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'Best friend of farmer — bigger and wider body design for more loading capacity.',
+    fullDesc:
+      'Blade 600 AR EPS 4X4 is the best friend of farmer with the bigger and wider body design for more loading capacity. The design of 320 mm ground clearance is higher than average agriculture ATV making it stand out from the crowd. Combining all the practical functions, Blade 600 AR EPS 4X4 has confidence helping all the heavy works get solved.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'HEAVY-DUTY AND TOUGH',
+    highlightStats: [
+      { label: 'Engine Type', value: '561', unit: 'cc' },
+      { label: 'Max Power', value: '44.8', unit: 'HP' },
+      { label: 'Max Torque', value: '46.5', unit: 'Nm' },
+      { label: 'Compression Ratio', value: '10.2', unit: '' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful 600 cc Engine',
+        description:
+          'The reliable 600 cc four-stroke engine with modern four-valve technology is cooled by liquid and oil with two separate radiators. Modern electronic fuel injection guarantees high performance, high tractive force, high torque, low emissions and reliable starting in summer and winter.',
+      },
+      {
+        title: 'Multifunctional LCD Display',
+        description:
+          'Accurate information whenever you need it: the modern multi-function LCD display is not only easy to read, but also beautiful, and offers many functions such as digital tachometer, digital speedometer, maximum engine speed, maximum speed, average speed, 2 daily distance counters, total distance counter, fuel gauge, on-board clock and all necessary indicator lights.',
+      },
+      {
+        title: 'Large Rear Cargo',
+        description:
+          'With an extended wheelbase (LT), a steel platform with class-leading capacity (200kg) and progressive power steering, you have a work tool that few can match. The bed has a gas-assisted tipping and the tailgate can be easily folded down. The side panels can also be removed to create a large, flat loading surface.',
+      },
+      {
+        title: 'Engine Braking System',
+        description:
+          'Controlling the speed at which a vehicle travels downhill for safety drive.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '561 cc, Single Cylinder, SOHC' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore \u00d7 Stroke', value: '\u00d8 95 \u00d7 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: '42 mm Throttle Body / Programmed Fuel Injection' },
+      { label: 'Max Power', value: '31.4 kW / 7000 rpm' },
+      { label: 'Max Torque', value: '53.6 Nm / 5500 rpm' },
+      { label: 'Drive System', value: '4 \u00d7 4 Shaft Drive' },
+      { label: 'Gear Selection', value: 'L / H / N / R / P' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Front Suspension', value: 'Double A-Arm' },
+      { label: 'Rear Suspension', value: 'Double A-Arm' },
+      { label: 'Front Brake', value: '\u00d8 200 mm discs with 1-piston calipers' },
+      { label: 'Rear Brake', value: '\u00d8 180 mm discs with 1-piston calipers' },
+      { label: 'Front Tire', value: 'AT 25 \u00d7 8 - 12' },
+      { label: 'Rear Tire', value: 'AT 25 \u00d7 10 - 12' },
+      { label: 'Wheelbase', value: '1465 mm' },
+      { label: 'Overall Length', value: '2550 mm' },
+      { label: 'Overall Width', value: '1290 mm' },
+      { label: 'Overall Height', value: '1280 mm' },
+      { label: 'Fuel Capacity', value: '18 L' },
+      { label: 'Ground Clearance', value: '320 mm' },
+      { label: 'Est. Dry Weight', value: '454 kg' },
+      { label: 'Electrical Outlet', value: '2 DC 12V 10A 120W' },
+    ],
+  },
+
+  // ── Engine Kit ────────────────────────────────────────────
+  {
+    id: 'ek-1',
+    name: 'TGB 1000 Fire Pump Engine',
+    category: 'Engine Kit',
+    priceEur: 4500,
+    images: [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: 'TGB 1000 cc V-Twin engine configured for fire pump applications with customizable PTO adapter shaft.',
+    fullDesc:
+      'TGB fire pump engine impresses in terms of excellent power performance, weight and high quality in a unique way. The compact size design and customizable PTO adapter shaft of the TGB fire pump engine allows ease of installation in your fire pump products. The abundant power output can make pump to achieve maximum suction and pumping capacity and output with high pressure and high flow, let your portable fire pump be impressed in every operation.',
+    tags: ['Specialty'],
+    availability: 'In Stock',
+    tagline: 'COMPACT POWER FOR FIRE FIGHTING!',
+    highlightStats: [
+      { label: 'Displacement', value: '997.1', unit: 'cc' },
+      { label: 'Max Power', value: '83', unit: 'HP' },
+      { label: 'HP/Weight (net)', value: '1.66', unit: 'hp/kg' },
+      { label: 'Built-in Alternator', value: '480', unit: 'watt' },
+      { label: 'Dry Weight', value: '49.5', unit: 'kg' },
+    ],
+    keyFeatures: [
+      {
+        title: 'V-Twin SOHC Technology',
+        description:
+          'Advanced V-Twin SOHC engine architecture delivers outstanding power-to-weight ratio with proven reliability for demanding fire pump operations.',
+      },
+      {
+        title: 'Oxygen Sensor Closed Loop EFI System',
+        description:
+          'Continental Electronic Fuel Injection with oxygen sensor closed loop system ensures optimal combustion, reliable starting and low fuel consumption in all conditions.',
+      },
+      {
+        title: 'Compact & Lightweight Design',
+        description:
+          'At just 49.5 kg dry weight and 533 x 398 x 456 mm dimensions, the compact engine allows ease of installation in a wide range of fire pump products.',
+      },
+      {
+        title: 'Forced Circulation & Splashing Lubrication',
+        description:
+          'Unique two-layer design of sump for oil pump and pickup combined with oil cooler ensures reliable lubrication even at extreme operating angles up to 45 degrees to all sides.',
+      },
+      {
+        title: 'Dynamically Balanced Crankshaft',
+        description:
+          'Precision-balanced crankshaft reduces vibration and extends engine life, delivering smooth and reliable operation during extended fire-fighting duty cycles.',
+      },
+      {
+        title: 'Built-in 480W Alternator',
+        description:
+          'Integrated 480-watt alternator provides ample electrical power for auxiliary equipment, lighting, and control systems without requiring a separate generator.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Name', value: 'TGB 1000 V-Twin engine' },
+      { label: 'Engine Type', value: '4 stroke / liquid cooled' },
+      { label: 'Bore × Stroke', value: 'Ø92 mm x 75 mm' },
+      { label: 'Displacement', value: '997.1 cc' },
+      { label: 'Maximum Power', value: '83 hp / 62 kW' },
+      { label: 'HP/Weight (net)', value: '1.66 hp/kg' },
+      { label: 'Inclination during operation', value: '45 degree angle to all sides' },
+      { label: 'Built-in Alternator', value: '480 watt' },
+      { label: 'Fuel Type', value: 'E10 or 87 octane above' },
+      { label: 'Fuel System', value: 'Continental Electronic Fuel Injection' },
+      { label: 'Dry Weight', value: '49.5 kg' },
+      { label: 'Overall L × W × H', value: '533 x 398 x 456 mm' },
+    ],
+  },
+  {
+    id: 'ek-2',
+    name: '83 HP 1000 EFI — UTV Engine',
+    category: 'Engine Kit',
+    priceEur: 5200,
+    images: [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: '83 HP 1000 cc V-Twin EFI engine — Top 5 off-road powersports engine worldwide for UTV applications.',
+    fullDesc:
+      'TGB 1000 UTV V-twin EFI engine is Top 5 off-road powersports engine around the world that can go for the maximum power up to 83HP, high torque, high traction and high balance design can support your UTV to reach the utmost performance no matter where it goes and how it is used in the conditions of high / low driving speed, acceleration, climbing high, downhill slope and heavy-duty tasks! Its electronic fuel injection system also guarantees instant starting in cold temperature, clean combustion and low fuel consumption.\n\nIts high efficient and reliable CVT system requires a minimal maintenance. Its engine brake function can equip your UTV even more secure and reliable in all difficult tough terrains! It will upgrade your UTV performance immediately once it is built up and assembled!',
+    tags: ['Bestseller'],
+    availability: 'In Stock',
+    tagline: 'TOP 5 OFF-ROAD POWERSPORTS ENGINE!',
+    highlightStats: [
+      { label: 'Displacement', value: '997.1', unit: 'cc' },
+      { label: 'Compression Ratio', value: '10.2', unit: '± 0.5' },
+      { label: 'Max Power', value: '83', unit: 'HP' },
+      { label: 'Max Torque', value: '89.8', unit: 'Nm' },
+      { label: 'Weight', value: '95', unit: 'kg' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful V-Twin 1000 EFI Engine',
+        description:
+          'The 997.1 cc V-Twin engine delivers maximum power up to 83 HP with high torque of 89.8 Nm, providing high traction and high balance design for the utmost UTV performance.',
+      },
+      {
+        title: 'Electronic Fuel Injection',
+        description:
+          'EFI system guarantees instant starting in cold temperature, clean combustion and low fuel consumption across all operating conditions.',
+      },
+      {
+        title: 'High-Efficiency CVT Transmission',
+        description:
+          'Reliable CVT V-belt automatic transmission with L/H/N/R/P gear shift requires minimal maintenance while delivering smooth power delivery.',
+      },
+      {
+        title: 'Engine Brake Function',
+        description:
+          'Built-in engine brake equips your UTV with added security and reliability in all difficult tough terrains including downhill slopes.',
+      },
+      {
+        title: 'Liquid Cooled with Pump Circulation',
+        description:
+          'Advanced liquid cooling system with pump circulation maintains optimal engine temperature even under heavy-duty tasks and extreme conditions.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Mode', value: 'T-1000 EFI-UTV' },
+      { label: 'Engine Name', value: 'TGB 1000 V-Twin engine' },
+      { label: 'Engine Type', value: 'Four stroke / V-Twin SOHC / 8 valves / liquid cooled' },
+      { label: 'Bore × Stroke', value: 'Ø92 mm x 75 mm' },
+      { label: 'Compression Ratio', value: '10.2 ± 0.5' },
+      { label: 'Displacement', value: '997.1 cc' },
+      { label: 'Cooling System', value: 'Liquid cooled with pump circulation' },
+      { label: 'Ignition Method', value: 'IDI (Inductive Discharge Ignition)' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Maximum Power', value: '83 hp / 7000 rpm' },
+      { label: 'Maximum Torque', value: '89.8 Nm / 5500 rpm' },
+      { label: 'Lubrication Method', value: 'Oil pump' },
+      { label: 'Fuel Type', value: '92 above unleaded gasoline' },
+      { label: 'Transmission', value: 'C.V.T. / V-belt' },
+      { label: 'Gear Shift', value: 'L.H.N.R.P' },
+      { label: 'Weight (net)', value: '95 kg' },
+    ],
+  },
+  {
+    id: 'ek-3',
+    name: '83 HP 1000 EFI — ATV Engine',
+    category: 'Engine Kit',
+    priceEur: 4900,
+    images: [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: '83 HP 1000 cc V-Twin EFI engine — Top 5 powersports engine worldwide with huge power for ATV applications.',
+    fullDesc:
+      'The T-1000 EFI-ATV engine with V-Twin cylinders up to 997.1cc and huge power (83 hp) gives the ATV top acceleration. Top 5 selected strong and powerful engine around the world, with high torque and high traction, Ø92 mm x 75 mm Bore x Stroke keep its stability during speed up, and so does help with low speed driving condition. Electronic fuel injection guarantees reliable starting, clean combustion and low fuel consumption. More than 2,000 units have been sold annually.\n\nThe reliable, robust & heavy-duty automatic transmission with minimal maintenance is equipped with an efficient engine brake, and upgrades your ATV performance immediately once it is assembled.',
+    tags: ['Bestseller'],
+    availability: 'In Stock',
+    tagline: 'TOP ACCELERATION & HEAVY-DUTY POWER!',
+    highlightStats: [
+      { label: 'Displacement', value: '997.1', unit: 'cc' },
+      { label: 'Compression Ratio', value: '10.2', unit: '± 0.5' },
+      { label: 'Max Power', value: '83', unit: 'HP' },
+      { label: 'Max Torque', value: '89.8', unit: 'Nm' },
+      { label: 'Weight', value: '95', unit: 'kg' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Powerful V-Twin 1000 EFI Engine',
+        description:
+          'V-Twin cylinders up to 997.1 cc and huge power of 83 hp give the ATV top acceleration. Top 5 selected strong and powerful engine around the world with high torque and high traction.',
+      },
+      {
+        title: 'Electronic Fuel Injection',
+        description:
+          'EFI guarantees reliable starting in summer and winter, clean combustion and low fuel consumption. Proven with more than 2,000 units sold annually.',
+      },
+      {
+        title: 'Heavy-Duty Automatic Transmission',
+        description:
+          'Reliable, robust & heavy-duty CVT V-belt automatic transmission with minimal maintenance delivers smooth power across all driving conditions.',
+      },
+      {
+        title: 'Efficient Engine Brake',
+        description:
+          'Built-in engine brake provides added security and control in tough terrains, upgrading your ATV performance immediately once assembled.',
+      },
+      {
+        title: 'Liquid Cooled with Pump Circulation',
+        description:
+          'Advanced liquid cooling system with pump circulation maintains optimal engine temperature for sustained high-performance operation.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Mode', value: 'T-1000 EFI-ATV' },
+      { label: 'Engine Name', value: 'TGB 1000 V-Twin engine' },
+      { label: 'Engine Type', value: 'Four stroke / V-Twin SOHC / 8 valves / liquid cooled' },
+      { label: 'Bore × Stroke', value: 'Ø92 mm x 75 mm' },
+      { label: 'Compression Ratio', value: '10.2 ± 0.5' },
+      { label: 'Displacement', value: '997.1 cc' },
+      { label: 'Cooling System', value: 'Liquid cooled with pump circulation' },
+      { label: 'Ignition Method', value: 'IDI (Inductive Discharge Ignition)' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Maximum Power', value: '83 hp / 7000 rpm' },
+      { label: 'Maximum Torque', value: '89.8 Nm / 5500 rpm' },
+      { label: 'Lubrication Method', value: 'Oil pump' },
+      { label: 'Fuel Type', value: '92 above unleaded gasoline' },
+      { label: 'Transmission', value: 'C.V.T. / V-belt' },
+      { label: 'Gear Shift', value: 'L.H.N.R.P' },
+      { label: 'Weight (net)', value: '95 kg' },
+    ],
+  },
+  {
+    id: 'ek-4',
+    name: '42 HP 570 EFI Engine',
+    category: 'Engine Kit',
+    priceEur: 3200,
+    images: [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: '42.4 HP 561.4 cc EFI single-cylinder engine — one of the most competitive ATV engines in its class.',
+    fullDesc:
+      'The 570 EFI Engine is one of the most competitive ATV engines within its acceleration with upgraded performance and exclusive weight. The reliable four-stroke engine with modern four-valve technology, liquid and oil cooling with two separate radiators is equipped with modern electronic fuel injection. Injection guarantees high performance, high traction, high torque, low emissions and reliable starting in summer and winter.\n\nThe reliable, robust & heavy-duty automatic transmission with minimal maintenance is equipped with an efficient engine brake, upgraded your ATV performance immediately once it is assembled.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'COMPETITIVE PERFORMANCE & EXCLUSIVE WEIGHT!',
+    highlightStats: [
+      { label: 'Displacement', value: '561.4', unit: 'cc' },
+      { label: 'Compression Ratio', value: '10.2', unit: '± 0.5' },
+      { label: 'Max Power', value: '42.4', unit: 'HP' },
+      { label: 'Max Torque', value: '51.9', unit: 'Nm' },
+      { label: 'Weight', value: '70', unit: 'kg' },
+    ],
+    keyFeatures: [
+      {
+        title: 'Modern Four-Valve Technology',
+        description:
+          'Reliable four-stroke single-cylinder engine with modern SOHC four-valve technology delivers 42.4 hp of competitive performance with an exclusive weight of just 70 kg.',
+      },
+      {
+        title: 'Dual Radiator Cooling',
+        description:
+          'Liquid and oil cooling with two separate radiators ensures optimal temperature management for sustained high-performance operation.',
+      },
+      {
+        title: 'Electronic Fuel Injection',
+        description:
+          'Modern EFI guarantees high performance, high traction, high torque, low emissions and reliable starting in both summer and winter conditions.',
+      },
+      {
+        title: 'Heavy-Duty Automatic Transmission',
+        description:
+          'Reliable, robust & heavy-duty CVT V-belt automatic transmission with minimal maintenance and L/H/N/R/P gear shift for versatile operation.',
+      },
+      {
+        title: 'Efficient Engine Brake',
+        description:
+          'Built-in engine brake provides added control and safety, upgrading your ATV performance immediately once it is assembled.',
+      },
+    ],
+    specs: [
+      { label: 'Engine Mode', value: '570 EFI' },
+      { label: 'Engine Name', value: 'TGB 570 single cylinder engine' },
+      { label: 'Engine Type', value: 'Four stroke / single cylinder, SOHC / liquid cooled' },
+      { label: 'Bore × Stroke', value: 'Ø95 mm x 79.2 mm' },
+      { label: 'Compression Ratio', value: '10.2 ± 0.5' },
+      { label: 'Displacement', value: '561.4 cc' },
+      { label: 'Cooling System', value: 'Liquid cooled with pump circulation' },
+      { label: 'Ignition Method', value: 'IDI (Inductive Discharge Ignition)' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Maximum Power', value: '42.4 hp / 6500 rpm' },
+      { label: 'Maximum Torque', value: '51.9 Nm / 5500 rpm' },
+      { label: 'Lubrication Method', value: 'Oil pump' },
+      { label: 'Fuel Type', value: '92 above unleaded gasoline' },
+      { label: 'Transmission', value: 'C.V.T. / V-belt' },
+      { label: 'Gear Shift', value: 'L.H.N.R.P' },
+      { label: 'Weight (net)', value: '70 kg' },
+    ],
+  },
+  {
+    id: 'ek-5',
+    name: '38 HP 500 EFI Engine',
+    category: 'Engine Kit',
+    priceEur: 2800,
+    images: [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800',
+    ],
+    shortDesc: '38 HP 500 cc EFI single-cylinder engine.',
+    fullDesc:
+      'Reliable 500 cc single-cylinder EFI engine delivering 38 HP. OEM-compatible replacement for BLADE 520/550 platforms. Comes with ECU, harness, exhaust, and install guide.',
+    tags: [],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Displacement', value: '500 cc' },
+      { label: 'Power', value: '38 HP' },
+      { label: 'Fuel System', value: 'EFI' },
+      { label: 'Type', value: 'Single Cylinder, 4-Stroke' },
+    ],
+  },
+
+  // ═══════════════════════  ACCESSORIES  ════════════════════
+
+  // ── ATV Blade Accessories ─────────────────────────────────
+  {
+    id: 'blade-acc-1',
+    name: 'Hitch',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-2',
+    name: 'Winch (3000 lbs)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: ['Bestseller'],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-3',
+    name: 'EVO-R Shock Absorber (Front)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-4',
+    name: 'EVO-R Shock Absorber (Rear)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-5',
+    name: 'EVO Shock Absorber (Front, BLADE 1000)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-6',
+    name: 'EVO Shock Absorber (Rear, BLADE 1000)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-7',
+    name: 'EVO Shock Absorber (Front, BLADE 600)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-8',
+    name: 'EVO Shock Absorber (Rear, BLADE 600)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-9',
+    name: 'Front Bumper (BLADE 1000 LTX)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-10',
+    name: 'Rear Bumper (BLADE 1000 LTX)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-11',
+    name: 'Front Bumper (BLADE 600 LTX)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-12',
+    name: 'Rear Bumper (BLADE 600 LTX)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-13',
+    name: 'Front Bumper (BLADE 600 SE.X)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-14',
+    name: 'Rear Bumper (BLADE 600 SE.X)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-15',
+    name: 'Front Bumper (BLADE 550 LTX)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-16',
+    name: 'Rear Bumper (BLADE 550 LTX)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-17',
+    name: 'Front Bumper (BLADE 550X)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-18',
+    name: 'Front Bumper (BLADE 550)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-19',
+    name: 'Rear Bumper (BLADE 550)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-20',
+    name: 'Backrest',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-21',
+    name: 'Air Compressor',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-22',
+    name: 'Rear Mirror (Round)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-23',
+    name: 'Rear Mirror (Rectangular)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-24',
+    name: 'Rear Rack',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-25',
+    name: 'Rear Carrier Comp (BLADE 1000)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-26',
+    name: 'Rear Carrier Comp (BLADE 600)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-27',
+    name: 'Fuel Tank Support',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-28',
+    name: 'Fuel Tank',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-29',
+    name: 'Rear Cargo Box (135 L)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: ['Bestseller'],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Capacity', value: '135 L' },
+      { label: 'Material', value: 'PP Polypropylene' },
+    ],
+  },
+  {
+    id: 'blade-acc-30',
+    name: 'Rear Cargo Box (110 L)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Capacity', value: '110 L' },
+      { label: 'Material', value: 'PP Polypropylene' },
+    ],
+  },
+  {
+    id: 'blade-acc-31',
+    name: 'Rear Cargo Box (50 L)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Capacity', value: '50 L' },
+      { label: 'Material', value: 'PP Polypropylene' },
+    ],
+  },
+  {
+    id: 'blade-acc-32',
+    name: 'Hand Guard RH (BLADE 1000)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-33',
+    name: 'Hand Guard LH (BLADE 1000)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-34',
+    name: 'Hand Guard RH (BLADE 600)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-35',
+    name: 'Hand Guard LH (BLADE 600)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-36',
+    name: 'Passenger Holder (BLADE 1000)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-37',
+    name: 'Passenger Holder (BLADE 600)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-38',
+    name: 'Hand Hold LH',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-39',
+    name: 'Hand Hold RH',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-40',
+    name: 'Seat Back Cushion (BLADE 1000)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-41',
+    name: 'Seat Back Cushion (BLADE 600)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-42',
+    name: 'Wind Shield (BLADE 1000)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'blade-acc-43',
+    name: 'Wind Shield (BLADE 600)',
+    category: 'ATV Blade',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+
+  // ── ATV Target Accessories ────────────────────────────────
+  {
+    id: 'target-acc-1',
+    name: 'Hitch',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-2',
+    name: 'Winch (3000 lbs)',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: ['Bestseller'],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-3',
+    name: 'EVO Shock Absorber (Front)',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-4',
+    name: 'EVO Shock Absorber (Rear)',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-5',
+    name: 'Steel Front Bumper',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-6',
+    name: 'Front Bumper',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-7',
+    name: 'Alloy Handlebar',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-8',
+    name: 'Rear Cargo Box (70 L)',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Capacity', value: '70 L' },
+      { label: 'Material', value: 'PP Polypropylene' },
+    ],
+  },
+  {
+    id: 'target-acc-9',
+    name: 'Soft Top Case (50 L)',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Capacity', value: '50 L' },
+    ],
+  },
+  {
+    id: 'target-acc-10',
+    name: 'Fuel Tank Support',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-11',
+    name: '10 L Fuel Tank',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-12',
+    name: 'Hand Guard RH',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-13',
+    name: 'Hand Guard LH',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-14',
+    name: 'Rear Mirror',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'target-acc-15',
+    name: 'Side Rail Comp.',
+    category: 'ATV Target',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+
+  // ── Agriculture Accessories ───────────────────────────────
+  {
+    id: 'agri-1',
+    name: 'Front Rack',
+    category: 'Agriculture',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'agri-2',
+    name: 'Front Bumper',
+    category: 'Agriculture',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'agri-3',
+    name: 'Protection Tube',
+    category: 'Agriculture',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'agri-4',
+    name: 'Backrest Bracket Comp.',
+    category: 'Agriculture',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'agri-5',
+    name: 'Handle RH',
+    category: 'Agriculture',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'agri-6',
+    name: 'Handle LH',
+    category: 'Agriculture',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'agri-7',
+    name: 'Bumper, Side Comp. (LH)',
+    category: 'Agriculture',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'agri-8',
+    name: 'Bumper, Side Comp. (RH)',
+    category: 'Agriculture',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+
+  // ── Apparel ───────────────────────────────────────────────
   {
     id: 'apparel-1',
-    name: 'BMC Rider Hoodie',
+    name: 'Backpack With Hydropack',
     category: 'Apparel',
-    priceEur: 89,
-    images: [
-      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=800',
-      'https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Premium heavyweight hoodie with embroidered club crest.',
-    fullDesc: 'Our signature heavyweight hoodie crafted from 400gsm organic cotton. Features embroidered BMC crest on chest and "Balkan Moto Club" lettering across the back. Double-lined hood, reinforced seams, and kangaroo pocket.',
-    tags: ['New', 'Bestseller'],
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: ['Bestseller'],
     availability: 'In Stock',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Black', 'Charcoal'],
-    specs: [
-      { label: 'Material', value: '100% Organic Cotton, 400gsm' },
-      { label: 'Fit', value: 'Relaxed' },
-      { label: 'Care', value: 'Machine wash cold' }
-    ]
   },
   {
     id: 'apparel-2',
-    name: 'BMC Classic Tee',
+    name: 'Cap',
     category: 'Apparel',
-    priceEur: 45,
-    images: [
-      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=800',
-      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Essential crew neck with vintage club logo.',
-    fullDesc: 'Premium cotton t-shirt featuring our vintage 2012 founding logo. Screen-printed graphics, pre-shrunk fabric, and reinforced collar.',
-    tags: ['Essential'],
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
     availability: 'In Stock',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Black', 'White', 'Grey']
   },
   {
     id: 'apparel-3',
-    name: 'Riding Flannel Shirt',
+    name: 'Keyring',
     category: 'Apparel',
-    priceEur: 120,
-    images: [
-      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Reinforced flannel with hidden armor pockets.',
-    fullDesc: 'Kevlar-reinforced flannel shirt designed for riding. Hidden pockets for CE-approved shoulder and elbow armor (sold separately). Classic buffalo check pattern.',
-    tags: ['Protection'],
-    availability: 'Low Stock',
-    sizes: ['M', 'L', 'XL', 'XXL'],
-    colors: ['Red/Black', 'Grey/Black']
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
   },
   {
     id: 'apparel-4',
-    name: 'BMC Leather Vest',
+    name: 'Lanyard',
     category: 'Apparel',
-    priceEur: 299,
-    images: [
-      'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Full-grain leather vest with club patches.',
-    fullDesc: 'Handcrafted full-grain cowhide leather vest. Includes official BMC back patch and front rocker. Multiple interior pockets, adjustable side laces.',
-    tags: ['Premium', 'Members Only'],
-    availability: 'Pre-Order',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
-  },
-
-  // Accessories
-  {
-    id: 'acc-1',
-    name: 'BMC Snapback Cap',
-    category: 'Accessories',
-    priceEur: 35,
-    images: [
-      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Classic snapback with embroidered logo.',
-    fullDesc: 'Structured 6-panel snapback cap with flat brim. 3D embroidered BMC logo on front, "Est. 2012" on side. Adjustable snap closure.',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
     tags: [],
     availability: 'In Stock',
-    colors: ['Black', 'Navy']
   },
   {
-    id: 'acc-2',
-    name: 'Rider Bandana Set',
-    category: 'Accessories',
-    priceEur: 25,
-    images: [
-      'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Set of 3 multi-use bandanas with BMC designs.',
-    fullDesc: 'Versatile bandana set featuring three unique BMC designs. 100% cotton, machine washable. Perfect for face covering, headwrap, or neck protection.',
-    tags: ['Value Pack'],
-    availability: 'In Stock'
-  },
-  {
-    id: 'acc-3',
-    name: 'Titanium Keychain',
-    category: 'Accessories',
-    priceEur: 45,
-    images: [
-      'https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'CNC machined titanium keychain with club emblem.',
-    fullDesc: 'Precision CNC-machined from Grade 5 titanium. Laser-engraved BMC emblem, includes premium leather lanyard. Lifetime warranty.',
-    tags: ['Premium'],
-    availability: 'In Stock'
-  },
-
-  // Gear
-  {
-    id: 'gear-1',
-    name: 'BMC Riding Gloves',
-    category: 'Gear',
-    priceEur: 79,
-    images: [
-      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Premium leather gloves with knuckle protection.',
-    fullDesc: 'Full-grain goatskin leather riding gloves. Carbon fiber knuckle protectors, reinforced palm, touchscreen-compatible fingertips. BMC logo embossed.',
-    tags: ['Protection', 'New'],
-    availability: 'In Stock',
-    sizes: ['S', 'M', 'L', 'XL']
-  },
-  {
-    id: 'gear-2',
-    name: 'Tank Bag - 15L',
-    category: 'Gear',
-    priceEur: 129,
-    images: [
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Magnetic tank bag with quick-release system.',
-    fullDesc: 'Expandable 15L tank bag with powerful magnetic mounting. Waterproof construction, transparent map pocket, cable ports for device charging.',
-    tags: ['Practical'],
-    availability: 'In Stock'
-  },
-  {
-    id: 'gear-3',
-    name: 'Rain Cover Set',
-    category: 'Gear',
-    priceEur: 65,
-    images: [
-      'https://images.unsplash.com/photo-1534481016308-0fca71578ae5?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Compact rain gear for emergency situations.',
-    fullDesc: 'Ultralight emergency rain set including jacket, pants, and boot covers. Packs into included pouch that fits under your seat.',
-    tags: ['Essential'],
-    availability: 'Low Stock',
-    sizes: ['S/M', 'L/XL', 'XXL']
-  },
-
-  // Stickers
-  {
-    id: 'sticker-1',
-    name: 'BMC Logo Sticker Pack',
-    category: 'Stickers',
-    priceEur: 12,
-    images: [
-      'https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Set of 10 vinyl die-cut stickers.',
-    fullDesc: 'Premium vinyl sticker pack featuring various BMC logos and designs. Weather-resistant, UV-protected. Perfect for helmets, tanks, and laptops.',
-    tags: ['Value Pack'],
-    availability: 'In Stock'
-  },
-  {
-    id: 'sticker-2',
-    name: 'Reflective Safety Stickers',
-    category: 'Stickers',
-    priceEur: 18,
-    images: [
-      'https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'High-visibility reflective sticker set for night riding.',
-    fullDesc: '3M reflective material stickers for enhanced night visibility. Includes helmet strips, tank logos, and pannier decals.',
-    tags: ['Safety'],
-    availability: 'In Stock'
-  },
-
-  // Essentials
-  {
-    id: 'ess-1',
-    name: 'Multi-Tool Kit',
-    category: 'Essentials',
-    priceEur: 55,
-    images: [
-      'https://images.unsplash.com/photo-1426927308491-6380b6a9936f?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Compact toolkit for roadside repairs.',
-    fullDesc: 'Essential multi-tool kit designed for motorcyclists. Includes hex keys, screwdrivers, tire repair kit, and emergency supplies in BMC-branded pouch.',
-    tags: ['Essential', 'Bestseller'],
-    availability: 'In Stock'
-  },
-  {
-    id: 'ess-2',
-    name: 'BMC Water Bottle',
-    category: 'Essentials',
-    priceEur: 28,
-    images: [
-      'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Insulated stainless steel bottle, 750ml.',
-    fullDesc: 'Double-wall vacuum insulated stainless steel bottle. Keeps drinks cold 24hrs or hot 12hrs. Leak-proof lid, laser-engraved BMC logo.',
+    id: 'apparel-5',
+    name: 'Sport Polo (Black)',
+    category: 'Apparel',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
     tags: [],
     availability: 'In Stock',
-    colors: ['Matte Black', 'Brushed Steel']
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Black'],
   },
   {
-    id: 'ess-3',
-    name: 'First Aid Kit',
-    category: 'Essentials',
-    priceEur: 42,
-    images: [
-      'https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&q=80&w=800'
-    ],
-    shortDesc: 'Motorcycle-specific first aid kit.',
-    fullDesc: 'Compact first aid kit designed for riders. Includes bandages, antiseptic, emergency blanket, and basic trauma supplies. Fits under most seats.',
-    tags: ['Safety', 'Essential'],
-    availability: 'In Stock'
+    id: 'apparel-6',
+    name: 'Sport Polo (White)',
+    category: 'Apparel',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['White'],
   },
   {
-    id: 'ess-4',
-    name: 'Cleaning Kit Pro',
-    category: 'Essentials',
-    priceEur: 75,
-    images: [
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800'
+    id: 'apparel-7',
+    name: 'Sport Polo (Red)',
+    category: 'Apparel',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Red'],
+  },
+  {
+    id: 'apparel-8',
+    name: 'X-Motion Duffle',
+    category: 'Apparel',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: ['New'],
+    availability: 'In Stock',
+  },
+
+  // ── TGB Shop ──────────────────────────────────────────────
+  {
+    id: 'tgb-1',
+    name: 'TGB Flag',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-2',
+    name: 'String Flag',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-3',
+    name: 'Window Sticker',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-4',
+    name: 'Banner Flag Assy. (5 M)',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-5',
+    name: 'Banner Flag Assy. (3 M)',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-6',
+    name: 'Banner Flag (5 M)',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-7',
+    name: 'Banner Flag (3 M)',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-8',
+    name: 'Banner Flag Pole',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-9',
+    name: 'Banner Flag Stand (17 L)',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-10',
+    name: 'Banner Flag Stand (12 L)',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-11',
+    name: 'Outdoor Light Box — S',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-12',
+    name: 'Indoor Light Box',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: [],
+    availability: 'In Stock',
+  },
+  {
+    id: 'tgb-13',
+    name: 'Logo Mat (150×240 cm)',
+    category: 'TGB Shop',
+    priceEur: 0,
+    images: ['https://images.unsplash.com/photo-1558618047-f4b511e645e3?auto=format&fit=crop&q=80&w=800'],
+    shortDesc: '',
+    fullDesc: '',
+    tags: ['Bestseller'],
+    availability: 'In Stock',
+    specs: [
+      { label: 'Size', value: '150 × 240 cm' },
+      { label: 'Material', value: 'Nylon / Rubber backing' },
     ],
-    shortDesc: 'Complete motorcycle cleaning and detailing kit.',
-    fullDesc: 'Professional-grade cleaning kit including wash, polish, chain lube, and microfiber towels. Everything you need to keep your machine pristine.',
-    tags: ['Premium'],
-    availability: 'Sold Out'
-  }
+  },
 ];
