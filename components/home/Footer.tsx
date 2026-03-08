@@ -15,17 +15,12 @@ export default function Footer() {
   const { t } = useLanguage()
 
   const footerLinks = {
-    services: [
-      { name: t('footer.maintenance'), href: '#services' },
-      { name: t('footer.diagnostics'), href: '#services' },
-      { name: t('footer.tireBrake'), href: '#services' },
-      { name: t('footer.performance'), href: '#services' },
-    ],
-    company: [
-      { name: t('footer.aboutUs'), href: '#about' },
-      { name: t('footer.membership'), href: '#membership' },
-      { name: t('footer.careers'), href: '#' },
-      { name: t('footer.partners'), href: '#' },
+    navigation: [
+      { name: t('nav.home'), href: '/' },
+      { name: t('nav.about'), href: '/#about' },
+      { name: t('nav.shop'), href: '/shop' },
+      { name: t('nav.locations'), href: '/locations' },
+      { name: t('nav.contact'), href: '/contact' },
     ],
   }
 
@@ -44,7 +39,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8"
         >
           {/* Brand Column */}
           <div className="sm:col-span-2 lg:col-span-1">
@@ -70,32 +65,13 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Services Links */}
+          {/* Navigation Links */}
           <div>
             <h4 className="text-sm font-semibold text-[#F5F5F7] uppercase tracking-wider mb-4">
-              {t('footer.services')}
+              {t('footer.navigation')}
             </h4>
             <ul className="space-y-1 sm:space-y-3 -ml-3 sm:ml-0">
-              {footerLinks.services.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="block px-3 sm:px-0 py-2 sm:py-0 text-[#8A8A95] text-sm hover:text-[#E10600] active:text-[#E10600] transition-colors focus:outline-none focus-visible:text-[#E10600] min-h-[44px] sm:min-h-0 flex items-center"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h4 className="text-sm font-semibold text-[#F5F5F7] uppercase tracking-wider mb-4">
-              {t('footer.company')}
-            </h4>
-            <ul className="space-y-1 sm:space-y-3 -ml-3 sm:ml-0">
-              {footerLinks.company.map((link, index) => (
+              {footerLinks.navigation.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}

@@ -10,7 +10,6 @@ import { TranslationKey } from '@/lib/i18n/translations/sr'
 const navLinks: { key: TranslationKey; href: string }[] = [
   { key: 'nav.home', href: '/' },
   { key: 'nav.about', href: '/#about' },
-  { key: 'nav.services', href: '/#services' },
   { key: 'nav.shop', href: '/shop' },
   { key: 'nav.locations', href: '/locations' },
   { key: 'nav.contact', href: '/contact' },

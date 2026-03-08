@@ -117,6 +117,7 @@ const en: Record<TranslationKey, string> = {
   'footer.membership': 'Membership',
   'footer.careers': 'Careers',
   'footer.partners': 'Partners',
+  'footer.navigation': 'Navigation',
   'footer.contact': 'Contact',
   'footer.copyright': 'All rights reserved.',
   'footer.privacy': 'Privacy Policy',

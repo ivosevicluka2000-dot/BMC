@@ -1851,7 +1851,7 @@ export const products: Product[] = [
     category: 'Moped',
     priceEur: 1950,
     images: [
-      '/products/moped-GUSITE-MATRIX/1.png',
+      '/products/moped-GUSITE-MATRIX/Gusite Matrix.jpg',
     ],
     shortDesc: 'GUSITE MATRIX — 49cc 4-stroke moped with automatic transmission and 2.1 kW engine.',
     fullDesc: 'The GUSITE MATRIX is a versatile moped designed for everyday urban commuting with reliable performance. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and a 9-litre fuel tank for extended range.',
@@ -1874,7 +1874,7 @@ export const products: Product[] = [
     category: 'Moped',
     priceEur: 2250,
     images: [
-      '/products/moped-GUSITE-FEYMONDA/1.png',
+      '/products/moped-GUSITE-FEYMONDA/Gusite Feymonda.jpg',
     ],
     shortDesc: 'GUSITE FEYMONDA — retro design 49cc moped with automatic transmission and 2.1 kW engine.',
     fullDesc: 'The GUSITE FEYMONDA combines retro-inspired styling with practical everyday riding capability. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission, a 9-litre fuel tank and a timeless retro design.',
@@ -1898,7 +1898,7 @@ export const products: Product[] = [
     category: 'Moped',
     priceEur: 2450,
     images: [
-      '/products/moped-GUSITE-GRACE/1.png',
+      '/products/moped-GUSITE-GRACE/Gusite Grace.jpg',
     ],
     shortDesc: 'GUSITE GRACE — city moped with 49cc 4-stroke engine, automatic transmission and 2.1 kW power.',
     fullDesc: 'The GUSITE GRACE delivers an elegant city riding experience with smooth handling and dependable performance. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and a 9-litre fuel tank — the perfect city moped.',
@@ -1922,7 +1922,7 @@ export const products: Product[] = [
     category: 'Moped',
     priceEur: 2750,
     images: [
-      '/products/moped-GUSITE-AGV-X/1.png',
+      '/products/moped-GUSITE-AGV-X/Gusite AGV-X.jpg',
     ],
     shortDesc: 'GUSITE AGV-X — sporty 49cc moped with automatic transmission, disc brakes and 2.1 kW engine.',
     fullDesc: 'The GUSITE AGV-X offers a sporty moped experience with modern design and agile handling. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and disc brakes for confident stopping power.',
@@ -1945,7 +1945,7 @@ export const products: Product[] = [
     category: 'Moped',
     priceEur: 2150,
     images: [
-      '/products/moped-GUSITE-BOMBARDER/1.png',
+      '/products/moped-GUSITE-BOMBARDER/Gusite Bombarder.jpg',
     ],
     shortDesc: 'GUSITE BOMBARDER — rugged 49cc moped, 187 kg, disc brakes, automatic transmission and 2.1 kW engine.',
     fullDesc: 'The GUSITE BOMBARDER is a rugged moped built for durability and reliable daily transport. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission, disc brakes, a 9-litre fuel tank and a solid 187 kg build.',
@@ -1972,7 +1972,7 @@ export const products: Product[] = [
     category: 'Moped',
     priceEur: 3150,
     images: [
-      '/products/moped-GUSITE-AGV-R/1.png',
+      '/products/moped-GUSITE-AGV-R/Gusite AGV-R.jpg',
     ],
     shortDesc: 'GUSITE AGV-R — premium 49cc moped with LED lights, keyless start, CBS brakes and 2.1 kW engine.',
     fullDesc: 'The GUSITE AGV-R is a premium moped with sport-inspired design and refined performance. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission, LED lighting, keyless start system, CBS disc brakes, a 9-litre fuel tank and weighs 148 kg.',
@@ -2000,7 +2000,7 @@ export const products: Product[] = [
     category: 'Sports Bike',
     priceEur: 2490,
     images: [
-      '/products/sportsbike-DAYUN-250-8/1.png',
+      '/products/sportsbike-DAYUN-250-8/Dayun 250-8.jpg',
     ],
     shortDesc: 'DAYUN 250-8 — 250cc sport bike with 15 kW engine, manual transmission and disc brakes.',
     fullDesc: 'The DAYUN 250-8 is a lightweight sports bike delivering an exciting ride with sharp handling and sporty aesthetics. Powered by a 250cc engine producing 15 kW, it features manual transmission, disc brakes, a 16-litre fuel tank and weighs just 162 kg.',
@@ -2028,7 +2028,10 @@ export const products: Product[] = [
     category: 'Touring',
     priceEur: 3190,
     images: [
-      '/products/touring-DAYUN-DY300-XF/1.png',
+      '/products/touring-DAYUN-DY300-XF/Dayun DY300-XF 1.jpg',
+      '/products/touring-DAYUN-DY300-XF/Dayun DY300-XF 2.jpg',
+      '/products/touring-DAYUN-DY300-XF/Dayun DY300-XF 3.jpg',
+      '/products/touring-DAYUN-DY300-XF/Dayun DY300-XF 4.jpg',
     ],
     shortDesc: 'DAYUN DY300-XF — 300cc adventure touring motorcycle with manual transmission.',
     fullDesc: 'The DAYUN DY300-XF is a touring motorcycle built for long-distance comfort and adventure riding. Powered by a capable 300cc engine with manual transmission, it offers a relaxed riding position ideal for exploring both on and off the beaten path.',

@@ -115,6 +115,7 @@ const sr = {
   'footer.membership': 'Članstvo',
   'footer.careers': 'Karijere',
   'footer.partners': 'Partneri',
+  'footer.navigation': 'Navigacija',
   'footer.contact': 'Kontakt',
   'footer.copyright': 'Sva prava zadržana.',
   'footer.privacy': 'Politika privatnosti',
