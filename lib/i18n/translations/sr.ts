@@ -12,7 +12,7 @@ const sr = {
 
   // ── Hero ──
   'hero.title': 'Balkan Moto Centar',
-  'hero.subtitle': 'Vrhunski servis. Provereni delovi. Zajednica vozača.',
+  'hero.subtitle': 'Premium vozila. Provereni delovi. Zajednica vozača.',
   'hero.showLocation': 'Prikaži lokaciju',
   'hero.contactUs': 'Kontaktirajte nas',
   'hero.showLocationAria': 'Prikaži našu lokaciju',
@@ -23,21 +23,21 @@ const sr = {
 
   // ── About ──
   'about.established': 'OSNOVANO MMXII',
-  'about.sectionLabel': 'Naša filozofija',
+  'about.sectionLabel': 'Ko smo mi',
   'about.heading1': 'Izgrađeno na',
-  'about.headingTrust': 'poverenju',
+  'about.headingTrust': 'kvalitetu',
   'about.heading2': 'Pokretano',
-  'about.headingSteel': 'čelikom.',
+  'about.headingSteel': 'strašću.',
   'about.paragraph1':
-    'Balkan Moto Klub nije za svakoga. Ne postojimo za vikend hobiste niti za zaljubljenike u društvene mreže. Postojimo za one koji razumeju da je put učitelj, a mašina — ogledalo.',
+    'Balkan Moto Centar je vaša premijer destinacija za ATV-ove, UTV-ove i powersport vozila širom Balkana. Sarađujemo sa vodećim proizvođačima kako bismo vam doneli mašine napravljene za svaki teren — od planinskih staza do otvorenog poljoprivrednog zemljišta.',
   'about.paragraph2':
-    'Naš moto je jednostavan: Poštuj liniju. Čuvaj grupu. Održavaj zanat. Bilo da prelazimo surove vrhove Dinarskih Alpa ili gradski lavirint Beograda, krećemo se sa zajedničkim ciljem koji prevazilazi granice.',
-  'about.discipline': 'Disciplina',
+    'Svako vozilo koje prodajemo podržano je našom posvećenošću kvalitetu, stručnim savetima i postprodajnom podrškom. Bilo da tražite moćnu radnu mašinu ili vašu sledeću off-road avanturu, pomoći ćemo vam da pronađete savršenu vožnju.',
+  'about.discipline': 'Izbor',
   'about.disciplineDesc':
-    'Bezbednost nije spisak za štikliranje — to je instinkt izošten kroz hiljade zajedničkih kilometara.',
-  'about.loyalty': 'Lojalnost',
+    'Pažljivo odabran asortiman ATV-ova, UTV-ova i opreme od najpouzdanijih svetskih brendova.',
+  'about.loyalty': 'Podrška',
   'about.loyaltyDesc':
-    'Nijedan vozač ne ostaje iza. Vezani smo obavezom koja je tiha, ali apsolutna.',
+    'Od vaše prve probne vožnje do redovnog održavanja, stojimo iza svakog vozila koje prodamo.',
 
   // ── Services ──
   'services.sectionLabel': 'Šta nudimo',
@@ -72,6 +72,12 @@ const sr = {
   'shopPreview.newArrival': 'Novo u ponudi',
   'shopPreview.popular': 'Popularan',
   'shopPreview.shopAll': 'Svi proizvodi',
+
+  // ── Gallery ──
+  'gallery.sectionLabel': 'Galerija',
+  'gallery.heading': 'Naše mašine',
+  'gallery.prev': 'Prethodni slajd',
+  'gallery.next': 'Sledeći slajd',
 
   // ── Member CTA ──
   'member.heading': 'Postanite',

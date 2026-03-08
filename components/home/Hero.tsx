@@ -3,12 +3,11 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Shield, Wrench, Users } from 'lucide-react'
+import { Wrench, Users } from 'lucide-react'
 import { useLanguage } from '@/lib/i18n'
 import { TranslationKey } from '@/lib/i18n/translations/sr'
 
-const trustBadgeKeys: { icon: typeof Shield; key: TranslationKey }[] = [
-  { icon: Shield, key: 'hero.certifiedService' },
+const trustBadgeKeys: { icon: typeof Wrench; key: TranslationKey }[] = [
   { icon: Wrench, key: 'hero.oemParts' },
   { icon: Users, key: 'hero.riderCommunity' },
 ]
@@ -31,7 +30,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-image.jpg"
+          src="/gallery/gallery-4.jpg"
           alt="Motorcycle background"
           fill
           priority

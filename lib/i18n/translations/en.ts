@@ -14,7 +14,7 @@ const en: Record<TranslationKey, string> = {
 
   // ── Hero ──
   'hero.title': 'Balkan Moto Center',
-  'hero.subtitle': 'Premium service. Trusted parts. Rider community.',
+  'hero.subtitle': 'Premium vehicles. Trusted parts. Rider community.',
   'hero.showLocation': 'Show location',
   'hero.contactUs': 'Contact us',
   'hero.showLocationAria': 'Show our location',
@@ -25,21 +25,21 @@ const en: Record<TranslationKey, string> = {
 
   // ── About ──
   'about.established': 'ESTABLISHED MMXII',
-  'about.sectionLabel': 'Our Philosophy',
+  'about.sectionLabel': 'Who We Are',
   'about.heading1': 'Built on',
-  'about.headingTrust': 'Trust',
+  'about.headingTrust': 'Quality',
   'about.heading2': 'Driven by',
-  'about.headingSteel': 'Steel.',
+  'about.headingSteel': 'Passion.',
   'about.paragraph1':
-    'The Balkan Moto Club is not for everyone. We do not exist for the weekend hobbyist or the social media enthusiast. We exist for those who understand that the road is a teacher, and the machine is a mirror.',
+    'Balkan Moto Center is your premier destination for ATVs, UTVs, and powersport vehicles across the Balkans. We partner with leading manufacturers to bring you machines built for every terrain — from rugged mountain trails to open farmland.',
   'about.paragraph2':
-    'Our creed is simple: Respect the line. Protect the pack. Maintain the craft. Whether traversing the rugged peaks of the Dinaric Alps or the urban labyrinth of Belgrade, we move with a unified purpose that transcends borders.',
-  'about.discipline': 'Discipline',
+    'Every vehicle we sell is backed by our commitment to quality, expert guidance, and after-sale support. Whether you need a powerful work machine or your next off-road adventure, we will help you find the perfect ride.',
+  'about.discipline': 'Selection',
   'about.disciplineDesc':
-    'Safety is not a checklist; it is an instinct honed through thousands of shared kilometers.',
-  'about.loyalty': 'Loyalty',
+    'A curated range of ATVs, UTVs, and accessories from the world\'s most trusted brands.',
+  'about.loyalty': 'Support',
   'about.loyaltyDesc':
-    'No rider is left behind. We are bound by a commitment that remains silent but absolute.',
+    'From your first test ride to ongoing maintenance, we stand behind every vehicle we sell.',
 
   // ── Services ──
   'services.sectionLabel': 'What We Offer',
@@ -74,6 +74,12 @@ const en: Record<TranslationKey, string> = {
   'shopPreview.newArrival': 'New Arrival',
   'shopPreview.popular': 'Popular',
   'shopPreview.shopAll': 'Shop All Products',
+
+  // ── Gallery ──
+  'gallery.sectionLabel': 'Gallery',
+  'gallery.heading': 'Our Machines',
+  'gallery.prev': 'Previous slide',
+  'gallery.next': 'Next slide',
 
   // ── Member CTA ──
   'member.heading': 'Become a',

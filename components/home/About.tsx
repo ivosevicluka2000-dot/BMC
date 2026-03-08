@@ -40,7 +40,7 @@ const About: React.FC = () => {
           <div className="lg:col-span-5 relative reveal">
             <div className="aspect-[3/4] overflow-hidden border border-white/5">
               <img 
-                src="/about-moto.png" 
+                src="/gallery/gallery-1.jpg" 
                 alt="The Machine" 
                 className="w-full h-full object-cover"
                 loading="lazy"
