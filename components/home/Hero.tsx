@@ -24,7 +24,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-screen lg:min-h-[85vh] flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
       aria-label="Hero section"
     >
       {/* Background Image */}
