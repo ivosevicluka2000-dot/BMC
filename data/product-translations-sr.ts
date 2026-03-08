@@ -222,4 +222,56 @@ export const productTranslationsSr: Record<string, ProductTextSr> = {
     fullDesc:
       'Pouzdan jednocilindrični EFI motor od 500 ccm koji razvija 38 KS. OEM-kompatibilna zamena za BLADE 520/550 platforme. Dolazi sa ECU-om, instalacijskim kablovima, auspuhom i uputstvom za ugradnju.',
   },
+
+  // ═══════════════════════  ATV (new 2025)  ═══════════════════════
+  'atv-18': {
+    shortDesc: 'TGB BLADE 1000 LTX EPS LIMITED — 997cc V-Twin, 83 KS, limitirana edicija 2025 sa ekskluzivnim karakteristikama i premium završnom obradom.',
+    fullDesc:
+      'BLADE 1000 LTX EPS LIMITED 2025 donosi ekskluzivne karakteristike i premium završnu obradu na proverenoj BLADE 1000 platformi. Pokretan V-Twin SOHC motorom od 997 ccm koji isporučuje 83 KS i 89,9 Nm obrtnog momenta, ovaj model limitirane serije kombinuje vrhunske performanse sa upečatljivim stilom. Opremljen programiranim ubrizgavanjem goriva, V-rem CVT automatskim menjačem i 4×4 kardanskim pogonom, osvaja svaki teren sa samopouzdanjem.',
+    tagline: 'NEŠTO NOVO',
+  },
+
+  // ═══════════════════════  Moped  ═══════════════════════
+  'moped-1': {
+    shortDesc: 'GUSITE MATRIX — 49cc 4-taktni moped sa automatskim menjačem i motorom od 2,1 kW.',
+    fullDesc: 'GUSITE MATRIX je svestran moped dizajniran za svakodnevnu gradsku vožnju sa pouzdanim performansama. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač i rezervoar od 9 litara za produženi domet.',
+  },
+  'moped-2': {
+    shortDesc: 'GUSITE FEYMONDA — retro dizajn 49cc moped sa automatskim menjačem i motorom od 2,1 kW.',
+    fullDesc: 'GUSITE FEYMONDA kombinuje retro-inspirisan stil sa praktičnom svakodnevnom upotrebom. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač, rezervoar od 9 litara i bezvremenski retro dizajn.',
+    tagline: 'RETRO DIZAJN',
+  },
+  'moped-3': {
+    shortDesc: 'GUSITE GRACE — gradski moped sa 49cc 4-taktnim motorom, automatskim menjačem i snagom od 2,1 kW.',
+    fullDesc: 'GUSITE GRACE pruža elegantno iskustvo gradske vožnje sa glatkim upravljanjem i pouzdanim performansama. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač i rezervoar od 9 litara — savršen gradski moped.',
+    tagline: 'GRADSKI MOPED',
+  },
+  'moped-4': {
+    shortDesc: 'GUSITE AGV-X — sportski 49cc moped sa automatskim menjačem, disk kočnicama i motorom od 2,1 kW.',
+    fullDesc: 'GUSITE AGV-X nudi sportsko iskustvo sa modernim dizajnom i agilnim upravljanjem. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač i disk kočnice za pouzdano kočenje.',
+  },
+  'moped-5': {
+    shortDesc: 'GUSITE BOMBARDER — robustan 49cc moped, 187 kg, disk kočnice, automatski menjač i motor od 2,1 kW.',
+    fullDesc: 'GUSITE BOMBARDER je robustan moped napravljen za izdržljivost i pouzdan svakodnevni prevoz. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač, disk kočnice, rezervoar od 9 litara i solidnu težinu od 187 kg.',
+    tagline: 'ZVER',
+  },
+  'moped-6': {
+    shortDesc: 'GUSITE AGV-R — premium 49cc moped sa LED svetlima, bezključnim pokretanjem, CBS kočnicama i motorom od 2,1 kW.',
+    fullDesc: 'GUSITE AGV-R je premium moped sa sportski inspirisanim dizajnom i rafiniranim performansama. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač, LED osvetljenje, bezključni start sistem, CBS disk kočnice, rezervoar od 9 litara i težinu od 148 kg.',
+    tagline: 'LED, BEZKLJUČNI, CBS',
+  },
+
+  // ═══════════════════════  Sports Bike  ═══════════════════════
+  'sportsbike-1': {
+    shortDesc: 'DAYUN 250-8 — 250cc sportski motocikl sa 15 kW motorom, ručnim menjačem i disk kočnicama.',
+    fullDesc: 'DAYUN 250-8 je lagan sportski motocikl koji pruža uzbudljivu vožnju sa oštrim upravljanjem i sportskom estetikom. Pokretan motorom od 250 ccm sa 15 kW snage, ima ručni menjač, disk kočnice, rezervoar od 16 litara i teži samo 162 kg.',
+    tagline: 'SPORTSKI MOTOCIKL',
+  },
+
+  // ═══════════════════════  Touring  ═══════════════════════
+  'touring-1': {
+    shortDesc: 'DAYUN DY300-XF — 300cc avanturistički turing motocikl sa ručnim menjačem.',
+    fullDesc: 'DAYUN DY300-XF je turing motocikl napravljen za udobnost na dugim putovanjima i avanturističku vožnju. Pokretan sposobnim motorom od 300 ccm sa ručnim menjačem, nudi opušten položaj vožnje idealan za istraživanje na putu i van njega.',
+    tagline: 'DAYUN AVANTURA',
+  },
 };

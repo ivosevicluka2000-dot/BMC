@@ -221,6 +221,16 @@ const sr = {
   'loc.service5.desc': 'Specijalisti za restauraciju vintage motocikala. Od napuštenih nalaza do pobednika na izložbama. Nabavka autentičnih delova i stručna izrada.',
   'loc.service6.desc': 'Specijalisti za gume motocikala. Svi vodeći brendovi na stanju. Besplatna montaža uz kupovinu. Balansiranje i centriranje točkova.',
 
+  // ── Terrain Section ──
+  'terrain.sectionLabel': 'Kategorije',
+  'terrain.heading': 'Osvoji svaki teren',
+  'terrain.working': 'Rad',
+  'terrain.workingDesc': 'Pametniji za najteže poslove',
+  'terrain.recreation': 'Rekreacija',
+  'terrain.recreationDesc': 'Otključaj svaki put',
+  'terrain.adventure': 'Avantura',
+  'terrain.adventureDesc': 'Osvaja svaki zahtevni teren',
+
   // ── Metadata ──
   'meta.title': 'Balkan Moto Centar | Vrhunski servis motocikala',
   'meta.description': 'Vrhunski servis motocikala, provereni delovi i zajednica vozača. Vaš pouzdani partner za sve potrebe u vezi sa motociklima.',

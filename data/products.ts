@@ -3,6 +3,9 @@ export type ProductCategory =
   | 'UTV'
   | 'ATV'
   | 'Engine Kit'
+  | 'Moped'
+  | 'Sports Bike'
+  | 'Touring'
   | 'ATV Blade'
   | 'ATV Target'
   | 'Agriculture'
@@ -13,7 +16,7 @@ export type ProductCategory =
 export type ProductGroup = 'Products' | 'Accessories';
 
 export const CATEGORY_GROUPS: Record<ProductGroup, ProductCategory[]> = {
-  Products: ['UTV', 'ATV', 'Engine Kit'],
+  Products: ['UTV', 'ATV', 'Engine Kit', 'Moped', 'Sports Bike', 'Touring'],
   Accessories: ['ATV Blade', 'ATV Target', 'Agriculture', 'Apparel', 'TGB Shop'],
 };
 
@@ -1795,6 +1798,249 @@ export const products: Product[] = [
   // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•  ACCESSORIES  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
   // â”€â”€ ATV Blade Accessories â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  {
+    id: 'atv-18',
+    name: 'BLADE 1000 LTX EPS LIMITED',
+    category: 'ATV',
+    priceEur: 11900,
+    images: [
+      '/products/atv-BLADE-1000-LTX-EPS-LIMITED/1.png',
+    ],
+    shortDesc: 'TGB BLADE 1000 LTX EPS LIMITED — 997cc V-Twin, 83 HP, limited edition 2025 with exclusive features and premium finish.',
+    fullDesc:
+      'The 2025 BLADE 1000 LTX EPS LIMITED brings exclusive features and premium finish to the proven BLADE 1000 platform. Powered by a 997cc V-Twin SOHC engine delivering 83 HP and 89.9 Nm of torque, this limited edition model combines top-tier performance with distinctive styling. Equipped with programmed fuel injection, V-belt CVT automatic transmission and 4×4 shaft drive, it conquers any terrain with confidence.',
+    tags: ['New', 'Premium'],
+    availability: 'In Stock',
+    tagline: 'SOMETHING NEW',
+    highlightStats: [
+      { label: 'Engine', value: '997', unit: 'cc' },
+      { label: 'Power', value: '83', unit: 'HP' },
+      { label: 'Torque', value: '89.9', unit: 'Nm' },
+    ],
+    specs: [
+      { label: 'Engine Type', value: '997 cc V-Twin, SOHC' },
+      { label: 'Engine Size', value: '997 cc' },
+      { label: 'Ignition', value: 'ECU' },
+      { label: 'Starter', value: 'Electric' },
+      { label: 'Bore × Stroke', value: '92 × 75.0 mm' },
+      { label: 'Compression Ratio', value: '10.2' },
+      { label: 'Fuel System', value: 'Programmed Fuel Injection' },
+      { label: 'Transmission', value: 'V-belt CVT Automatic' },
+      { label: 'Drive System', value: '4 × 4 Shaft Drive' },
+      { label: 'Max Power', value: '83 HP / 7000 rpm' },
+      { label: 'Max Torque', value: '89.9 Nm / 5500 rpm' },
+      { label: 'Front Suspension', value: 'Dual A-arm' },
+      { label: 'Rear Suspension', value: 'Dual A-arm with Anti-roll Bar' },
+      { label: 'Front Brake', value: 'Hydraulic Disc with piston caliper and Hydraulic Foot Brake' },
+      { label: 'Front Tire', value: 'AT 26 × 9 - 14, 6 PLY' },
+      { label: 'Rear Tire', value: 'AT 26 × 11 - 14, 6 PLY' },
+      { label: 'Wheelbase', value: '1460 mm' },
+      { label: 'Length', value: '2340 mm' },
+      { label: 'Width', value: '1255 mm' },
+      { label: 'Height', value: '1340 mm' },
+      { label: 'Ground Clearance', value: '270 mm' },
+      { label: 'Fuel Capacity', value: '20 L' },
+      { label: 'Year', value: '2025' },
+      { label: 'Status', value: 'Brand New' },
+    ],
+  },
+  // ── Moped ──────────────────────────────────────────────────────
+  {
+    id: 'moped-1',
+    name: 'GUSITE MATRIX',
+    category: 'Moped',
+    priceEur: 1950,
+    images: [
+      '/products/moped-GUSITE-MATRIX/1.png',
+    ],
+    shortDesc: 'GUSITE MATRIX — 49cc 4-stroke moped with automatic transmission and 2.1 kW engine.',
+    fullDesc: 'The GUSITE MATRIX is a versatile moped designed for everyday urban commuting with reliable performance. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and a 9-litre fuel tank for extended range.',
+    tags: ['New', 'Special Offer'],
+    availability: 'In Stock',
+    highlightStats: [
+      { label: 'Power', value: '2.1', unit: 'kW' },
+    ],
+    specs: [
+      { label: 'Engine', value: '49 cc, 4 stroke, air cooled' },
+      { label: 'Engine Power', value: '2.1 kW' },
+      { label: 'Transmission', value: 'Automatic' },
+      { label: 'Fuel Type', value: 'Petrol' },
+      { label: 'Fuel Capacity', value: '9 L' },
+    ],
+  },
+  {
+    id: 'moped-2',
+    name: 'GUSITE FEYMONDA',
+    category: 'Moped',
+    priceEur: 2250,
+    images: [
+      '/products/moped-GUSITE-FEYMONDA/1.png',
+    ],
+    shortDesc: 'GUSITE FEYMONDA — retro design 49cc moped with automatic transmission and 2.1 kW engine.',
+    fullDesc: 'The GUSITE FEYMONDA combines retro-inspired styling with practical everyday riding capability. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission, a 9-litre fuel tank and a timeless retro design.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'RETRO DESIGN',
+    highlightStats: [
+      { label: 'Power', value: '2.1', unit: 'kW' },
+    ],
+    specs: [
+      { label: 'Engine', value: '49 cc, 4 stroke, air cooled' },
+      { label: 'Engine Power', value: '2.1 kW' },
+      { label: 'Transmission', value: 'Automatic' },
+      { label: 'Fuel Type', value: 'Petrol' },
+      { label: 'Fuel Capacity', value: '9 L' },
+    ],
+  },
+  {
+    id: 'moped-3',
+    name: 'GUSITE GRACE',
+    category: 'Moped',
+    priceEur: 2450,
+    images: [
+      '/products/moped-GUSITE-GRACE/1.png',
+    ],
+    shortDesc: 'GUSITE GRACE — city moped with 49cc 4-stroke engine, automatic transmission and 2.1 kW power.',
+    fullDesc: 'The GUSITE GRACE delivers an elegant city riding experience with smooth handling and dependable performance. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and a 9-litre fuel tank — the perfect city moped.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'CITY MOPED',
+    highlightStats: [
+      { label: 'Power', value: '2.1', unit: 'kW' },
+    ],
+    specs: [
+      { label: 'Engine', value: '49 cc, 4 stroke, air cooled' },
+      { label: 'Engine Power', value: '2.1 kW' },
+      { label: 'Transmission', value: 'Automatic' },
+      { label: 'Fuel Type', value: 'Petrol' },
+      { label: 'Fuel Capacity', value: '9 L' },
+    ],
+  },
+  {
+    id: 'moped-4',
+    name: 'GUSITE AGV-X',
+    category: 'Moped',
+    priceEur: 2750,
+    images: [
+      '/products/moped-GUSITE-AGV-X/1.png',
+    ],
+    shortDesc: 'GUSITE AGV-X — sporty 49cc moped with automatic transmission, disc brakes and 2.1 kW engine.',
+    fullDesc: 'The GUSITE AGV-X offers a sporty moped experience with modern design and agile handling. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and disc brakes for confident stopping power.',
+    tags: [],
+    availability: 'In Stock',
+    highlightStats: [
+      { label: 'Power', value: '2.1', unit: 'kW' },
+    ],
+    specs: [
+      { label: 'Engine', value: '49 cc, 4 stroke, air cooled' },
+      { label: 'Engine Power', value: '2.1 kW' },
+      { label: 'Transmission', value: 'Automatic' },
+      { label: 'Fuel Type', value: 'Petrol' },
+      { label: 'Brakes', value: 'Disc' },
+    ],
+  },
+  {
+    id: 'moped-5',
+    name: 'GUSITE BOMBARDER',
+    category: 'Moped',
+    priceEur: 2150,
+    images: [
+      '/products/moped-GUSITE-BOMBARDER/1.png',
+    ],
+    shortDesc: 'GUSITE BOMBARDER — rugged 49cc moped, 187 kg, disc brakes, automatic transmission and 2.1 kW engine.',
+    fullDesc: 'The GUSITE BOMBARDER is a rugged moped built for durability and reliable daily transport. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission, disc brakes, a 9-litre fuel tank and a solid 187 kg build.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'THE BEAST',
+    highlightStats: [
+      { label: 'Power', value: '2.1', unit: 'kW' },
+      { label: 'Weight', value: '187', unit: 'kg' },
+    ],
+    specs: [
+      { label: 'Engine', value: '49 cc, 4 stroke, air cooled' },
+      { label: 'Engine Power', value: '2.1 kW' },
+      { label: 'Transmission', value: 'Automatic' },
+      { label: 'Fuel Type', value: 'Petrol' },
+      { label: 'Fuel Capacity', value: '9 L' },
+      { label: 'Weight', value: '187 kg' },
+      { label: 'Brakes', value: 'Disc' },
+    ],
+  },
+  {
+    id: 'moped-6',
+    name: 'GUSITE AGV-R',
+    category: 'Moped',
+    priceEur: 3150,
+    images: [
+      '/products/moped-GUSITE-AGV-R/1.png',
+    ],
+    shortDesc: 'GUSITE AGV-R — premium 49cc moped with LED lights, keyless start, CBS brakes and 2.1 kW engine.',
+    fullDesc: 'The GUSITE AGV-R is a premium moped with sport-inspired design and refined performance. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission, LED lighting, keyless start system, CBS disc brakes, a 9-litre fuel tank and weighs 148 kg.',
+    tags: [],
+    availability: 'In Stock',
+    tagline: 'LED, KEYLESS, CBS',
+    highlightStats: [
+      { label: 'Power', value: '2.1', unit: 'kW' },
+      { label: 'Weight', value: '148', unit: 'kg' },
+    ],
+    specs: [
+      { label: 'Engine', value: '49 cc, 4 stroke, air cooled' },
+      { label: 'Engine Power', value: '2.1 kW' },
+      { label: 'Transmission', value: 'Automatic' },
+      { label: 'Fuel Type', value: 'Petrol' },
+      { label: 'Fuel Capacity', value: '9 L' },
+      { label: 'Weight', value: '148 kg' },
+      { label: 'Brakes', value: 'Disc' },
+    ],
+  },
+  // ── Sports Bike ────────────────────────────────────────────────
+  {
+    id: 'sportsbike-1',
+    name: 'DAYUN 250-8',
+    category: 'Sports Bike',
+    priceEur: 2490,
+    images: [
+      '/products/sportsbike-DAYUN-250-8/1.png',
+    ],
+    shortDesc: 'DAYUN 250-8 — 250cc sport bike with 15 kW engine, manual transmission and disc brakes.',
+    fullDesc: 'The DAYUN 250-8 is a lightweight sports bike delivering an exciting ride with sharp handling and sporty aesthetics. Powered by a 250cc engine producing 15 kW, it features manual transmission, disc brakes, a 16-litre fuel tank and weighs just 162 kg.',
+    tags: ['New'],
+    availability: 'In Stock',
+    tagline: 'SPORT BIKE',
+    highlightStats: [
+      { label: 'Power', value: '15', unit: 'kW' },
+      { label: 'Weight', value: '162', unit: 'kg' },
+    ],
+    specs: [
+      { label: 'Engine', value: '250 cc' },
+      { label: 'Engine Power', value: '15 kW' },
+      { label: 'Transmission', value: 'Manual' },
+      { label: 'Fuel Type', value: 'Petrol' },
+      { label: 'Fuel Capacity', value: '16 L' },
+      { label: 'Weight', value: '162 kg' },
+      { label: 'Brakes', value: 'Disc' },
+    ],
+  },
+  // ── Touring ────────────────────────────────────────────────────
+  {
+    id: 'touring-1',
+    name: 'DAYUN DY300-XF',
+    category: 'Touring',
+    priceEur: 3190,
+    images: [
+      '/products/touring-DAYUN-DY300-XF/1.png',
+    ],
+    shortDesc: 'DAYUN DY300-XF — 300cc adventure touring motorcycle with manual transmission.',
+    fullDesc: 'The DAYUN DY300-XF is a touring motorcycle built for long-distance comfort and adventure riding. Powered by a capable 300cc engine with manual transmission, it offers a relaxed riding position ideal for exploring both on and off the beaten path.',
+    tags: ['New'],
+    availability: 'In Stock',
+    tagline: 'DAYUN ADVENTURE',
+    specs: [
+      { label: 'Engine', value: '300 cc' },
+      { label: 'Transmission', value: 'Manual' },
+    ],
+  },
+  // ── ATV Blade Accessories ──────────────────────────────────────
   {
     id: 'blade-acc-1',
     name: 'Hitch',

@@ -1,6 +1,7 @@
 import Header from '@/components/home/Header'
 import Hero from '@/components/home/Hero'
 import About from '@/components/home/About'
+import TerrainSection from '@/components/home/TerrainSection'
 import Services from '@/components/home/Services'
 import ShopPreview from '@/components/home/ShopPreview'
 import MemberCTA from '@/components/home/MemberCTA'
@@ -12,6 +13,7 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
+      <TerrainSection />
       <Services />
       <ShopPreview />
       <MemberCTA />

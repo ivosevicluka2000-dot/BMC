@@ -223,6 +223,16 @@ const en: Record<TranslationKey, string> = {
   'loc.service5.desc': 'Vintage motorcycle restoration specialists. From barn finds to concours winners. Authentic parts sourcing and expert craftsmanship.',
   'loc.service6.desc': 'Motorcycle tire specialists. All major brands in stock. Free mounting with purchase. Wheel balancing and alignment services.',
 
+  // ── Terrain Section ──
+  'terrain.sectionLabel': 'Categories',
+  'terrain.heading': 'Conquer Different Terrain',
+  'terrain.working': 'Working',
+  'terrain.workingDesc': 'Smarter for toughest jobs',
+  'terrain.recreation': 'Recreation',
+  'terrain.recreationDesc': 'Unlock any road',
+  'terrain.adventure': 'Adventure',
+  'terrain.adventureDesc': 'Conquers every arduous terrain',
+
   // ── Metadata ──
   'meta.title': 'Balkan Moto Center | Premium Motorcycle Service',
   'meta.description': 'Premium motorcycle service, trusted parts, and rider community. Your trusted partner for all motorcycle needs.',
