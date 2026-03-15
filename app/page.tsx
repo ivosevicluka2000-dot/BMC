@@ -6,6 +6,7 @@ import TerrainSection from '@/components/home/TerrainSection'
 import ShopPreview from '@/components/home/ShopPreview'
 import Gallery from '@/components/home/Gallery'
 import MemberCTA from '@/components/home/MemberCTA'
+import SocialSection from '@/components/home/SocialSection'
 import Footer from '@/components/home/Footer'
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <ShopPreview />
       <Gallery />
       <MemberCTA />
+      <SocialSection />
       <Footer />
     </main>
   )

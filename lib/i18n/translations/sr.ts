@@ -153,7 +153,8 @@ const sr = {
   'contact.partner': 'partner',
 
   // ── Social ──
-  'social.heading': 'Pratite nas na društvenim mrežama',
+  'social.heading': 'Budite u toku',
+  'social.subtitle': 'Pratite nas na društvenim mrežama za najnovije vesti, događaje i ekskluzivne ponude',
 
   // ── Brand Representative ──
   'brands.sectionLabel': 'Ovlašćeni zastupnik',

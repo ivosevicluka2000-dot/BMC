@@ -155,7 +155,8 @@ const en: Record<TranslationKey, string> = {
   'contact.partner': 'partner',
 
   // ── Social ──
-  'social.heading': 'Follow us on social media',
+  'social.heading': 'Stay Connected',
+  'social.subtitle': 'Follow us on social media for the latest news, events and exclusive offers',
 
   // ── Brand Representative ──
   'brands.sectionLabel': 'Authorized Dealer',
