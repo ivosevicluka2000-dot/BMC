@@ -5,9 +5,9 @@ import Image from 'next/image'
 import { useLanguage } from '@/lib/i18n'
 
 const brands = [
-  { name: 'TGB', logo: '/brands/tgb-logo.svg' },
-  { name: 'Dayun', logo: '/brands/dayun-logo.svg' },
-  { name: 'Gusite', logo: '/brands/gusite-logo.svg' },
+  { name: 'TGB', logo: '/brands/tgb.jpeg' },
+  { name: 'Dayun', logo: '/brands/dayun.jpeg' },
+  { name: 'Gusite', logo: '/brands/gusite.jpeg' },
 ]
 
 export default function BrandRepresentative() {
