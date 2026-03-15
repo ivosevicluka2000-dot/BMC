@@ -1,9 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { useLanguage } from '@/lib/i18n'
 
-const brands = ['TGB', 'Dayun', 'Gusite']
+const brands = [
+  { name: 'TGB', logo: '/brands/tgb-logo.svg' },
+  { name: 'Dayun', logo: '/brands/dayun-logo.svg' },
+  { name: 'Gusite', logo: '/brands/gusite-logo.svg' },
+]
 
 export default function BrandRepresentative() {
   const { t } = useLanguage()
@@ -30,16 +35,20 @@ export default function BrandRepresentative() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
             {brands.map((brand, index) => (
               <motion.div
-                key={brand}
+                key={brand.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="w-48 h-28 sm:w-56 sm:h-32 rounded-xl bg-[#1A1A1F] border border-[#2A2A33] flex items-center justify-center hover:border-[#E10600]/50 transition-colors duration-300"
+                className="w-48 h-28 sm:w-56 sm:h-32 rounded-xl bg-[#1A1A1F] border border-[#2A2A33] flex items-center justify-center hover:border-[#E10600]/50 transition-colors duration-300 p-4"
               >
-                <span className="text-2xl sm:text-3xl font-bold text-[#F5F5F7]/80 tracking-wider">
-                  {brand}
-                </span>
+                <Image
+                  src={brand.logo}
+                  alt={`${brand.name} logo`}
+                  width={200}
+                  height={70}
+                  className="w-full h-full object-contain"
+                />
               </motion.div>
             ))}
           </div>
