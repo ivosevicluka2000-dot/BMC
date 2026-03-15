@@ -1,14 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter } from 'lucide-react'
+import { MapPin, Phone, Facebook, Instagram } from 'lucide-react'
 import { useLanguage } from '@/lib/i18n'
 
 const socialLinks = [
-  { icon: Facebook, label: 'Facebook', href: '#' },
-  { icon: Instagram, label: 'Instagram', href: '#' },
-  { icon: Youtube, label: 'YouTube', href: '#' },
-  { icon: Twitter, label: 'Twitter', href: '#' },
+  { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/people/Balkan-MotoCentar/pfbid022qZJyZBqbRW4KprMHUcVDqfxLvt5cpurthdvAsu6SaMcrXRuABQrnsj4a8vmWqSVl/' },
+  { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/balkan_moto_centar' },
 ]
 
 export default function Footer() {
@@ -93,26 +91,38 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#E10600] mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <address className="text-[#8A8A95] text-sm not-italic leading-relaxed">
-                  123 Moto Boulevard<br />
-                  Belgrade, Serbia 11000
+                  Atar 100a<br />
+                  Kać 21241, Srbija
                 </address>
               </li>
               <li>
+                <span className="text-[#8A8A95] text-xs mb-1 block">🇷🇸 Srbija</span>
                 <a
-                  href="tel:+381111234567"
-                  className="flex items-center gap-3 text-[#8A8A95] text-sm hover:text-[#E10600] active:text-[#E10600] transition-colors focus:outline-none focus-visible:text-[#E10600] py-2 sm:py-0 min-h-[44px] sm:min-h-0"
+                  href="tel:+38162644263"
+                  className="flex items-center gap-3 text-[#8A8A95] text-sm hover:text-[#E10600] active:text-[#E10600] transition-colors focus:outline-none focus-visible:text-[#E10600] py-1 sm:py-0"
                 >
                   <Phone className="w-4 h-4 text-[#E10600] flex-shrink-0" aria-hidden="true" />
-                  +381 11 123 4567
+                  +381 62 644 263
                 </a>
               </li>
               <li>
+                <span className="text-[#8A8A95] text-xs mb-1 block">🇧🇦 BiH</span>
                 <a
-                  href="mailto:info@balkanmoto.rs"
-                  className="flex items-center gap-3 text-[#8A8A95] text-sm hover:text-[#E10600] active:text-[#E10600] transition-colors focus:outline-none focus-visible:text-[#E10600] py-2 sm:py-0 min-h-[44px] sm:min-h-0"
+                  href="tel:+38765006779"
+                  className="flex items-center gap-3 text-[#8A8A95] text-sm hover:text-[#E10600] active:text-[#E10600] transition-colors focus:outline-none focus-visible:text-[#E10600] py-1 sm:py-0"
                 >
-                  <Mail className="w-4 h-4 text-[#E10600] flex-shrink-0" aria-hidden="true" />
-                  info@balkanmoto.rs
+                  <Phone className="w-4 h-4 text-[#E10600] flex-shrink-0" aria-hidden="true" />
+                  +387 65 006779
+                </a>
+              </li>
+              <li>
+                <span className="text-[#8A8A95] text-xs mb-1 block">🇲🇰 MK / 🇲🇪 MNE</span>
+                <a
+                  href="tel:+38970399277"
+                  className="flex items-center gap-3 text-[#8A8A95] text-sm hover:text-[#E10600] active:text-[#E10600] transition-colors focus:outline-none focus-visible:text-[#E10600] py-1 sm:py-0"
+                >
+                  <Phone className="w-4 h-4 text-[#E10600] flex-shrink-0" aria-hidden="true" />
+                  +389 70 399277
                 </a>
               </li>
             </ul>

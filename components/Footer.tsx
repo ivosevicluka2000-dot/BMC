@@ -30,9 +30,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h5 className="uppercase tracking-widest text-[10px] font-bold mb-4 lg:mb-6 text-brand">Social</h5>
             <ul className="space-y-2">
-              <li><a href="#" className="text-sm text-white/60 hover:text-white active:text-brand transition-colors py-2 inline-block">Instagram</a></li>
-              <li><a href="#" className="text-sm text-white/60 hover:text-white active:text-brand transition-colors py-2 inline-block">Vimeo</a></li>
-              <li><a href="#" className="text-sm text-white/60 hover:text-white active:text-brand transition-colors py-2 inline-block">The Journal</a></li>
+              <li><a href="https://www.facebook.com/people/Balkan-MotoCentar/pfbid022qZJyZBqbRW4KprMHUcVDqfxLvt5cpurthdvAsu6SaMcrXRuABQrnsj4a8vmWqSVl/" target="_blank" rel="noopener noreferrer" className="text-sm text-white/60 hover:text-white active:text-brand transition-colors py-2 inline-block">Facebook</a></li>
+              <li><a href="https://www.instagram.com/balkan_moto_centar" target="_blank" rel="noopener noreferrer" className="text-sm text-white/60 hover:text-white active:text-brand transition-colors py-2 inline-block">Instagram</a></li>
             </ul>
           </div>
 

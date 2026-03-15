@@ -114,13 +114,6 @@ export function translateLocationDescription(
     'shop-2': 'loc.shop2.desc',
     'shop-3': 'loc.shop3.desc',
     'shop-4': 'loc.shop4.desc',
-    'shop-5': 'loc.shop5.desc',
-    'service-1': 'loc.service1.desc',
-    'service-2': 'loc.service2.desc',
-    'service-3': 'loc.service3.desc',
-    'service-4': 'loc.service4.desc',
-    'service-5': 'loc.service5.desc',
-    'service-6': 'loc.service6.desc',
   }
   return map[locationId] ? t(map[locationId]) : null
 }

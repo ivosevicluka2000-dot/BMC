@@ -19,6 +19,8 @@ const en: Record<TranslationKey, string> = {
   'hero.contactUs': 'Contact us',
   'hero.showLocationAria': 'Show our location',
   'hero.contactUsAria': 'Contact us',
+  'hero.shopCta': 'Shop',
+  'hero.shopCtaAria': 'Visit the shop',
   'hero.certifiedService': 'Certified Service',
   'hero.oemParts': 'OEM Parts',
   'hero.riderCommunity': 'Rider Community',
@@ -106,7 +108,7 @@ const en: Record<TranslationKey, string> = {
   // ── Footer ──
   'footer.brand': 'Balkan Moto Center',
   'footer.brandDesc':
-    'Your trusted partner for premium motorcycle service, quality parts, and a passionate rider community.',
+    'Your trusted partner for ATV, UTV, and powersport vehicles. Authorized TGB, Dayun & Gusite dealer.',
   'footer.services': 'Services',
   'footer.maintenance': 'Maintenance',
   'footer.diagnostics': 'Diagnostics',
@@ -142,6 +144,24 @@ const en: Record<TranslationKey, string> = {
   'contact.sent': 'Message Sent!',
   'contact.sentDesc': 'We\'ll get back to you soon.',
 
+  // ── Contact Countries ──
+  'contact.serbia': 'Serbia',
+  'contact.bosnia': 'Bosnia and Herzegovina',
+  'contact.macedonia': 'Macedonia',
+  'contact.montenegro': 'Montenegro',
+  'contact.management': 'management',
+  'contact.sales': 'sales',
+  'contact.service': 'service',
+  'contact.partner': 'partner',
+
+  // ── Social ──
+  'social.heading': 'Follow us on social media',
+
+  // ── Brand Representative ──
+  'brands.sectionLabel': 'Authorized Dealer',
+  'brands.heading': 'General Representative of TGB, Dayun and Gusite Brands',
+  'brands.subtitle': 'for Serbia, Bosnia and Herzegovina, Macedonia and Montenegro',
+
   // ── Locations Page ──
   'locations.heading': 'The Network',
   'locations.subtitle': 'Verified Chapters & Partners',
@@ -170,14 +190,14 @@ const en: Record<TranslationKey, string> = {
   'locationSection.heading': 'Our Locations',
   'locationSection.description':
     'We have chapters active throughout the region. Come visit us or join a ride.',
-  'locationSection.belgradeHQ': 'Belgrade HQ',
-  'locationSection.weeklySchedule': 'Weekly Schedule',
-  'locationSection.dawnPatrol': 'Sundays @ 08:00 AM — Dawn Patrol',
-  'locationSection.nightSessions': 'Wednesdays @ 07:00 PM — Night Sessions',
+  'locationSection.belgradeHQ': 'Headquarters — Ka\u0107, Serbia',
+  'locationSection.weeklySchedule': 'Working Hours',
+  'locationSection.dawnPatrol': 'Mon-Sat: 09:00 - 18:00',
+  'locationSection.nightSessions': 'Phone: +381 62 644 263',
   'locationSection.viewAll': 'View All Locations',
   'locationSection.contactUs': 'Contact Us',
   'locationSection.enterMap': 'Enter Interactive Map',
-  'locationSection.hqBelgrade': 'HQ — Belgrade',
+  'locationSection.hqBelgrade': 'Laniko car d.o.o.',
 
   // ── Products Page ──
   'products.brandLabel': 'Balkan Moto Club',
@@ -218,17 +238,10 @@ const en: Record<TranslationKey, string> = {
   'locCategory.tireService': 'Tire Service',
 
   // ── Location descriptions ──
-  'loc.shop1.desc': 'Our flagship store in Belgrade. Full range of motorcycles, gear, and accessories. Authorized service center with factory-trained technicians.',
-  'loc.shop2.desc': 'Premium motorcycle gear and accessories. Exclusive Balkan Moto Club merchandise available. Custom fitting services for helmets and riding suits.',
-  'loc.shop3.desc': 'Bulgaria\'s premier motorcycle destination. New and used bikes, full accessory shop, and expert advice from passionate riders.',
-  'loc.shop4.desc': 'Your trusted motorcycle partner in Bosnia. Wide selection of riding gear, parts, and club merchandise.',
-  'loc.shop5.desc': 'Montenegro\'s largest motorcycle showroom. From adventure bikes to sportbikes, we have it all. Expert financing available.',
-  'loc.service1.desc': 'Factory-certified technicians for all major brands. Full diagnostics, engine rebuilds, and performance tuning. Club members get 15% discount.',
-  'loc.service2.desc': 'Custom builds, paint jobs, and chrome work. Turn your vision into reality. Award-winning custom bikes built here.',
-  'loc.service3.desc': 'Roadside assistance and emergency repairs. We come to you anywhere in Vojvodina. Fast, reliable, and fairly priced.',
-  'loc.service4.desc': 'Track preparation, ECU tuning, and suspension setup. Home of multiple national racing champions. Dyno testing available.',
-  'loc.service5.desc': 'Vintage motorcycle restoration specialists. From barn finds to concours winners. Authentic parts sourcing and expert craftsmanship.',
-  'loc.service6.desc': 'Motorcycle tire specialists. All major brands in stock. Free mounting with purchase. Wheel balancing and alignment services.',
+  'loc.shop1.desc': 'Headquarters of Laniko car d.o.o. Authorized TGB, Dayun and Gusite dealer for Serbia. Complete sales, service, and spare parts for ATV and UTV vehicles.',
+  'loc.shop2.desc': 'Balkan Moto Center representative for Bosnia and Herzegovina. Sales and service of TGB, Dayun and Gusite vehicles. Expert advice and after-sale support.',
+  'loc.shop3.desc': 'Mas trade d.o.o. — partner store for Montenegro. Sales and service of ATV and UTV vehicles. Authorized distributor for the territory of Montenegro.',
+  'loc.shop4.desc': 'MOTO ILINDEN MK — partner store for Macedonia. Sales and service of TGB, Dayun and Gusite vehicles in Skopje and surrounding area.',
 
   // ── Terrain Section ──
   'terrain.sectionLabel': 'Categories',
@@ -241,8 +254,8 @@ const en: Record<TranslationKey, string> = {
   'terrain.adventureDesc': 'Conquers every arduous terrain',
 
   // ── Metadata ──
-  'meta.title': 'Balkan Moto Center | Premium Motorcycle Service',
-  'meta.description': 'Premium motorcycle service, trusted parts, and rider community. Your trusted partner for all motorcycle needs.',
+  'meta.title': 'Balkan Moto Center | Authorized TGB, Dayun & Gusite Dealer',
+  'meta.description': 'Authorized TGB, Dayun and Gusite dealer for Serbia, Bosnia and Herzegovina, Macedonia and Montenegro. ATV, UTV and powersport vehicles.',
 };
 
 export default en;

@@ -46,30 +46,72 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Contact Info */}
             <div className="space-y-8">
+              {/* Serbia */}
               <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-brand mt-1" />
+                <span className="text-2xl mt-0.5">🇷🇸</span>
                 <div>
-                  <h3 className="text-white font-bold uppercase tracking-wider text-sm mb-2">{t('contact.address')}</h3>
-                  <p className="text-white/60 text-sm">12 Bulevar Kralja Petra<br />Belgrade, Serbia</p>
+                  <h3 className="text-white font-bold uppercase tracking-wider text-sm mb-2">{t('contact.serbia')}</h3>
+                  <p className="text-white/60 text-sm">Laniko car d.o.o., Atar 100a, Kać 21241</p>
+                  <div className="mt-1 space-y-0.5">
+                    <p className="text-white/60 text-sm">
+                      <a href="tel:+38162644263" className="hover:text-[#E10600] transition-colors">+381 62 644 263</a>
+                      <span className="text-white/40"> ({t('contact.management')})</span>
+                    </p>
+                    <p className="text-white/60 text-sm">
+                      <a href="tel:+38162644265" className="hover:text-[#E10600] transition-colors">+381 62 644 265</a>
+                      <span className="text-white/40"> ({t('contact.sales')})</span>
+                    </p>
+                    <p className="text-white/60 text-sm">
+                      <a href="tel:+38162644269" className="hover:text-[#E10600] transition-colors">+381 62 644 269</a>
+                      <span className="text-white/40"> ({t('contact.service')})</span>
+                    </p>
+                  </div>
                 </div>
               </div>
-              
+
+              {/* Bosnia */}
               <div className="flex items-start gap-4">
-                <Phone className="w-5 h-5 text-brand mt-1" />
+                <span className="text-2xl mt-0.5">🇧🇦</span>
                 <div>
-                  <h3 className="text-white font-bold uppercase tracking-wider text-sm mb-2">{t('contact.phone')}</h3>
-                  <p className="text-white/60 text-sm">+381 11 123 4567</p>
+                  <h3 className="text-white font-bold uppercase tracking-wider text-sm mb-2">{t('contact.bosnia')}</h3>
+                  <p className="text-white/60 text-sm">Balkan Moto Centar, Prijedor</p>
+                  <p className="text-white/60 text-sm mt-1">
+                    <a href="tel:+38765006779" className="hover:text-[#E10600] transition-colors">+387 65 006779</a>
+                  </p>
                 </div>
               </div>
-              
+
+              {/* Macedonia */}
               <div className="flex items-start gap-4">
-                <Mail className="w-5 h-5 text-brand mt-1" />
+                <span className="text-2xl mt-0.5">🇲🇰</span>
                 <div>
-                  <h3 className="text-white font-bold uppercase tracking-wider text-sm mb-2">{t('contact.email')}</h3>
-                  <p className="text-white/60 text-sm">info@balkanmoto.club</p>
+                  <h3 className="text-white font-bold uppercase tracking-wider text-sm mb-2">{t('contact.macedonia')}</h3>
+                  <p className="text-white/60 text-sm">MOTO ILINDEN MK, Village of Marino, Str. 500 No.2D, Skopje 1000</p>
+                  <div className="mt-1 space-y-0.5">
+                    <p className="text-white/60 text-sm">
+                      <a href="tel:+38970399277" className="hover:text-[#E10600] transition-colors">+389 70 399277</a>
+                    </p>
+                    <p className="text-white/60 text-sm">
+                      <a href="tel:+38978311199" className="hover:text-[#E10600] transition-colors">+389 78 311199</a>
+                      <span className="text-white/40"> ({t('contact.partner')} Moto Ilinden)</span>
+                    </p>
+                  </div>
                 </div>
               </div>
-              
+
+              {/* Montenegro */}
+              <div className="flex items-start gap-4">
+                <span className="text-2xl mt-0.5">🇲🇪</span>
+                <div>
+                  <h3 className="text-white font-bold uppercase tracking-wider text-sm mb-2">{t('contact.montenegro')}</h3>
+                  <p className="text-white/60 text-sm">Mas trade d.o.o., bb Ilije Plamenca, Podgorica 81000</p>
+                  <p className="text-white/60 text-sm mt-1">
+                    <a href="tel:+38220230219" className="hover:text-[#E10600] transition-colors">+382 20 230 219</a>
+                  </p>
+                </div>
+              </div>
+
+              {/* Working Hours */}
               <div className="flex items-start gap-4">
                 <Clock className="w-5 h-5 text-brand mt-1" />
                 <div>

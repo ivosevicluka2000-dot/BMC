@@ -92,6 +92,15 @@ export default function Hero() {
             >
               {t('hero.contactUs')}
             </button>
+
+            {/* Shop CTA */}
+            <Link
+              href="/shop"
+              className="group w-full sm:w-auto px-8 py-4 bg-transparent text-[#F5F5F7] font-semibold rounded-xl border border-[#E10600]/50 hover:border-[#E10600] transition-all duration-300 hover:bg-[#E10600]/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E10600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D]"
+              aria-label={t('hero.shopCtaAria')}
+            >
+              {t('hero.shopCta')}
+            </Link>
           </motion.div>
 
           {/* Trust Badges */}

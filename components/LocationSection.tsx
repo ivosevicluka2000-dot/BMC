@@ -24,7 +24,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({ onNavigate }) => {
             <div className="space-y-4 md:space-y-6 mb-8 md:mb-10">
               <div>
                 <h4 className="uppercase tracking-widest text-xs font-bold mb-2 text-white/80">{t('locationSection.belgradeHQ')}</h4>
-                <p className="text-white/60 text-sm font-light">12 Bulevar Kralja Petra, Belgrade, Serbia</p>
+                <p className="text-white/60 text-sm font-light">Atar 100a, Kać 21241</p>
               </div>
               <div>
                 <h4 className="uppercase tracking-widest text-xs font-bold mb-2 text-white/80">{t('locationSection.weeklySchedule')}</h4>

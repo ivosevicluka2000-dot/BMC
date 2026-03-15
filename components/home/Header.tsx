@@ -80,7 +80,7 @@ export default function Header() {
       }`}
     >
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-24 sm:h-28">
           {/* Logo */}
           <Link
             href="/"
@@ -89,7 +89,7 @@ export default function Header() {
             <img
               src="/download-removebg-preview.png"
               alt="BMC Logo"
-              className="h-20 sm:h-24 w-auto"
+              className="h-40 sm:h-48 w-auto"
               style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.7)) drop-shadow(0 0 20px rgba(255,255,255,0.5)) drop-shadow(0 0 40px rgba(255,255,255,0.3))' }}
             />
           </Link>

@@ -17,6 +17,8 @@ const sr = {
   'hero.contactUs': 'Kontaktirajte nas',
   'hero.showLocationAria': 'Prikaži našu lokaciju',
   'hero.contactUsAria': 'Kontaktirajte nas',
+  'hero.shopCta': 'Prodavnica',
+  'hero.shopCtaAria': 'Posetite prodavnicu',
   'hero.certifiedService': 'Sertifikovan servis',
   'hero.oemParts': 'Originalni delovi',
   'hero.riderCommunity': 'Zajednica vozača',
@@ -104,7 +106,7 @@ const sr = {
   // ── Footer ──
   'footer.brand': 'Balkan Moto Centar',
   'footer.brandDesc':
-    'Vaš pouzdani partner za vrhunski servis motocikala, kvalitetne delove i strastvenu zajednicu vozača.',
+    'Vaš pouzdani partner za ATV, UTV i powersport vozila. Ovlašćeni zastupnik TGB, Dayun i Gusite.',
   'footer.services': 'Usluge',
   'footer.maintenance': 'Održavanje',
   'footer.diagnostics': 'Dijagnostika',
@@ -140,6 +142,24 @@ const sr = {
   'contact.sent': 'Poruka poslata!',
   'contact.sentDesc': 'Javićemo vam se uskoro.',
 
+  // ── Contact Countries ──
+  'contact.serbia': 'Srbija',
+  'contact.bosnia': 'Bosna i Hercegovina',
+  'contact.macedonia': 'Makedonija',
+  'contact.montenegro': 'Crna Gora',
+  'contact.management': 'menadžment',
+  'contact.sales': 'prodaja',
+  'contact.service': 'servis',
+  'contact.partner': 'partner',
+
+  // ── Social ──
+  'social.heading': 'Pratite nas na društvenim mrežama',
+
+  // ── Brand Representative ──
+  'brands.sectionLabel': 'Ovlašćeni zastupnik',
+  'brands.heading': 'Generalni zastupnik brendova TGB, Dayun i Gusite',
+  'brands.subtitle': 'za Srbiju, Bosnu i Hercegovinu, Makedoniju i Crnu Goru',
+
   // ── Locations Page ──
   'locations.heading': 'Mreža',
   'locations.subtitle': 'Verifikovani partneri i zastupnici',
@@ -168,14 +188,14 @@ const sr = {
   'locationSection.heading': 'Naše lokacije',
   'locationSection.description':
     'Imamo aktivne ogranke širom regiona. Posetite nas ili se pridružite vožnji.',
-  'locationSection.belgradeHQ': 'Sedište — Beograd',
-  'locationSection.weeklySchedule': 'Nedeljni raspored',
-  'locationSection.dawnPatrol': 'Nedelja @ 08:00 — Jutarnja patrola',
-  'locationSection.nightSessions': 'Sreda @ 19:00 — Noćne sesije',
+  'locationSection.belgradeHQ': 'Sedište — Kać, Srbija',
+  'locationSection.weeklySchedule': 'Radno vreme',
+  'locationSection.dawnPatrol': 'Pon-Sub: 09:00 - 18:00',
+  'locationSection.nightSessions': 'Telefon: +381 62 644 263',
   'locationSection.viewAll': 'Pogledaj sve lokacije',
   'locationSection.contactUs': 'Kontaktirajte nas',
   'locationSection.enterMap': 'Otvori interaktivnu mapu',
-  'locationSection.hqBelgrade': 'Sedište — Beograd',
+  'locationSection.hqBelgrade': 'Laniko car d.o.o.',
 
   // ── Products Page ──
   'products.brandLabel': 'Balkan Moto Klub',
@@ -216,17 +236,10 @@ const sr = {
   'locCategory.tireService': 'Servis guma',
 
   // ── Location descriptions ──
-  'loc.shop1.desc': 'Naša vodeća prodavnica u Beogradu. Kompletan asortiman motocikala, opreme i dodataka. Ovlašćeni servisni centar sa fabričkim tehničarima.',
-  'loc.shop2.desc': 'Premium oprema i dodaci za motocikle. Ekskluzivna roba Balkan Moto Kluba dostupna. Prilagođavanje kaciga i vozačkih odela.',
-  'loc.shop3.desc': 'Premijer destinacija za motocikle u Bugarskoj. Novi i polovni motocikli, kompletna prodavnica opreme i stručni saveti od strastvenih vozača.',
-  'loc.shop4.desc': 'Vaš pouzdani partner za motocikle u Bosni. Širok izbor vozačke opreme, delova i klupske robe.',
-  'loc.shop5.desc': 'Najveći izložbeni salon motocikala u Crnoj Gori. Od avanturističkih do sportskih motocikala, imamo sve. Stručno finansiranje dostupno.',
-  'loc.service1.desc': 'Fabrički sertifikovani tehničari za sve vodeće brendove. Kompletna dijagnostika, remont motora i podešavanje performansi. Članovi kluba dobijaju 15% popusta.',
-  'loc.service2.desc': 'Izrada po meri, farbanje i hromiranje. Pretvorite vašu viziju u stvarnost. Nagrađivani motocikli napravljeni ovde.',
-  'loc.service3.desc': 'Pomoć na putu i hitne popravke. Dolazimo do vas bilo gde u Vojvodini. Brzo, pouzdano i po fer cenama.',
-  'loc.service4.desc': 'Priprema za stazu, podešavanje ECU-a i suspenzije. Dom višestrukih nacionalnih šampiona. Dino testiranje dostupno.',
-  'loc.service5.desc': 'Specijalisti za restauraciju vintage motocikala. Od napuštenih nalaza do pobednika na izložbama. Nabavka autentičnih delova i stručna izrada.',
-  'loc.service6.desc': 'Specijalisti za gume motocikala. Svi vodeći brendovi na stanju. Besplatna montaža uz kupovinu. Balansiranje i centriranje točkova.',
+  'loc.shop1.desc': 'Sedište kompanije Laniko car d.o.o. Ovlašćeni zastupnik TGB, Dayun i Gusite za Srbiju. Kompletna prodaja, servis i rezervni delovi za ATV i UTV vozila.',
+  'loc.shop2.desc': 'Balkan Moto Centar zastupništvo za Bosnu i Hercegovinu. Prodaja i servis TGB, Dayun i Gusite vozila. Stručni saveti i postprodajna podrška.',
+  'loc.shop3.desc': 'Mas trade d.o.o. — partnerska prodavnica za Crnu Goru. Prodaja i servis ATV i UTV vozila. Ovlašćeni distributer za teritoriju Crne Gore.',
+  'loc.shop4.desc': 'MOTO ILINDEN MK — partnerska prodavnica za Makedoniju. Prodaja i servis TGB, Dayun i Gusite vozila u Skoplju i okolini.',
 
   // ── Terrain Section ──
   'terrain.sectionLabel': 'Kategorije',
@@ -239,8 +252,8 @@ const sr = {
   'terrain.adventureDesc': 'Osvaja svaki zahtevni teren',
 
   // ── Metadata ──
-  'meta.title': 'Balkan Moto Centar | Vrhunski servis motocikala',
-  'meta.description': 'Vrhunski servis motocikala, provereni delovi i zajednica vozača. Vaš pouzdani partner za sve potrebe u vezi sa motociklima.',
+  'meta.title': 'Balkan Moto Centar | Ovlašćeni zastupnik TGB, Dayun i Gusite',
+  'meta.description': 'Ovlašćeni zastupnik TGB, Dayun i Gusite za Srbiju, Bosnu i Hercegovinu, Makedoniju i Crnu Goru. ATV, UTV i powersport vozila.',
 } as const;
 
 export type TranslationKey = keyof typeof sr;
