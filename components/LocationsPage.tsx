@@ -243,7 +243,6 @@ const LocationsPage: React.FC = () => {
                 defaultCenter={BALKANS_CENTER}
                 defaultZoom={DEFAULT_ZOOM}
                 mapId="balkans-dark-map"
-                styles={darkMapStyle}
                 disableDefaultUI={true}
                 zoomControl={true}
                 className="h-full w-full"
