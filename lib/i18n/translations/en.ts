@@ -134,7 +134,7 @@ const en: Record<TranslationKey, string> = {
   'contact.phone': 'Phone',
   'contact.email': 'Email',
   'contact.hours': 'Hours',
-  'contact.hoursValue': 'Mon-Fri: 9:00 - 18:00\nSat: 10:00 - 14:00',
+  'contact.hoursValue': 'Mon-Fri: 9:00 - 17:00\nSat: 10:00 - 14:00',
   'contact.yourName': 'Your Name',
   'contact.emailAddress': 'Email Address',
   'contact.phoneNumber': 'Phone Number',
@@ -193,12 +193,12 @@ const en: Record<TranslationKey, string> = {
     'We have chapters active throughout the region. Come visit us or join a ride.',
   'locationSection.belgradeHQ': 'Headquarters — Ka\u0107, Serbia',
   'locationSection.weeklySchedule': 'Working Hours',
-  'locationSection.dawnPatrol': 'Mon-Sat: 09:00 - 18:00',
+  'locationSection.dawnPatrol': 'Mon-Sat: 09:00 - 17:00',
   'locationSection.nightSessions': 'Phone: +381 62 644 263',
   'locationSection.viewAll': 'View All Locations',
   'locationSection.contactUs': 'Contact Us',
   'locationSection.enterMap': 'Enter Interactive Map',
-  'locationSection.hqBelgrade': 'Laniko car d.o.o.',
+  'locationSection.hqBelgrade': 'BalkanMotoCentar',
 
   // ── Products Page ──
   'products.brandLabel': 'Balkan Moto Club',
@@ -239,10 +239,11 @@ const en: Record<TranslationKey, string> = {
   'locCategory.tireService': 'Tire Service',
 
   // ── Location descriptions ──
-  'loc.shop1.desc': 'Headquarters of Laniko car d.o.o. Authorized TGB, Dayun and Gusite dealer for Serbia. Complete sales, service, and spare parts for ATV and UTV vehicles.',
+  'loc.shop1.desc': 'Headquarters of BalkanMotoCentar. Authorized TGB, Dayun and Gusite dealer for Serbia. Complete sales, service, and spare parts for ATV and UTV vehicles.',
   'loc.shop2.desc': 'Balkan Moto Center representative for Bosnia and Herzegovina. Sales and service of TGB, Dayun and Gusite vehicles. Expert advice and after-sale support.',
   'loc.shop3.desc': 'Mas trade d.o.o. — partner store for Montenegro. Sales and service of ATV and UTV vehicles. Authorized distributor for the territory of Montenegro.',
   'loc.shop4.desc': 'MOTO ILINDEN MK — partner store for Macedonia. Sales and service of TGB, Dayun and Gusite vehicles in Skopje and surrounding area.',
+  'loc.service1.desc': 'Authorized BalkanMotoCentar service for ATV and UTV vehicles. Complete maintenance, diagnostics and spare parts.',
 
   // ── Terrain Section ──
   'terrain.sectionLabel': 'Categories',

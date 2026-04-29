@@ -51,11 +51,15 @@ export default function ContactPage() {
                 <span className="text-2xl mt-0.5">🇷🇸</span>
                 <div>
                   <h3 className="text-white font-bold uppercase tracking-wider text-sm mb-2">{t('contact.serbia')}</h3>
-                  <p className="text-white/60 text-sm">Laniko car d.o.o., Atar 100a, Kać 21241</p>
+                  <p className="text-white/60 text-sm">BalkanMotoCentar, Atar 100a, Kać 21241</p>
                   <div className="mt-1 space-y-0.5">
                     <p className="text-white/60 text-sm">
                       <a href="tel:+38162644263" className="hover:text-[#E10600] transition-colors">+381 62 644 263</a>
                       <span className="text-white/40"> ({t('contact.management')})</span>
+                    </p>
+                    <p className="text-white/60 text-sm">
+                      <a href="tel:+38162644266" className="hover:text-[#E10600] transition-colors">+381 62 644 266</a>
+                      <span className="text-white/40"> ({t('contact.sales')})</span>
                     </p>
                     <p className="text-white/60 text-sm">
                       <a href="tel:+38162644265" className="hover:text-[#E10600] transition-colors">+381 62 644 265</a>

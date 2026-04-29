@@ -114,6 +114,7 @@ export function translateLocationDescription(
     'shop-2': 'loc.shop2.desc',
     'shop-3': 'loc.shop3.desc',
     'shop-4': 'loc.shop4.desc',
+    'service-1': 'loc.service1.desc',
   }
   return map[locationId] ? t(map[locationId]) : null
 }

@@ -132,7 +132,7 @@ const sr = {
   'contact.phone': 'Telefon',
   'contact.email': 'Email',
   'contact.hours': 'Radno vreme',
-  'contact.hoursValue': 'Pon-Pet: 9:00 - 18:00\nSub: 10:00 - 14:00',
+  'contact.hoursValue': 'Pon-Pet: 9:00 - 17:00\nSub: 10:00 - 14:00',
   'contact.yourName': 'Vaše ime',
   'contact.emailAddress': 'Email adresa',
   'contact.phoneNumber': 'Broj telefona',
@@ -191,12 +191,12 @@ const sr = {
     'Imamo aktivne ogranke širom regiona. Posetite nas ili se pridružite vožnji.',
   'locationSection.belgradeHQ': 'Sedište — Kać, Srbija',
   'locationSection.weeklySchedule': 'Radno vreme',
-  'locationSection.dawnPatrol': 'Pon-Sub: 09:00 - 18:00',
+  'locationSection.dawnPatrol': 'Pon-Sub: 09:00 - 17:00',
   'locationSection.nightSessions': 'Telefon: +381 62 644 263',
   'locationSection.viewAll': 'Pogledaj sve lokacije',
   'locationSection.contactUs': 'Kontaktirajte nas',
   'locationSection.enterMap': 'Otvori interaktivnu mapu',
-  'locationSection.hqBelgrade': 'Laniko car d.o.o.',
+  'locationSection.hqBelgrade': 'BalkanMotoCentar',
 
   // ── Products Page ──
   'products.brandLabel': 'Balkan Moto Klub',
@@ -237,10 +237,11 @@ const sr = {
   'locCategory.tireService': 'Servis guma',
 
   // ── Location descriptions ──
-  'loc.shop1.desc': 'Sedište kompanije Laniko car d.o.o. Ovlašćeni zastupnik TGB, Dayun i Gusite za Srbiju. Kompletna prodaja, servis i rezervni delovi za ATV i UTV vozila.',
+  'loc.shop1.desc': 'Sedište kompanije BalkanMotoCentar. Ovlašćeni zastupnik TGB, Dayun i Gusite za Srbiju. Kompletna prodaja, servis i rezervni delovi za ATV i UTV vozila.',
   'loc.shop2.desc': 'Balkan Moto Centar zastupništvo za Bosnu i Hercegovinu. Prodaja i servis TGB, Dayun i Gusite vozila. Stručni saveti i postprodajna podrška.',
   'loc.shop3.desc': 'Mas trade d.o.o. — partnerska prodavnica za Crnu Goru. Prodaja i servis ATV i UTV vozila. Ovlašćeni distributer za teritoriju Crne Gore.',
   'loc.shop4.desc': 'MOTO ILINDEN MK — partnerska prodavnica za Makedoniju. Prodaja i servis TGB, Dayun i Gusite vozila u Skoplju i okolini.',
+  'loc.service1.desc': 'Ovlašćeni servis BalkanMotoCentar za ATV i UTV vozila. Kompletno održavanje, dijagnostika i rezervni delovi.',
 
   // ── Terrain Section ──
   'terrain.sectionLabel': 'Kategorije',

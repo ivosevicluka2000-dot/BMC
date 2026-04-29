@@ -19,17 +19,17 @@ export interface Location {
 export const locations: Location[] = [
   {
     id: 'shop-1',
-    name: 'Laniko car d.o.o.',
+    name: 'BalkanMotoCentar',
     type: 'shop',
     category: 'Official Dealer',
     city: 'Kać',
     address: 'Atar 100a, Kać 21241',
     lat: 45.2983,
     lng: 19.8608,
-    hours: 'Mon-Sat: 09:00 - 18:00',
+    hours: 'Mon-Sat: 09:00 - 17:00',
     phone: '+381 62 644 263',
     website: '',
-    description: 'Headquarters of Laniko car d.o.o. Authorized TGB, Dayun and Gusite dealer for Serbia.',
+    description: 'Headquarters of BalkanMotoCentar. Authorized TGB, Dayun and Gusite dealer for Serbia.',
     images: []
   },
   {
@@ -75,6 +75,21 @@ export const locations: Location[] = [
     phone: '+389 70 399277',
     website: '',
     description: 'Partner store for Macedonia. TGB, Dayun and Gusite vehicle sales and service.',
+    images: []
+  },
+  {
+    id: 'service-1',
+    name: 'BalkanMotoCentar Servis',
+    type: 'service',
+    category: 'Full Service',
+    city: 'Kać',
+    address: 'Atar 100a, Kać 21241',
+    lat: 45.2983,
+    lng: 19.8608,
+    hours: 'Mon-Sat: 09:00 - 17:00',
+    phone: '+381 62 644 269',
+    website: '',
+    description: 'Authorized BalkanMotoCentar service for ATV and UTV vehicles. Complete maintenance, diagnostics and spare parts.',
     images: []
   },
 ];
