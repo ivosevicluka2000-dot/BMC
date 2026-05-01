@@ -260,6 +260,25 @@ export const productTranslationsSr: Record<string, ProductTextSr> = {
     fullDesc: 'GUSITE AGV-R je premium moped sa sportski inspirisanim dizajnom i rafiniranim performansama. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač, LED osvetljenje, bezključni start sistem, CBS disk kočnice, rezervoar od 9 litara i težinu od 148 kg.',
     tagline: 'LED, BEZKLJUČNI, CBS',
   },
+  'moped-7': {
+    shortDesc: 'GUSITE GT-50 — početni 49cc 4-taktni moped sa automatskim menjačem i motorom od 2,1 kW.',
+    fullDesc: 'GUSITE GT-50 je pristupačan i jednostavan za vožnju početni moped, idealan za svakodnevni gradski prevoz. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač i rezervoar od 9 litara.',
+    tagline: 'GRADSKI PREVOZ',
+  },
+  'moped-8': {
+    shortDesc: 'GUSITE MS-1 — kompaktan 49cc 4-taktni moped sa automatskim menjačem i motorom od 2,1 kW.',
+    fullDesc: 'GUSITE MS-1 je kompaktan i pouzdan moped dizajniran za svakodnevnu gradsku mobilnost. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač i rezervoar od 9 litara.',
+  },
+  'moped-9': {
+    shortDesc: 'GUSITE GT-50 R — sportski stilizovan 49cc 4-taktni moped sa automatskim menjačem i motorom od 2,1 kW.',
+    fullDesc: 'GUSITE GT-50 R donosi sportski izgled GT-50 platformi uz pouzdane svakodnevne performanse. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač i rezervoar od 9 litara.',
+    tagline: 'SPORTSKI STIL',
+  },
+  'moped-10': {
+    shortDesc: 'GUSITE GT-50 F — potpuno opremljen 49cc 4-taktni moped sa automatskim menjačem i motorom od 2,1 kW.',
+    fullDesc: 'GUSITE GT-50 F je potpuno opremljena varijanta GT-50 platforme koja kombinuje svakodnevnu upotrebljivost sa rafiniranim stilom. Pokretan 49cc 4-taktnim vazdušno hlađenim motorom od 2,1 kW, ima automatski menjač i rezervoar od 9 litara.',
+    tagline: 'PUNA OPREMA',
+  },
 
   // ═══════════════════════  Sports Bike  ═══════════════════════
   'sportsbike-1': {
