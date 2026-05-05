@@ -1998,7 +1998,9 @@ export const products: Product[] = [
     name: 'GUSITE GT-50',
     category: 'Moped',
     priceEur: 1190,
-    images: [],
+    images: [
+      '/products/moped-GUSITE-GT-50/Gusite GT-50.jpg',
+    ],
     shortDesc: 'GUSITE GT-50 — entry-level 49cc 4-stroke moped with automatic transmission and 2.1 kW engine.',
     fullDesc: 'The GUSITE GT-50 is an affordable, easy-to-ride entry-level moped ideal for daily city commuting. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and a 9-litre fuel tank.',
     tags: ['New'],
@@ -2020,7 +2022,9 @@ export const products: Product[] = [
     name: 'GUSITE MS-1',
     category: 'Moped',
     priceEur: 1650,
-    images: [],
+    images: [
+      '/products/moped-GUSITE-MS-1/Gusite MS-1.jpg',
+    ],
     shortDesc: 'GUSITE MS-1 — compact 49cc 4-stroke moped with automatic transmission and 2.1 kW engine.',
     fullDesc: 'The GUSITE MS-1 is a compact and reliable moped designed for everyday urban mobility. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and a 9-litre fuel tank.',
     tags: ['New'],
@@ -2041,7 +2045,9 @@ export const products: Product[] = [
     name: 'GUSITE GT-50 R',
     category: 'Moped',
     priceEur: 1790,
-    images: [],
+    images: [
+      '/products/moped-GUSITE-GT-50-R/Gusite GT-50 R.jpg',
+    ],
     shortDesc: 'GUSITE GT-50 R — sport-styled 49cc 4-stroke moped with automatic transmission and 2.1 kW engine.',
     fullDesc: 'The GUSITE GT-50 R brings a sportier look to the GT-50 platform with reliable everyday performance. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and a 9-litre fuel tank.',
     tags: ['New'],
@@ -2063,7 +2069,9 @@ export const products: Product[] = [
     name: 'GUSITE GT-50 F',
     category: 'Moped',
     priceEur: 1950,
-    images: [],
+    images: [
+      '/products/moped-GUSITE-GT-50-F/Gusite GT-50 F.jpg',
+    ],
     shortDesc: 'GUSITE GT-50 F — fully-equipped 49cc 4-stroke moped with automatic transmission and 2.1 kW engine.',
     fullDesc: 'The GUSITE GT-50 F is a fully-equipped variant of the GT-50 platform combining everyday usability with refined styling. Powered by a 49cc 4-stroke air-cooled engine delivering 2.1 kW, it features automatic transmission and a 9-litre fuel tank.',
     tags: ['New'],

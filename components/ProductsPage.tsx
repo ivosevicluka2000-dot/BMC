@@ -239,7 +239,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index, onClick }) =>
         </div>
         <h3 className="serif text-base sm:text-lg md:text-xl text-white group-hover:text-brand transition-colors mb-2 sm:mb-3">{product.name}</h3>
         {localizedText.shortDesc && <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed line-clamp-2">{localizedText.shortDesc}</p>}
-        
+
+        {product.priceEur > 0 && (
+          <div className="mt-3 sm:mt-4">
+            <span className="text-white text-lg sm:text-xl md:text-2xl font-bold">
+              €{product.priceEur.toLocaleString('en-US')}
+            </span>
+          </div>
+        )}
+
         <div className="mt-4 sm:mt-6 flex items-center space-x-3 text-white/50 group-hover:text-brand transition-colors">
            <div className="w-3 sm:w-4 h-[2px] bg-current" />
            <span className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold">{t('products.viewDetails')}</span>

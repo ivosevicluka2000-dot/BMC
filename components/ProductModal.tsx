@@ -129,6 +129,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
                   {product.name}
                 </h2>
 
+                {/* Price */}
+                {product.priceEur > 0 && (
+                  <div className="mb-4">
+                    <span className="text-white text-3xl sm:text-4xl font-bold">
+                      €{product.priceEur.toLocaleString('en-US')}
+                    </span>
+                  </div>
+                )}
+
                 {/* Availability */}
                 <div className="flex items-center gap-4 mb-6">
                   <span
@@ -391,6 +400,14 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             <span className="text-white/50 text-xs uppercase tracking-[0.2em] block mb-2">{product.category}</span>
 
             <h2 className="serif text-2xl sm:text-3xl lg:text-4xl text-white mb-2">{product.name}</h2>
+
+            {product.priceEur > 0 && (
+              <div className="mb-4">
+                <span className="text-white text-2xl sm:text-3xl font-bold">
+                  €{product.priceEur.toLocaleString('en-US')}
+                </span>
+              </div>
+            )}
 
             <div className="flex items-center gap-4 mb-6">
               <span
