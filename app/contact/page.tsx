@@ -69,6 +69,9 @@ export default function ContactPage() {
                       <a href="tel:+38162644269" className="hover:text-[#E10600] transition-colors">+381 62 644 269</a>
                       <span className="text-white/40"> ({t('contact.service')})</span>
                     </p>
+                    <p className="text-white/60 text-sm">
+                      <a href="mailto:balkanmotocentar@gmail.com" className="hover:text-[#E10600] transition-colors">balkanmotocentar@gmail.com</a>
+                    </p>
                   </div>
                 </div>
               </div>
