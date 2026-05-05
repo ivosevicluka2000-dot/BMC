@@ -204,14 +204,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index, onClick }) =>
       className="bg-[#0a0a0a] group cursor-pointer overflow-hidden p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col hover:bg-white/[0.04] active:bg-white/[0.08] transition-colors duration-200 border-r border-b border-white/10"
     >
       <div className="relative aspect-[4/3] mb-3 sm:mb-4 md:mb-6 overflow-hidden bg-zinc-900">
-        <img 
-          src={`${product.images[0].split('?')[0]}?auto=format&fit=crop&q=60&w=400`}
-          alt={product.name} 
-          loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover lg:group-hover:scale-105 transition-all duration-300"
-          style={{ transform: 'translateZ(0)' }}
-        />
+        {product.images[0] ? (
+          <img
+            src={`${product.images[0].split('?')[0]}?auto=format&fit=crop&q=60&w=400`}
+            alt={product.name}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover lg:group-hover:scale-105 transition-all duration-300"
+            style={{ transform: 'translateZ(0)' }}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-zinc-900 text-white/30 text-[10px] uppercase tracking-widest">
+            {product.name}
+          </div>
+        )}
         <div className="absolute top-2 sm:top-3 left-2 sm:left-3 flex flex-col gap-1 sm:gap-2">
            {product.tags.map(tag => (
              <span key={tag} className="bg-brand text-white px-1.5 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] font-bold uppercase tracking-wider">{tag}</span>
